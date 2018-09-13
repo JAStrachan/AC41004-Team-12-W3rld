@@ -1,0 +1,16 @@
+#map {
+    height: 500px;
+    width: 50%;
+}
+
+.leaflet-popup-tip-container {
+    display: none;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: blue;
+}
+
+.leaflet-popup-content {
+    height: auto;
+}

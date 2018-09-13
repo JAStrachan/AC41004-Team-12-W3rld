@@ -1,0 +1,63 @@
+*{
+    --card-height: 100px;
+    --button-height: 25px;
+}
+
+.card {
+    background-color: #EEEEEE;
+    width: 200%;
+    height: var(--card-height);
+    transition-duration: 0.5s;
+    overflow-y: hidden;
+}
+
+.value {
+    width: 50%;
+    margin: 0;
+    font-size: 3em;
+    height: calc(var(--card-height) - var(--button-height));
+    float: left;
+    display: block;
+    text-align: center;
+}
+
+.icon {
+    background-color: black;
+    float: left;
+    display: block;
+    height: calc(var(--card-height) - var(--button-height));
+    margin: 5px;
+    width: 50%;
+    margin: 0;
+}
+
+.graph {
+    margin: 10px;
+    background-color: #DDDDDD;
+    width: calc(100% - 20px);
+    height: calc(var(--card-height) - 20px);
+    display: block;
+    float: left;
+}
+
+.button {
+    background-color: #EEEEEE;
+    text-align: center;
+    height: var(--button-height);
+    width: 100%;
+    margin: 0;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: #DDDDDD;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: 0.3s;
+}
