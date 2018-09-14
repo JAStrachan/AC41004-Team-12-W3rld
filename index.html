@@ -28,6 +28,8 @@
 
             <!-- Map -->
             <div id="map"></div>
+
+            <!-- Script to add content -->
             <script>
                 // create map
                 var map = L.Wrld.map("map", "7253bcb8510b3ccb628b5e59b301df98", {center: [56.4598, -2.977], zoom: 16, indoorsEnabled: true});
@@ -40,7 +42,7 @@
                 var div = card1.getDiv();
 
                 // create popup
-                var popup = L.popup({offset: [50,-50], keepInView: true}).setContent(div).openOn(map);
+                var popup = L.popup({offset: [150,-10], keepInView: true}).setContent(div).openOn(map);
 
                 //create marker
                 var marker = L.marker([56.4598, -2.977], {elevation: 10.0, title: "Test"}).addTo(map);

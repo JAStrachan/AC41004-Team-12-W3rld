@@ -34,18 +34,30 @@ class Card {
 
                 // flip arrow
                 arrow.style.transform = "rotate(225deg)";
+                arrow.style.marginTop = "5px";
+                arrow.style.marginBottom = "auto";
 
                 // expand card
-                cardDiv.style.height = "calc(2 * var(--card-height))";
+                cardDiv.style.height = "calc(var(--card-height-expanded) + var(--graph-height))";
+                cardDiv.style.width = "var(--card-width-expanded)";
+                valDiv.style.height = "var(--card-height-expanded)";
+                valDiv.style.fontSize = "var(--value-font-size-expanded)"
+                iconDiv.style.height = "var(--card-height-expanded)";
             }
             else {
                 this.expanded = false;
 
                 // flip arrow
                 arrow.style.transform = "rotate(45deg)";
+                arrow.style.marginTop = "auto";
+                arrow.style.marginBottom = "5px";
 
                 // shrink card
                 cardDiv.style.height = "calc(var(--card-height))";
+                cardDiv.style.width = "var(--card-width)";
+                valDiv.style.height = "calc(var(--card-height) - var(--button-height))";
+                valDiv.style.fontSize = "var(--value-font-size)"
+                iconDiv.style.height = "calc(var(--card-height) - var(--button-height))";
             }
         });
 

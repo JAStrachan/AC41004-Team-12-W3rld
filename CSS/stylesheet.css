@@ -8,9 +8,14 @@
 }
 
 .leaflet-popup-content-wrapper {
-    background-color: blue;
+    min-width: 250px;
+    width: auto;
+    height: auto;
+    background-color: #EEEEEE;
+    border-radius: 0px;
 }
 
 .leaflet-popup-content {
     height: auto;
+    width: auto;
 }
