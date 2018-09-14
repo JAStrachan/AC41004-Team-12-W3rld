@@ -14,6 +14,18 @@
     --graph-height: 200px;
 }
 
+.flexcontainer{
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+    padding-top: 10px;
+    width: calc(60% - 20px);
+    /* font-size: 3em; */
+    float:left;
+    text-align: center;
+    transition: 0.5s;
+}
+
 .card {
     background-color: #EEEEEE;
     width: 100%;
@@ -22,17 +34,10 @@
     overflow-y: hidden;
 }
 
+
+
 .value {
-    margin: 0;
-    padding-top: 10px;
-    width: calc(60% - 20px);
-    /* font-size: 3em; */
-    font-size: var(--value-font-size);
-    height: calc(var(--card-height) - var(--button-height));
-    display: block;
-    float:left;
-    text-align: center;
-    transition: 0.5s;
+    font-size: 40px;
 }
 
 .icon {
@@ -44,6 +49,10 @@
     width: 40%;
     margin: 0;
     transition: 0.5s;
+}
+
+.time {
+    font-size: 10px;
 }
 
 .graph {
