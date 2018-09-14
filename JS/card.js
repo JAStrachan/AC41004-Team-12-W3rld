@@ -9,15 +9,26 @@ class Card {
         let cardDiv = document.createElement("div");
         cardDiv.className = "card";
 
+		let container = document.createElement("div");
+		
+		container.className = "flexcontainer value";
+		
         // create div to store the value
         let valDiv = document.createElement("div");
         valDiv.className = "value";
         valDiv.textContent = this.value;
-
+	
+		 // create div to store the value
+        let TimeDiv = document.createElement("div");
+        TimeDiv.className = "time";
+        TimeDiv.textContent = "13:38";	
+		
+		
         // create div to store SVG icon
         let iconDiv = document.createElement("div");
-        iconDiv.className = "icon";
+        iconDiv.className = "flexcontainer icon";
 
+<<<<<<< HEAD
             // add svg into iconDiv
             let svgIcon = document.createElement("object");
             svgIcon.type = "image/svg+xml";
@@ -28,6 +39,10 @@ class Card {
 
             iconDiv.appendChild(svgIcon);
 
+=======
+       	
+		
+>>>>>>> 476e59c9993f23c9f2ceb784ffb231235dc708f4
         // create div to store graph
         let graphDiv = document.createElement("div");
         graphDiv.className = "graph";
@@ -85,7 +100,9 @@ class Card {
         });
 
         // combine elements into card
-        cardDiv.appendChild(valDiv);
+		container.appendChild(valDiv);
+		container.appendChild(TimeDiv);
+		cardDiv.appendChild(container);
         cardDiv.appendChild(iconDiv);
         cardDiv.appendChild(buttonDiv);
         cardDiv.appendChild(graphDiv);
