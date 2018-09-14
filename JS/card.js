@@ -17,7 +17,6 @@ class Card {
         let valDiv = document.createElement("div");
         valDiv.className = "value";
         valDiv.textContent = this.value;
-
 		 // create div to store the value
         let TimeDiv = document.createElement("div");
         TimeDiv.className = "time";
