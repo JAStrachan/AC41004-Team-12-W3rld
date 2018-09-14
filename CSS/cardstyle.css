@@ -41,7 +41,8 @@
 }
 
 .icon {
-    background-color: black;
+    /* background-color: black;
+    border-radius: 50%; */
     display: block;
     float: right;
     height: calc(var(--card-height) - var(--button-height));

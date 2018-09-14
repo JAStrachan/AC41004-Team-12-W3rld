@@ -27,9 +27,15 @@ class Card {
         // create div to store SVG icon
         let iconDiv = document.createElement("div");
         iconDiv.className = "flexcontainer icon";
+            // add svg into iconDiv
+            let svgIcon = document.createElement("object");
+            svgIcon.type = "image/svg+xml";
+            svgIcon.data = "SVG/thermometer.svg";
+            svgIcon.style.height = "calc(var(--card-height) - var(--button-height))";
+            svgIcon.style.width = "100%";
 
-       	
-		
+
+            iconDiv.appendChild(svgIcon);
         // create div to store graph
         let graphDiv = document.createElement("div");
         graphDiv.className = "graph";
@@ -55,6 +61,19 @@ class Card {
                 valDiv.style.height = "var(--card-height-expanded)";
                 valDiv.style.fontSize = "var(--value-font-size-expanded)"
                 iconDiv.style.height = "var(--card-height-expanded)";
+
+                // get svgobject
+                var doc = svgIcon.contentDocument;
+                var percentages = doc.getElementsByClassName("level");
+                var decimals = doc.getElementsByClassName("levelAnim");
+                // set new percentages
+                for(var i=0; i<percentages.length; i++) {
+                    percentages[i].setAttribute("offset", "60%");
+                }
+                // set new animation points
+                for(var i=0; i<decimals.length; i++) {
+                    decimals[i].setAttribute("to", "0.6");
+                }
             }
             else {
                 this.expanded = false;
