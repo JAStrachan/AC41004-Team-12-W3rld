@@ -84,18 +84,18 @@
         <dc:title />
       </cc:Work>
     </rdf:RDF>
-  </metadata> 
+  </metadata>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
     <linearGradient id="lg" x1="0.5" y1="1" x2="0.5" y2="0">
       <stop offset="0%" stop-opacity="1" stop-color="#D40000"/>
-      <stop offset="40%" stop-opacity="1" stop-color="#D40000">
-	  <animate attributeName="offset" from="0" to="0.4" repeatCount="1" dur="3s" begin="0s"/>
+      <stop class="level" offset="40%" stop-opacity="1" stop-color="#D40000">
+	  <animate class="levelAnim" attributeName="offset" from="0" to="0.4" repeatCount="1" dur="3s" begin="0s"/>
 	  </stop>
-      <stop offset="40%" stop-opacity="1" stop-color="white">
-	  <animate attributeName="offset" from="0" to="0.4" repeatCount="1" dur="3s" begin="0s"/>
+      <stop class="level" offset="40%" stop-opacity="1" stop-color="white">
+	  <animate class="levelAnim" attributeName="offset" from="0" to="0.4" repeatCount="1" dur="3s" begin="0s"/>
 	  </stop>
 	</linearGradient>
     <path
@@ -108,6 +108,6 @@
        id="path4752"
        d="m 317.7224,50.64496 c -19.85924,0 -35.75573,13.800218 -35.64305,30.944365 L 286.1787,705.38088 A 175.51115,151.51827 0 0 0 207.04908,831.92194 175.51115,151.51827 0 0 0 382.5586,983.43885 175.51115,151.51827 0 0 0 558.07039,831.92194 175.51115,151.51827 0 0 0 480.44296,706.22266 L 476.33909,81.589325 C 476.22639,64.445178 460.14806,50.64496 440.28881,50.64496 l -122.56641,0 z"
        fill="url(#lg)"/>
-	   
+
   </g>
 </svg>
