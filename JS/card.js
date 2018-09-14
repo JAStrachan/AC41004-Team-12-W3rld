@@ -10,39 +10,32 @@ class Card {
         cardDiv.className = "card";
 
 		let container = document.createElement("div");
-		
+
 		container.className = "flexcontainer value";
-		
+
         // create div to store the value
         let valDiv = document.createElement("div");
         valDiv.className = "value";
         valDiv.textContent = this.value;
-	
+
 		 // create div to store the value
         let TimeDiv = document.createElement("div");
         TimeDiv.className = "time";
-        TimeDiv.textContent = "13:38";	
-		
-		
+        TimeDiv.textContent = "13:38";
+
         // create div to store SVG icon
         let iconDiv = document.createElement("div");
         iconDiv.className = "flexcontainer icon";
 
-<<<<<<< HEAD
-            // add svg into iconDiv
-            let svgIcon = document.createElement("object");
-            svgIcon.type = "image/svg+xml";
-            svgIcon.data = "SVG/thermometer.svg";
-            svgIcon.style.height = "calc(var(--card-height) - var(--button-height))";
-            svgIcon.style.width = "100%";
+        // add svg into iconDiv
+        let svgIcon = document.createElement("object");
+        svgIcon.type = "image/svg+xml";
+        svgIcon.data = "SVG/thermometer.svg";
+        svgIcon.style.height = "calc(var(--card-height) - var(--button-height))";
+        svgIcon.style.width = "100%";
 
 
-            iconDiv.appendChild(svgIcon);
-
-=======
-       	
-		
->>>>>>> 476e59c9993f23c9f2ceb784ffb231235dc708f4
+        iconDiv.appendChild(svgIcon);
         // create div to store graph
         let graphDiv = document.createElement("div");
         graphDiv.className = "graph";
