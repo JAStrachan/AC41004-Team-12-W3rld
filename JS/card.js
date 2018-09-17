@@ -35,9 +35,14 @@ class Card {
 
 
         iconDiv.appendChild(svgIcon);
+
         // create div to store graph
         let graphDiv = document.createElement("div");
         graphDiv.className = "graph";
+        let graphCanvas = document.createElement("canvas");
+        graphCanvas.id = "graphCanvas";
+        graphDiv.appendChild(graphCanvas);
+        
 
         // create div to store expand/contract button
         let buttonDiv = document.createElement("div");
@@ -73,6 +78,10 @@ class Card {
                 for(var i=0; i<decimals.length; i++) {
                     decimals[i].setAttribute("to", "0.6");
                 }
+
+                // loading graph for sensor
+                var graph = new Graph();
+                graph.createGraph();
             }
             else {
                 this.expanded = false;
@@ -88,6 +97,7 @@ class Card {
                 valDiv.style.height = "calc(var(--card-height) - var(--button-height))";
                 valDiv.style.fontSize = "var(--value-font-size)"
                 iconDiv.style.height = "calc(var(--card-height) - var(--button-height))";
+
             }
         });
 
