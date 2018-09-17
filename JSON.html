@@ -2,11 +2,13 @@
 <html>
 <head>
         <meta charset="utf-8"/>
+        <meta name="Tommy Walton">
         <title>Data Loading</title>
 </head>
 <body>
     <ul id = "tempTime"></ul>
     <script>
+        
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function(){
             //If ready to receive data, parse the input
@@ -15,10 +17,11 @@
                 var tempTime = response.tempTime;
                 
                 var output = '';
-                //Display each input
+                //Display each input in a list on the screen
                 for(var i = 0; i < tempTime.length; i++){
                     output += '<li>'+tempTime[i].Sensor1+'</li>';
                 }
+                //Information inputed should be from the tempTime field in the JSON file
                 document.getElementById('tempTime').innerHTML = output;
             }
         };
