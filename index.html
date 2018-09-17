@@ -32,7 +32,7 @@
             <!-- Script to add content -->
             <script>
                 // create map
-                var map = L.Wrld.map("map", "7253bcb8510b3ccb628b5e59b301df98", {center: [56.4598, -2.977], zoom: 16, indoorsEnabled: true});
+                var map = L.Wrld.map("map", "7253bcb8510b3ccb628b5e59b301df98", {center: [56.460102, -2.978278], zoom: 16, indoorsEnabled: true, indoorMapId: "westport_house", floorIndex: 2});
 
                 // indoor controller widget
                 var indoorControl = new WrldIndoorControl("widget-container", map);
@@ -42,13 +42,26 @@
                 var div = card1.getDiv();
 
                 // create popup
-                var popup = L.popup({offset: [150,50], keepInView: true}).setContent(div).openOn(map);
+                // var popup = L.popup({offset: [150,50], keepInView: true, indoorMapId: "westport_house", indoorMapFloorIndex: 2, autoClose: false, closeOnClick: false,}).setContent(div);
+                var popupOptions = {
+                    indoorMapId: "westport_house",
+                    indoorMapFloorIndex: 2,
+                    autoClose: false
+                };
+                var popup = L.popup(popupOptions)
+                    .setLatLng([56.460102, -2.978278])
+                    .setContent(div);
+                // entityIdsToPosition[id] = { "latLng": [56.460102, -2.978278], "indoorId": "westport_house", "floorIndex": 2 } ;
+
 
                 //create marker
-                var marker = L.marker([56.4598, -2.977], {elevation: 10.0, title: "Test"}).addTo(map);
+                var marker = L.marker([56.460102, -2.978278], {title: "Test", indoorMapId: "westport_house", indoorMapFloorId: 2}).addTo(map);
 
                 //attach popup to marker
-                marker.bindPopup(popup).openPopup();
+                // marker.bindPopup(popup).openPopup();
+                marker.on("click", function() {
+                    popup.addTo(map);
+                })
             </script>
         </div>
     </body>
