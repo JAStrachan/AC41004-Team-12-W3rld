@@ -45,9 +45,10 @@ class Card {
             slider.type = "range";
             slider.id = "range";
             slider.className = "slider";
-            slider.style.min = "1";
-            slider.style.max = "12";
-            slider.style.value = "12";
+            slider.min = "0";
+            slider.max = "12";
+            slider.value = "12";
+            slider.step = "1";
 
             sliderDiv.appendChild(slider);
 
