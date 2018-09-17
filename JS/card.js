@@ -17,7 +17,8 @@ class Card {
         let valDiv = document.createElement("div");
         valDiv.className = "value";
         valDiv.textContent = this.value;
-		 // create div to store the value
+
+		 // create div to store the time
         let TimeDiv = document.createElement("div");
         TimeDiv.className = "time";
         TimeDiv.textContent = "13:38";
@@ -26,15 +27,30 @@ class Card {
         let iconDiv = document.createElement("div");
         iconDiv.className = "flexcontainer icon";
 
-        // add svg into iconDiv
-        let svgIcon = document.createElement("object");
-        svgIcon.type = "image/svg+xml";
-        svgIcon.data = "SVG/thermometer.svg";
-        svgIcon.style.height = "calc(var(--card-height) - var(--button-height))";
-        svgIcon.style.width = "100%";
+            // add svg into iconDiv
+            let svgIcon = document.createElement("object");
+            svgIcon.type = "image/svg+xml";
+            svgIcon.data = "SVG/thermometer.svg";
+            svgIcon.style.height = "calc(var(--card-height) - var(--button-height))";
+            svgIcon.style.width = "100%";
 
+            iconDiv.appendChild(svgIcon);
 
-        iconDiv.appendChild(svgIcon);
+        // create div to store slider
+        let sliderDiv = document.createElement("div");
+        sliderDiv.className = "slidercontainer";
+
+            // add slider to div
+            let slider = document.createElement("input");
+            slider.type = "range";
+            slider.id = "range";
+            slider.className = "slider";
+            slider.style.min = "1";
+            slider.style.max = "12";
+            slider.style.value = "12";
+
+            sliderDiv.appendChild(slider);
+
         // create div to store graph
         let graphDiv = document.createElement("div");
         graphDiv.className = "graph";
@@ -89,6 +105,7 @@ class Card {
         // combine elements into card
 		container.appendChild(valDiv);
 		container.appendChild(TimeDiv);
+        container.appendChild(sliderDiv);
 		cardDiv.appendChild(container);
         cardDiv.appendChild(iconDiv);
         cardDiv.appendChild(buttonDiv);

@@ -18,7 +18,8 @@
 	display: flex;
 	flex-direction: column;
 	margin: 0;
-    width: calc(60% - 20px);
+    /* width: calc(60% - 20px); */
+    width: 50%;
     /* font-size: 3em; */
     float:left;
     text-align: center;
@@ -36,7 +37,7 @@
 
 
 .value {
-    font-size: 40px;
+    font-size: 28px;
 }
 
 .icon {
@@ -44,15 +45,19 @@
     border-radius: 50%; */
     display: block;
     float: right;
-    height: calc(var(--card-height) - var(--button-height));
+    /* height: calc(var(--card-height) - var(--button-height)); */
     margin: 5px;
-    width: 40%;
+    /* width: 40%; */
     margin: 0;
     transition: 0.5s;
 }
 
 .time {
-    font-size: 10px;
+    font-size: 15px;
+}
+
+.slider {
+    width: 100%;
 }
 
 .graph {
