@@ -1,6 +1,5 @@
 *{
     --card-height: 110px;
-    /* --card-height-expanded: 130px; */
     --card-height-expanded: 110px;
 
     --card-width: 230px;
@@ -18,9 +17,7 @@
 	display: flex;
 	flex-direction: column;
 	margin: 0;
-    /* width: calc(60% - 20px); */
     width: 50%;
-    /* font-size: 3em; */
     float:left;
     text-align: center;
     transition: 0.5s;
@@ -41,13 +38,9 @@
 }
 
 .icon {
-    /* background-color: black;
-    border-radius: 50%; */
     display: block;
     float: right;
-    /* height: calc(var(--card-height) - var(--button-height)); */
     margin: 5px;
-    /* width: 40%; */
     margin: 0;
     transition: 0.5s;
 }
