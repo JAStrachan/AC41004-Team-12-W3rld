@@ -8,19 +8,21 @@
     <ul id = "tempTime"></ul>
     <script>
         var xhttp = new XMLHttpRequest();
-
         xhttp.onreadystatechange = function(){
+            //If ready to receive data, parse the input
             if(this.readyState == 4 && this.status == 200){
                 var response = JSON.parse(xhttp.responseText);
                 var tempTime = response.tempTime;
                 
                 var output = '';
+                //Display each input
                 for(var i = 0; i < tempTime.length; i++){
                     output += '<li>'+tempTime[i].Sensor1+'</li>';
                 }
                 document.getElementById('tempTime').innerHTML = output;
             }
         };
+        //Read from data file
         xhttp.open("GET","TemperatureDataKelvin.json",true);
         xhttp.send();
     </script>
