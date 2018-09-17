@@ -57,14 +57,12 @@ class Card {
                 // expand card
                 cardDiv.style.height = "calc(var(--card-height-expanded) + var(--graph-height))";
                 cardDiv.style.width = "var(--card-width-expanded)";
-                valDiv.style.height = "var(--card-height-expanded)";
-                valDiv.style.fontSize = "var(--value-font-size-expanded)"
-                iconDiv.style.height = "var(--card-height-expanded)";
 
                 // get svgobject
                 var doc = svgIcon.contentDocument;
                 var percentages = doc.getElementsByClassName("level");
                 var decimals = doc.getElementsByClassName("levelAnim");
+
                 // set new percentages
                 for(var i=0; i<percentages.length; i++) {
                     percentages[i].setAttribute("offset", "60%");
@@ -82,12 +80,9 @@ class Card {
                 arrow.style.marginTop = "auto";
                 arrow.style.marginBottom = "5px";
 
-                // shrink card
-                cardDiv.style.height = "calc(var(--card-height))";
-                cardDiv.style.width = "var(--card-width)";
-                valDiv.style.height = "calc(var(--card-height) - var(--button-height))";
-                valDiv.style.fontSize = "var(--value-font-size)"
-                iconDiv.style.height = "calc(var(--card-height) - var(--button-height))";
+                // // shrink card
+                cardDiv.style.height = "";
+                cardDiv.style.width = "";
             }
         });
 

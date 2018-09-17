@@ -18,7 +18,6 @@
 	display: flex;
 	flex-direction: column;
 	margin: 0;
-    padding-top: 10px;
     width: calc(60% - 20px);
     /* font-size: 3em; */
     float:left;
