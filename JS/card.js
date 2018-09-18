@@ -108,7 +108,7 @@ class Card {
         this.svgIcon = document.createElement("object");
         this.svgIcon.type = "image/svg+xml";
         this.svgIcon.data = this.svgPath;
-        this.svgIcon.style.height = "calc(var(--card-height) - var(--button-height))";
+        this.svgIcon.style.height = "100%";
         this.svgIcon.style.width = "100%";
 
         iconDiv.appendChild(this.svgIcon);
