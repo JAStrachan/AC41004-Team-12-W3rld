@@ -14,7 +14,7 @@
                 this.SensorReading = SensorReading;
             }
         }
-
+        var noOfSensors = 4;
         var sensorOneReadings = [];
         var sensorTwoReadings = [];
         var sensorThreeReadings = [];
@@ -35,7 +35,10 @@
                     sensorTwoReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor2));
                     sensorThreeReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor3));
                     sensorFourReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor4));
+                    //Displays the average temperature of the 4 sensors
+                    console.log((tempTime[i].Sensor1+tempTime[i].Sensor2+tempTime[i].Sensor3+tempTime[i].Sensor4)/noOfSensors)
                 }
+                
                 //Information inputed should be from the tempTime field in the JSON file
                 document.getElementById('tempTime').innerHTML = output;
             }
