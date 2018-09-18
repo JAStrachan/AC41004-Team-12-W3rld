@@ -20,6 +20,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
     <!-- Our Stuff -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <!-- Stylesheets -->
     <link href="CSS/marker.css" rel="stylesheet"/>
     <!-- Scripts -->
@@ -46,13 +47,16 @@
 
                 // add markers with unique ids
                 let markerIDs = [0, 1];
-                let marker0 = markerController.addMarker(markerIDs[0], [56.460102, -2.978278], {title: "Test0", indoorMapId: "westport_house", indoorMapFloorId: 0});
+                let marker0 = markerController.addMarker(markerIDs[0], [56.460102, -2.978278], {title: "Test0", indoorMapId: "westport_house", indoorMapFloorId: 0, iconKey: "pin"});
                 let marker1 = markerController.addMarker(markerIDs[1], [56.460102, -2.978278], {title: "Test1", indoorMapId: "westport_house", indoorMapFloorId: 1, iconKey: "aroundme"});
 
                 // set the markers' icons to the custom icons
                 let icon = getDataMarkerIcon("20°C", "SVG/thermometer.svg");
-                console.log(icon);
-                let marker = L.marker([56.460102, -2.978278], { icon: icon, title: "Test", indoorMapId: "westport_house", indoorMapFloorId: 2}).addTo(map);
+                let marker = L.marker([56.460102, -2.978278], { icon: icon, title: "Test", indoorMapId: "westport_house", indoorMapFloorId: 2});
+                marker.className = "has-anchor";
+                marker.addTo(map);
+
+                // marker0.setIcon(icon);
             </script>
         </div>
     </body>

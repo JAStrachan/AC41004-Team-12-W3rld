@@ -28,3 +28,21 @@
     font-size: 16px;
     text-align: center;
 }
+
+.anchorTail {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    height: 75px;
+    width: 5px;
+    border-left: 2px solid white;
+    z-index: -1;
+}
+
+.anchorDot {
+    position: absolute;
+    bottom: 0;
+    left: -3.5px;
+    border: 3px solid white;
+    border-radius: 50%;
+}
