@@ -1,0 +1,21 @@
+#map {
+    height: 500px;
+    width: 50%;
+}
+
+.leaflet-popup-tip-container {
+    display: none;
+}
+
+.leaflet-popup-content-wrapper {
+    min-width: 250px;
+    width: auto;
+    height: auto;
+    background-color: #EEEEEE;
+    border-radius: 0px;
+}
+
+.leaflet-popup-content {
+    height: auto;
+    width: auto;
+}
