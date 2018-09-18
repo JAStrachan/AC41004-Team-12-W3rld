@@ -44,7 +44,8 @@
                 // create card for popup
                 var card1 = new Card("20°C");
                 var div = card1.getDiv();
-
+                console.log("Added to the div");
+                console.log(div.childNodes[0]);
                 // create popup
                 var popup = L.popup({offset: [150,50], keepInView: true}).setContent(div).openOn(map);
 

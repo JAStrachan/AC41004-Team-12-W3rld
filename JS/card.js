@@ -1,13 +1,58 @@
+function expandCard()
+{
+    // Since binded to class when called, this refers to card class
+    if(!this.expanded) {
+        this.expanded = true;
+
+        this.flipArrow("225deg", this.arrow);
+
+        // expand card
+        this.cardDiv.style.height = "calc(var(--card-height-expanded) + var(--graph-height))";
+        this.cardDiv.style.width = "var(--card-width-expanded)";
+
+        // get svgobject
+        let contentDoc = this.svgIcon.contentDocument;
+        let percentages = contentDoc.getElementsByClassName("level");;
+        let decimals = contentDoc.getElementsByClassName("levelAnim");
+
+        // set new percentages
+        for(let i=0; i<percentages.length; i++) {
+            percentages[i].setAttribute("offset", "60%");
+        }
+
+        // set new animation points
+        for(let i=0; i<decimals.length; i++) {
+            decimals[i].setAttribute("to", "0.6");
+        }
+
+        // loading graph for sensor
+        let graph = new Graph();
+        graph.createGraph();
+    }
+    else {
+        this.expanded = false;
+
+        this.flipArrow("45deg", this.arrow);
+
+        // // shrink card
+        this.cardDiv.style.height = "";
+        this.cardDiv.style.width = "";
+    } 
+}
+
 class Card {
+
     constructor(value) {
         this.value = value;
         this.expanded = false;
+        this.cardDiv = document.createElement("div");
+        this.cardDiv.className = "card";
+        this.svgIcon = null;
+        this.arrow =null;
+        this.svgPath="SVG/thermometer.svg";
     }
-
+    
     getDiv() {
-        // create empty card
-        let cardDiv = document.createElement("div");
-        cardDiv.className = "card";
 
 		let container = document.createElement("div");
 
@@ -18,21 +63,26 @@ class Card {
         valDiv.className = "value";
         valDiv.textContent = this.value;
 
+        container.appendChild(valDiv);
+
         let TimeDiv = this.getTimeDiv();
+        container.appendChild(TimeDiv);
+
         let sliderDiv = this.getSliderDiv();
-        let iconDiv = this.getIconDiv();
-        let buttonDiv = this.getButtonDiv();
-        let graphDiv = this.getGraphDiv();
-        
-        // combine elements into card
-		container.appendChild(valDiv);
-		container.appendChild(TimeDiv);
         container.appendChild(sliderDiv);
-		cardDiv.appendChild(container);
-        cardDiv.appendChild(iconDiv);
-        cardDiv.appendChild(buttonDiv);
-        cardDiv.appendChild(graphDiv);
-        return cardDiv;
+
+        this.cardDiv.appendChild(container);
+
+        let iconDiv = this.getIconDiv();
+        this.cardDiv.appendChild(iconDiv);
+
+        let buttonDiv = this.getButtonDiv();
+        this.cardDiv.appendChild(buttonDiv);
+
+        let graphDiv = this.getGraphDiv();
+        this.cardDiv.appendChild(graphDiv);
+       
+        return this.cardDiv;
     }
 
     // create div to store the time
@@ -51,13 +101,13 @@ class Card {
         iconDiv.className = "flexcontainer icon";
 
         // add svg into iconDiv
-        let svgIcon = document.createElement("object");
-        svgIcon.type = "image/svg+xml";
-        svgIcon.data = "SVG/thermometer.svg";
-        svgIcon.style.height = "calc(var(--card-height) - var(--button-height))";
-        svgIcon.style.width = "100%";
+        this.svgIcon = document.createElement("object");
+        this.svgIcon.type = "image/svg+xml";
+        this.svgIcon.data = this.svgPath;
+        this.svgIcon.style.height = "calc(var(--card-height) - var(--button-height))";
+        this.svgIcon.style.width = "100%";
 
-        iconDiv.appendChild(svgIcon);
+        iconDiv.appendChild(this.svgIcon);
         return iconDiv;
     }
 
@@ -95,59 +145,24 @@ class Card {
     {
         // create div to store expand/contract button
         let buttonDiv = document.createElement("div");
-        buttonDiv.className = "button";
-
-        let arrow = document.createElement("i");
-        arrow.className = "arrow";
-        buttonDiv.appendChild(arrow);
-
-        buttonDiv.addEventListener("click", expandCard());
+        buttonDiv.className = "button"; 
+        this.arrow = this.getArrowDiv();
+        buttonDiv.appendChild(this.arrow);
+        buttonDiv.addEventListener("click", expandCard.bind(this));
+        return buttonDiv;
     }
 
-    expandCard()
+    getArrowDiv()
     {
-        if(!this.expanded) {
-            this.expanded = true;
+        let arrowL = document.createElement("i");
+        arrowL.className = "arrow";
+        return arrowL;
+    }
 
-            // flip arrow
-            arrow.style.transform = "rotate(225deg)";
-            arrow.style.marginTop = "5px";
-            arrow.style.marginBottom = "auto";
-
-            // expand card
-            cardDiv.style.height = "calc(var(--card-height-expanded) + var(--graph-height))";
-            cardDiv.style.width = "var(--card-width-expanded)";
-
-            // get svgobject
-            var doc = svgIcon.contentDocument;
-            var percentages = doc.getElementsByClassName("level");
-            var decimals = doc.getElementsByClassName("levelAnim");
-
-            // set new percentages
-            for(var i=0; i<percentages.length; i++) {
-                percentages[i].setAttribute("offset", "60%");
-            }
-
-            // set new animation points
-            for(var i=0; i<decimals.length; i++) {
-                decimals[i].setAttribute("to", "0.6");
-            }
-
-            // loading graph for sensor
-            var graph = new Graph();
-            graph.createGraph();
-        }
-        else {
-            this.expanded = false;
-
-            // flip arrow
-            arrow.style.transform = "rotate(45deg)";
-            arrow.style.marginTop = "auto";
-            arrow.style.marginBottom = "5px";
-
-            // // shrink card
-            cardDiv.style.height = "";
-            cardDiv.style.width = "";
-        } 
+    flipArrow(rotation, arrow)
+    {
+        arrow.style.transform = "rotate("+ rotation + ")";
+        arrow.style.marginTop = "auto";
+        arrow.style.marginBottom = "5px";
     }
 }
