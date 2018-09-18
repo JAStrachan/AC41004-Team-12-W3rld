@@ -1,0 +1,30 @@
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+.svgDiv {
+    height: 100%;
+    width: 100%;
+}
+
+.readingDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.markerSVG {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.markerText {
+    font-size: 16px;
+    text-align: center;
+}

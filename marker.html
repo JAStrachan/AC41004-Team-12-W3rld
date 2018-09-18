@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Marker Controller Test</title>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+    <!-- Leaflet.js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
+
+    <!-- Wrld3D API -->
+    <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+    <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/indoor_control/latest/indoor_control.js"></script>
+    <link href="https://cdn-webgl.wrld3d.com/wrldjs/addons/resources/latest/css/wrld.css" rel="stylesheet"/>
+    <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/marker_controller/latest/marker_controller.js"></script>
+
+    <!--Chart.js-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+    <!-- Our Stuff -->
+    <!-- Stylesheets -->
+    <link href="CSS/marker.css" rel="stylesheet"/>
+    <!-- Scripts -->
+    <script src="JS/marker.js"></script>
+</head>
+    <body>
+        <div style="position: relative">
+            <!-- widget container for indoor controller -->
+            <div id="widget-container" class="wrld-widget-container"></div>
+
+            <!-- Map -->
+            <div id="map"></div>
+
+            <!-- Script to add content -->
+            <script>
+                // create map
+                let map = L.Wrld.map("map", "7253bcb8510b3ccb628b5e59b301df98", {center: [56.460102, -2.978278], zoom: 16, indoorsEnabled: true, indoorMapId: "westport_house", floorIndex: 2});
+
+                // indoor controller widget
+                let indoorControl = new WrldIndoorControl("widget-container", map);
+
+                // define marker controller
+                let markerController = new WrldMarkerController(map);
+
+                // add markers with unique ids
+                let markerIDs = [0, 1];
+                let marker0 = markerController.addMarker(markerIDs[0], [56.460102, -2.978278], {title: "Test0", indoorMapId: "westport_house", indoorMapFloorId: 0});
+                let marker1 = markerController.addMarker(markerIDs[1], [56.460102, -2.978278], {title: "Test1", indoorMapId: "westport_house", indoorMapFloorId: 1, iconKey: "aroundme"});
+
+                // set the markers' icons to the custom icons
+                let icon = getDataMarkerIcon("20°C", "SVG/thermometer.svg");
+                console.log(icon);
+                let marker = L.marker([56.460102, -2.978278], { icon: icon, title: "Test", indoorMapId: "westport_house", indoorMapFloorId: 2}).addTo(map);
+            </script>
+        </div>
+    </body>
+</html>
