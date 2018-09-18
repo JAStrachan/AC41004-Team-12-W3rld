@@ -8,13 +8,14 @@
 <body>
     <ul id = "tempTime"></ul>
     <script>
+        //Stores information about readings made at different intervals
         class Reading{
            constructor(ReadingDate, SensorReading){
                 this.ReadingDate = ReadingDate;
                 this.SensorReading = SensorReading;
             }
-        }
-        
+        }       
+        //Takes in input of mode desired to be displayed and converts values to appropriate unit when being displayed
         function Conversion(mode,value){
             switch(mode){
                 //Kelvin
@@ -31,6 +32,7 @@
 
         var mode = "C";
         var noOfSensors = 4;
+        //Initialise sensor arrays
         var sensorOneReadings = [];
         var sensorTwoReadings = [];
         var sensorThreeReadings = [];
