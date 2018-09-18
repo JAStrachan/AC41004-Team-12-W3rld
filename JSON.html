@@ -14,6 +14,22 @@
                 this.SensorReading = SensorReading;
             }
         }
+        
+        function Conversion(mode,value){
+            switch(mode){
+                //Kelvin
+                case "K":
+                    return value;
+                //Fahrenheit 
+                case "F":
+                    return (value*1.8)-459.67;
+                //Celsius
+                case "C":
+                    return value-273.15;
+            }
+        }
+
+        var mode = "C";
         var noOfSensors = 4;
         var sensorOneReadings = [];
         var sensorTwoReadings = [];
@@ -36,7 +52,7 @@
                     sensorThreeReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor3));
                     sensorFourReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor4));
                     //Displays the average temperature of the 4 sensors
-                    console.log((tempTime[i].Sensor1+tempTime[i].Sensor2+tempTime[i].Sensor3+tempTime[i].Sensor4)/noOfSensors)
+                    console.log((Conversion(mode,tempTime[i].Sensor1)+Conversion(mode,tempTime[i].Sensor2)+Conversion(mode,tempTime[i].Sensor3)+Conversion(mode,tempTime[i].Sensor4))/noOfSensors)
                 }
                 
                 //Information inputed should be from the tempTime field in the JSON file
