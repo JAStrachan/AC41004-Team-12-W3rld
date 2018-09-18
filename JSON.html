@@ -9,14 +9,7 @@
     <ul id = "tempTime"></ul>
     <script>
         class Reading{
-           /* constructor(name,SensorReading,Sensor2Reading,Sensor3Reading,Sensor4Reading){
-                this.date = date;
-                this.Sensor1Reading = Sensor1Reading;
-                this.Sensor2Reading = Sensor2Reading;
-                this.Sensor3Reading = Sensor3Reading;
-                this.Sensor4Reading = Sensor4Reading;
-            }*/
-            constructor(ReadingDate, SensorReading){
+           constructor(ReadingDate, SensorReading){
                 this.ReadingDate = ReadingDate;
                 this.SensorReading = SensorReading;
             }
@@ -37,16 +30,11 @@
                 //Display each input in a list on the screen
                 for(var i = 0; i < tempTime.length; i++){
                     output += '<li>'+tempTime[i].Sensor1+'</li>';
+                    //Add sensor data into appropriate arrays
                     sensorOneReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor1));
                     sensorTwoReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor2));
                     sensorThreeReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor3));
                     sensorFourReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor4));
-                   /*sensorReadings.push(new Reading(tempTime[i].name,
-                    tempTime[i].Sensor1Reading,
-                    tempTime[i].Sensor2Reading,
-                    tempTime[i].Sensor3Reading,
-                    tempTime[i].Sensor4Reading))*/
-                    console.log(sensorOneReadings[i]);
                 }
                 //Information inputed should be from the tempTime field in the JSON file
                 document.getElementById('tempTime').innerHTML = output;
