@@ -23,15 +23,22 @@
     transition: 0.5s;
 }
 
+.svgAndTempContainer{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
 .card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     background-color: #EEEEEE;
     width: 100%;
     height: var(--card-height);
     transition-duration: 0.5s;
     overflow-y: hidden;
 }
-
-
 
 .value {
     font-size: 28px;

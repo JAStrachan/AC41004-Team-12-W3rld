@@ -54,27 +54,31 @@ class Card {
     
     getDiv() {
 
-		let container = document.createElement("div");
+		let tempAndTimeContainer = document.createElement("div");
 
-		container.className = "flexcontainer value";
+		tempAndTimeContainer.className = "flexcontainer value";
 
         // create div to store the value
         let valDiv = document.createElement("div");
         valDiv.className = "value";
         valDiv.textContent = this.value;
 
-        container.appendChild(valDiv);
+        tempAndTimeContainer.appendChild(valDiv);
 
         let TimeDiv = this.getTimeDiv();
-        container.appendChild(TimeDiv);
+        tempAndTimeContainer.appendChild(TimeDiv);
 
         let sliderDiv = this.getSliderDiv();
-        container.appendChild(sliderDiv);
-
-        this.cardDiv.appendChild(container);
+        tempAndTimeContainer.appendChild(sliderDiv);
 
         let iconDiv = this.getIconDiv();
-        this.cardDiv.appendChild(iconDiv);
+
+        let svgAndTempContainer = document.createElement("div");
+        svgAndTempContainer.className = "svgAndTempContainer";
+        svgAndTempContainer.appendChild(tempAndTimeContainer);
+        svgAndTempContainer.appendChild(iconDiv);
+
+        this.cardDiv.appendChild(svgAndTempContainer);
 
         let buttonDiv = this.getButtonDiv();
         this.cardDiv.appendChild(buttonDiv);
@@ -122,10 +126,10 @@ class Card {
         slider.type = "range";
         slider.id = "range";
         slider.className = "slider";
-        slider.style.min = "1";
-        slider.style.max = "12";
-        slider.style.value = "12";
-
+        slider.min = "1";
+        slider.max = "12";
+        slider.value = "12";
+        slider.step = "1";
         sliderDiv.appendChild(slider);
         return sliderDiv;
     }
@@ -162,7 +166,5 @@ class Card {
     flipArrow(rotation, arrow)
     {
         arrow.style.transform = "rotate("+ rotation + ")";
-        arrow.style.marginTop = "auto";
-        arrow.style.marginBottom = "5px";
     }
 }

@@ -20,7 +20,6 @@
         <!-- Stylesheets -->
         <link href="CSS/stylesheet.css" rel="stylesheet"/>
         <link href="CSS/cardstyle.css" rel="stylesheet" />
-        <link href="CSS/poi.css" rel="stylesheet" />
         <!-- Scripts -->
         <script src="JS/card.js"></script>
         <script src="JS/graph.js"></script>
@@ -36,34 +35,29 @@
             <!-- Script to add content -->
             <script>
                 // create map
-                var map = L.Wrld.map("map", "7253bcb8510b3ccb628b5e59b301df98", {center: [56.460102, -2.978278], zoom: 16, indoorsEnabled: true, indoorMapId: "westport_house", floorIndex: 2});
+                let map = L.Wrld.map("map", "7253bcb8510b3ccb628b5e59b301df98", {center: [56.460102, -2.978278], zoom: 16, indoorsEnabled: true, indoorMapId: "westport_house", floorIndex: 2});
 
                 // indoor controller widget
-                var indoorControl = new WrldIndoorControl("widget-container", map);
+                let indoorControl = new WrldIndoorControl("widget-container", map);
 
                 // create card for popup
-                var card1 = new Card("20°C");
-                var div = card1.getDiv();
-                console.log("Added to the div");
-                console.log(div.childNodes[0]);
+                let card = new Card("20°C");
+                let div = card.getDiv();
+
                 // create popup
-                // var popup = L.popup({offset: [150,50], keepInView: true, indoorMapId: "westport_house", indoorMapFloorIndex: 2, autoClose: false, closeOnClick: false,}).setContent(div);
-                var popupOptions = {
+                let popupOptions = {
                     indoorMapId: "westport_house",
                     indoorMapFloorIndex: 2,
                     autoClose: false
                 };
-                var popup = L.popup(popupOptions)
+                let popup = L.popup(popupOptions)
                     .setLatLng([56.460102, -2.978278])
                     .setContent(div);
-                // entityIdsToPosition[id] = { "latLng": [56.460102, -2.978278], "indoorId": "westport_house", "floorIndex": 2 } ;
-
 
                 //create marker
-                var marker = L.marker([56.460102, -2.978278], {title: "Test", indoorMapId: "westport_house", indoorMapFloorId: 2}).addTo(map);
+                let marker = L.marker([56.460102, -2.978278], {title: "Test", indoorMapId: "westport_house", indoorMapFloorId: 2}).addTo(map);
 
                 //attach popup to marker
-                // marker.bindPopup(popup).openPopup();
                 marker.on("click", function() {
                     popup.addTo(map);
                 })
