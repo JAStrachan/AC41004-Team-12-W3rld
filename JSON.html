@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8"/>
+        <meta name="Tommy Walton">
+        <title>Data Loading</title>
+</head>
+<body>
+    <ul id = "tempTime"></ul>
+    <script>
+        //Stores information about readings made at different intervals
+        class Reading{
+           constructor(ReadingDate, SensorReading){
+                this.ReadingDate = ReadingDate;
+                this.SensorReading = SensorReading;
+            }
+        }       
+        //Takes in input of mode desired to be displayed and converts values to appropriate unit when being displayed
+        function Conversion(mode,value){
+            switch(mode){
+                //Kelvin
+                case "K":
+                    return value;
+                //Fahrenheit 
+                case "F":
+                    return (value*1.8)-459.67;
+                //Celsius
+                case "C":
+                    return value-273.15;
+            }
+        }
+
+        var mode = "C";
+        var noOfSensors = 4;
+        //Initialise sensor arrays
+        var sensorOneReadings = [];
+        var sensorTwoReadings = [];
+        var sensorThreeReadings = [];
+        var sensorFourReadings = [];
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            //If ready to receive data, parse the input
+            if(this.readyState == 4 && this.status == 200){
+                var response = JSON.parse(xhttp.responseText);
+                var tempTime = response.tempTime;               
+                var output = '';
+                //Display each input in a list on the screen
+                for(var i = 0; i < tempTime.length; i++){
+                    output += '<li>'+tempTime[i].Sensor1+'</li>';
+                    //Add sensor data into appropriate arrays
+                    sensorOneReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor1));
+                    sensorTwoReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor2));
+                    sensorThreeReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor3));
+                    sensorFourReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor4));
+                    //Displays the average temperature of the 4 sensors
+                    console.log((Conversion(mode,tempTime[i].Sensor1)+Conversion(mode,tempTime[i].Sensor2)+Conversion(mode,tempTime[i].Sensor3)+Conversion(mode,tempTime[i].Sensor4))/noOfSensors)
+                }
+                
+                //Information inputed should be from the tempTime field in the JSON file
+                document.getElementById('tempTime').innerHTML = output;
+            }
+        };
+        //Read from data file
+        xhttp.open("GET","TemperatureDataKelvin.json",true);
+        xhttp.send();
+    </script>
+</body>
+</html>
