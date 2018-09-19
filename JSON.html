@@ -16,8 +16,8 @@
             }
         }       
         //Takes in input of mode desired to be displayed and converts values to appropriate unit when being displayed
-        function Conversion(mode,value){
-            switch(mode){
+        function Conversion(temperatureFormat,value){
+            switch(temperatureFormat){
                 //Kelvin
                 case "K":
                     return value;
@@ -30,23 +30,24 @@
             }
         }
 
-        var mode = "C";
-        var noOfSensors = 4;
+        
         //Initialise sensor arrays
-        var sensorOneReadings = [];
-        var sensorTwoReadings = [];
-        var sensorThreeReadings = [];
-        var sensorFourReadings = [];
+        let sensorOneReadings = [];
+        let sensorTwoReadings = [];
+        let sensorThreeReadings = [];
+        let sensorFourReadings = [];
 
-        var xhttp = new XMLHttpRequest();
+        let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function(){
             //If ready to receive data, parse the input
             if(this.readyState == 4 && this.status == 200){
-                var response = JSON.parse(xhttp.responseText);
-                var tempTime = response.tempTime;               
-                var output = '';
+                let temperatureFormat = "K";
+                let noOfSensors = 4;
+                let response = JSON.parse(xhttp.responseText);
+                let tempTime = response.tempTime;               
+                let output = '';
                 //Display each input in a list on the screen
-                for(var i = 0; i < tempTime.length; i++){
+                for(let i = 0; i < tempTime.length; i++){
                     output += '<li>'+tempTime[i].Sensor1+'</li>';
                     //Add sensor data into appropriate arrays
                     sensorOneReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor1));
@@ -54,7 +55,7 @@
                     sensorThreeReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor3));
                     sensorFourReadings.push(new Reading(tempTime[i].Date,tempTime[i].Sensor4));
                     //Displays the average temperature of the 4 sensors
-                    console.log((Conversion(mode,tempTime[i].Sensor1)+Conversion(mode,tempTime[i].Sensor2)+Conversion(mode,tempTime[i].Sensor3)+Conversion(mode,tempTime[i].Sensor4))/noOfSensors)
+                    console.log((Conversion(temperatureFormat,tempTime[i].Sensor1)+Conversion(temperatureFormat,tempTime[i].Sensor2)+Conversion(temperatureFormat,tempTime[i].Sensor3)+Conversion(temperatureFormat,tempTime[i].Sensor4))/noOfSensors)
                 }
                 
                 //Information inputed should be from the tempTime field in the JSON file

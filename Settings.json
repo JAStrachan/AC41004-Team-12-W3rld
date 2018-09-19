@@ -1,8 +1,8 @@
 {
     "settings":[
         {
-            "NumberOfSensors": 4,
-            "Mode" : "K",
+            //"NumberOfSensors": 4,
+            "TemperatureFormat" : "K",
             "DateFormat" : "DD/MM/YYYY"
         }        
     ]
