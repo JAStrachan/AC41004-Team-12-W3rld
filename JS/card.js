@@ -34,10 +34,10 @@ function expandCard()
 
         this.flipArrow("45deg", this.arrow);
 
-        // // shrink card
+        // shrink card
         this.cardDiv.style.height = "";
         this.cardDiv.style.width = "";
-    } 
+    }
 }
 
 class Card {
@@ -51,7 +51,7 @@ class Card {
         this.arrow =null;
         this.svgPath="SVG/thermometer.svg";
     }
-    
+
     getDiv() {
 
 		let tempAndTimeContainer = document.createElement("div");
@@ -85,7 +85,7 @@ class Card {
 
         let graphDiv = this.getGraphDiv();
         this.cardDiv.appendChild(graphDiv);
-       
+
         return this.cardDiv;
     }
 
@@ -94,7 +94,7 @@ class Card {
     {
         let TimeDiv = document.createElement("div");
         TimeDiv.className = "time";
-        TimeDiv.textContent = "13:38";
+        TimeDiv.textContent = "19/09/18 13:38";
         return TimeDiv;
     }
 
@@ -149,7 +149,7 @@ class Card {
     {
         // create div to store expand/contract button
         let buttonDiv = document.createElement("div");
-        buttonDiv.className = "button"; 
+        buttonDiv.className = "button";
         this.arrow = this.getArrowDiv();
         buttonDiv.appendChild(this.arrow);
         buttonDiv.addEventListener("click", expandCard.bind(this));
