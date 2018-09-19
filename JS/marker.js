@@ -1,4 +1,4 @@
-function getDataMarkerIcon(sensorReading, svgPath) {
+function getDataMarkerIcon(value, units, svgPath) {
     let svgDiv = document.createElement("div");
     svgDiv.className = "svgDiv";
     let readingDiv = document.createElement("div");
@@ -10,7 +10,7 @@ function getDataMarkerIcon(sensorReading, svgPath) {
     svgObject.className = "markerSVG";
 
     let readingText = document.createElement("h1");
-    readingText.innerHTML = sensorReading;
+    readingText.innerHTML = value + units;
     readingText.className = "markerText";
 
     let tail = document.createElement("div");

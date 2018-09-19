@@ -42,14 +42,17 @@ function expandCard()
 
 class Card {
 
-    constructor(value) {
+    constructor(value, units, date, time, svgPath) {
         this.value = value;
+        this.time = time;
+        this.date = date;
+        this.units = units;
         this.expanded = false;
         this.cardDiv = document.createElement("div");
         this.cardDiv.className = "card";
         this.svgIcon = null;
-        this.arrow =null;
-        this.svgPath="SVG/thermometer.svg";
+        this.arrow = null;
+        this.svgPath=svgPath;
     }
 
     getDiv() {
@@ -61,7 +64,7 @@ class Card {
         // create div to store the value
         let valDiv = document.createElement("div");
         valDiv.className = "value";
-        valDiv.textContent = this.value;
+        valDiv.textContent = this.value + this.units;
 
         tempAndTimeContainer.appendChild(valDiv);
 
@@ -94,7 +97,7 @@ class Card {
     {
         let TimeDiv = document.createElement("div");
         TimeDiv.className = "time";
-        TimeDiv.textContent = "19/09/18 13:38";
+        TimeDiv.textContent = this.date + " " + this.time;
         return TimeDiv;
     }
 
