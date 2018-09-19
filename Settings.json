@@ -1,0 +1,9 @@
+{
+    "settings":[
+        {
+            "NumberOfSensors": 4,
+            "Mode" : "K",
+            "DateFormat" : "DD/MM/YYYY"
+        }        
+    ]
+}
