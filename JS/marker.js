@@ -28,3 +28,25 @@ function getDataMarkerIcon(value, units, svgPath) {
 
     return L.divIcon({className: "divIcon has-anchor", html: container.innerHTML, iconSize: [50, 50], iconAnchor: [25, 75]});
 }
+
+function addSensor(markerController, indoorMapId, indoorMapFloorIndex, latLng, units, svgPath) {
+    let sensorData = getData();
+    console.log(Object.keys(sensorData));
+
+    let marker = markerController.addMarker(2, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
+    marker.setIcon(getDataMarkerIcon(sensorData[0]["Sensor1"], units, svgPath));
+
+    let card = new Card(sensorData[0].Sensor1, units, "19/09/18", "13:38", svgPath);
+    let div = card.getDiv();
+
+    let popupOptions = {
+        indoorMapId: indoorMapId,
+        indoorMapFloorIndex: indoorMapFloorIndex,
+        autoClose: false,
+    };
+    let popup = L.popup(popupOptions)
+        .setLatLng(latLng)
+        .setContent(div);
+
+    marker.bindPopup(popup);
+}

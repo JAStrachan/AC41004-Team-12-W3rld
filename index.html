@@ -26,6 +26,7 @@
         <script src="JS/card.js"></script>
         <script src="JS/graph.js"></script>
         <script src="JS/marker.js"></script>
+        <script src="JS/loadingData.js"></script>
     </head>
     <body>
         <div style="position: relative">
@@ -47,9 +48,6 @@
                 let markerController = new WrldMarkerController(map);
 
                 // create card for popup
-                let card = new Card("20", "°C", "19/09/18", "13:38", "SVG/thermometer.svg");
-                let div = card.getDiv();
-
                 let card2 = new Card("273", "°C", "19/09/18", "13:38", "SVG/thermometer.svg");
                 let div2 = card2.getDiv();
 
@@ -59,16 +57,6 @@
                     indoorMapFloorIndex: 0,
                     autoClose: false,
                 };
-                let popup = L.popup(popupOptions)
-                    .setLatLng([56.460102, -2.978278])
-                    .setContent(div);
-
-                //create marker
-                let marker = markerController.addMarker(0, [56.460102, -2.978278], {title: "Test", indoorMapId: "westport_house", indoorMapFloorId: 0});
-                marker.setIcon(getDataMarkerIcon("20", "°C", "SVG/thermometer.svg"));
-
-                //attach popup to marker
-                marker.bindPopup(popup);
 
                 let popup2 = L.popup(popupOptions)
                     .setLatLng([56.46, -2.97])
@@ -79,6 +67,12 @@
 
                 //attach popup to marker
                 marker2.bindPopup(popup2);
+
+                addSensor(markerController, "westport_house", 0, [56.460102, -2.978278], "K", "SVG/humidity.svg");
+                // waits until the o'clock of the next hour then runs the update method every hour
+                // setTimeout(setInterval(updateMarkers, 1000 * 60 * 60), (60 - Date.getMinutes()) * 60 * 1000);
+                setTimeout(setInterval, (60 - new Date().getSeconds()) * 1000, updateMarkers, 1000 * 60, markerController);
+                console.log(60 - new Date().getSeconds());
             </script>
         </div>
     </body>
