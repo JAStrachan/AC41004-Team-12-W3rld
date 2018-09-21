@@ -53,11 +53,3 @@ getData = function() {
     });
     return promise;
 }
-
-function updateMarkers(markerController) {
-    console.log(new Date());
-    let markerIds = markerController.getAllMarkerIds();
-    for(i=0; i<markerIds.length; i++) {
-        markerController.getMarker(markerIds[i]).setIcon(getDataMarkerIcon("100", "°C", "SVG/humidity.svg"));
-    }
-}

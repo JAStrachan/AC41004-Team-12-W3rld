@@ -63,7 +63,7 @@ class Card {
 
         // create div to store the value
         let valDiv = document.createElement("div");
-        valDiv.className = "value";
+        valDiv.className = "value valueText";
         valDiv.textContent = this.value + this.units;
 
         tempAndTimeContainer.appendChild(valDiv);
@@ -96,7 +96,7 @@ class Card {
     getTimeDiv()
     {
         let TimeDiv = document.createElement("div");
-        TimeDiv.className = "time";
+        TimeDiv.className = "time timeDateText";
         TimeDiv.textContent = this.date + " " + this.time;
         return TimeDiv;
     }

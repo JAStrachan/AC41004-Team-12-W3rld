@@ -71,8 +71,9 @@
                 addSensor(markerController, "westport_house", 0, [56.460102, -2.978278], "°C", "SVG/thermometer.svg");
                 // waits until the o'clock of the next hour then runs the update method every hour
                 // setTimeout(setInterval(updateMarkers, 1000 * 60 * 60), (60 - Date.getMinutes()) * 60 * 1000);
-                // setTimeout(setInterval, (60 - new Date().getSeconds()) * 1000, updateMarkers, 1000 * 60, markerController);
-                // console.log(60 - new Date().getSeconds());
+                // setTimeout(setInterval, (60 - new Date().getSeconds()) * 1000, updateSensor, 1000 * 60, markerController);
+                setInterval(updateSensor, 20*1000, markerController);
+                console.log(60 - new Date().getSeconds());
             </script>
         </div>
     </body>
