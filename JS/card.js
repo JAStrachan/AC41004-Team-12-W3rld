@@ -12,6 +12,7 @@ function expandCard()
 
         // get svgobject
         let contentDoc = this.svgIcon.contentDocument;
+        console.log(contentDoc);
         let percentages = contentDoc.getElementsByClassName("level");;
         let decimals = contentDoc.getElementsByClassName("levelAnim");
 
@@ -57,9 +58,10 @@ class Card {
 
     getDiv() {
 
+        console.log(this.svgPath);
 		let tempAndTimeContainer = document.createElement("div");
 
-		tempAndTimeContainer.className = "flexcontainer value";
+		tempAndTimeContainer.className = "flexcontainer tempAndTimeContainer";
 
         // create div to store the value
         let valDiv = document.createElement("div");
@@ -75,6 +77,7 @@ class Card {
         tempAndTimeContainer.appendChild(sliderDiv);
 
         let iconDiv = this.getIconDiv();
+        console.log("icon appended");
 
         let svgAndTempContainer = document.createElement("div");
         svgAndTempContainer.className = "svgAndTempContainer";
@@ -88,6 +91,9 @@ class Card {
 
         let graphDiv = this.getGraphDiv();
         this.cardDiv.appendChild(graphDiv);
+
+        console.log("fully appended card");
+        console.log(this.cardDiv.childNodes);
 
         return this.cardDiv;
     }
@@ -111,8 +117,10 @@ class Card {
         this.svgIcon = document.createElement("object");
         this.svgIcon.type = "image/svg+xml";
         this.svgIcon.data = this.svgPath;
-        this.svgIcon.style.height = "100%";
-        this.svgIcon.style.width = "100%";
+        this.svgIcon.className = "svgIcon";
+
+        console.log("Created svg Icon");
+        console.log(this.svgIcon);
 
         iconDiv.appendChild(this.svgIcon);
         return iconDiv;
