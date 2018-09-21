@@ -1,11 +1,12 @@
 class Reading{
-   constructor(ReadingDate, SensorOneReading){
-        this.ReadingDate = ReadingDate;
-        this.SensorOneReading = SensorOneReading;
+   constructor(date, time, reading){
+        this.date = date;
+        this.time = time;
+        this.reading = reading;
     }
 }
 //Takes in input of mode desired to be displayed and converts values to appropriate unit when being displayed
-function Conversion(mode,value){
+function convert(mode,value){
     switch(mode){
         //Kelvin
         case "K":
@@ -22,7 +23,7 @@ function Conversion(mode,value){
 function sensorAverage(mode) {
     //Displays the average temperature of the 4 sensors
     let noOfSensors = 4;
-    console.log((Conversion(mode,temperatureTime[i].Sensor1)+Conversion(mode,temperatureTime[i].Sensor2)+Conversion(mode,temperatureTime[i].Sensor3)+Conversion(mode,temperatureTime[i].Sensor4))/noOfSensors)
+    console.log((convert(mode,temperatureTime[i].Sensor1)+convert(mode,temperatureTime[i].Sensor2)+convert(mode,temperatureTime[i].Sensor3)+convert(mode,temperatureTime[i].Sensor4))/noOfSensors)
 }
 
 getData = function() {
@@ -44,7 +45,7 @@ getData = function() {
             let temperatureTime = response.temperatureTime;
 
             for(let i = 0; i < temperatureTime.length; i++){
-                sensorReadings.push(new Reading(temperatureTime[i].Date,temperatureTime[i].Sensor1));
+                sensorReadings.push(new Reading(temperatureTime[i].Date,temperatureTime[i].Time, temperatureTime[i].Sensor1));
             }
 
             resolve(sensorReadings);
