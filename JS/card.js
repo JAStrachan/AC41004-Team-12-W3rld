@@ -43,7 +43,7 @@ function expandCard()
 class Card {
 
     constructor(units,svgPath, sensorData) {
-        this.lastReading = sensorData[0].reading;
+        this.lastReading = convert("C", sensorData[0].reading);
         this.lastTime = sensorData[0].time;
         this.lastDate = sensorData[0].date;
         this.units = units;
@@ -57,8 +57,7 @@ class Card {
     }
 
     getDiv() {
-        
-        console.log(this.sensorData[0].reading);
+
 		let tempAndTimeContainer = document.createElement("div");
 
 		tempAndTimeContainer.className = "flexcontainer value";

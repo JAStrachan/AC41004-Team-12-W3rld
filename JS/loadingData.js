@@ -10,13 +10,13 @@ function convert(mode,value){
     switch(mode){
         //Kelvin
         case "K":
-            return value;
+            return Math.round(value*100)/100;
         //Fahrenheit
         case "F":
-            return (value*1.8)-459.67;
+            return Math.round((value*1.8-459.67)*100) / 100;
         //Celsius
         case "C":
-            return value-273.15;
+            return Math.round((value-273.15) * 100) / 100;
     }
 }
 
