@@ -26,7 +26,7 @@ function expandCard()
         }
 
         // loading graph for sensor
-        let graph = new Graph();
+        let graph = new Graph(this.sensorData);
         graph.createGraph();
     }
     else {
@@ -34,24 +34,28 @@ function expandCard()
 
         this.flipArrow("45deg", this.arrow);
 
-        // // shrink card
+        // shrink card
         this.cardDiv.style.height = "";
         this.cardDiv.style.width = "";
-    } 
+    }
 }
 
 class Card {
 
-    constructor(value) {
-        this.value = value;
+    constructor(units,svgPath, sensorData) {
+        this.lastReading = convert("C", sensorData[0].reading);
+        this.lastTime = sensorData[0].time;
+        this.lastDate = sensorData[0].date;
+        this.units = units;
         this.expanded = false;
         this.cardDiv = document.createElement("div");
         this.cardDiv.className = "card";
         this.svgIcon = null;
-        this.arrow =null;
-        this.svgPath="SVG/thermometer.svg";
+        this.arrow = null;
+        this.svgPath=svgPath;
+        this.sensorData = sensorData;
     }
-    
+
     getDiv() {
 
 		let tempAndTimeContainer = document.createElement("div");
@@ -59,11 +63,11 @@ class Card {
 		tempAndTimeContainer.className = "flexcontainer value";
 
         // create div to store the value
-        let valDiv = document.createElement("div");
-        valDiv.className = "value";
-        valDiv.textContent = this.value;
+        let sensorReadingDiv = document.createElement("div");
+        sensorReadingDiv.className = "value valueText";
+        sensorReadingDiv.textContent = this.lastReading + this.units;
 
-        tempAndTimeContainer.appendChild(valDiv);
+        tempAndTimeContainer.appendChild(sensorReadingDiv);
 
         let TimeDiv = this.getTimeDiv();
         tempAndTimeContainer.appendChild(TimeDiv);
@@ -85,7 +89,7 @@ class Card {
 
         let graphDiv = this.getGraphDiv();
         this.cardDiv.appendChild(graphDiv);
-       
+
         return this.cardDiv;
     }
 
@@ -93,8 +97,8 @@ class Card {
     getTimeDiv()
     {
         let TimeDiv = document.createElement("div");
-        TimeDiv.className = "time";
-        TimeDiv.textContent = "13:38";
+        TimeDiv.className = "time timeDateText";
+        TimeDiv.textContent = this.lastDate + " " + this.lastTime;
         return TimeDiv;
     }
 
@@ -149,7 +153,7 @@ class Card {
     {
         // create div to store expand/contract button
         let buttonDiv = document.createElement("div");
-        buttonDiv.className = "button"; 
+        buttonDiv.className = "button";
         this.arrow = this.getArrowDiv();
         buttonDiv.appendChild(this.arrow);
         buttonDiv.addEventListener("click", expandCard.bind(this));

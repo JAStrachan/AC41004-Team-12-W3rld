@@ -1,0 +1,580 @@
+{
+  "temperatureTime":[
+      {
+        "Date": "11/04/18",
+        "Time": "12:00",
+        "Sensor1": 296.2,
+        "Sensor2": 296.4,
+        "Sensor3": 296.2,
+        "Sensor4": 296.3
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "13:00",
+        "Sensor1": 295.9,
+        "Sensor2": 296.7,
+        "Sensor3": 297.4,
+        "Sensor4": 297
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "14:00",
+        "Sensor1": 296.6,
+        "Sensor2": 297.7,
+        "Sensor3": 296.7,
+        "Sensor4": 296.5
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "15:00",
+        "Sensor1": 296,
+        "Sensor2": 297.1,
+        "Sensor3": 297.1,
+        "Sensor4": 296.5
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "16:00",
+        "Sensor1": 296.9,
+        "Sensor2": 299,
+        "Sensor3": 297,
+        "Sensor4": 297.4
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "17:00",
+        "Sensor1": 297,
+        "Sensor2": 297,
+        "Sensor3": 296.7,
+        "Sensor4": 296.7
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "18:00",
+        "Sensor1": 294.8,
+        "Sensor2": 295.5,
+        "Sensor3": 295.8,
+        "Sensor4": 296.6
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "19:00",
+        "Sensor1": 295.9,
+        "Sensor2": 295.6,
+        "Sensor3": 295.5,
+        "Sensor4": 295.8
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "20:00",
+        "Sensor1": 295.1,
+        "Sensor2": 295.7,
+        "Sensor3": 295.2,
+        "Sensor4": 295
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "21:00",
+        "Sensor1": 294.8,
+        "Sensor2": 295.2,
+        "Sensor3": 295,
+        "Sensor4": 295.1
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "22:00",
+        "Sensor1": 293.4,
+        "Sensor2": 294.4,
+        "Sensor3": 294.1,
+        "Sensor4": 293.7
+      },
+      {
+        "Date": "11/04/18",
+        "Time": "23:00",
+        "Sensor1": 292.4,
+        "Sensor2": 294.6,
+        "Sensor3": 293.4,
+        "Sensor4": 293.3
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "00:00",
+        "Sensor1": 293.6,
+        "Sensor2": 294.1,
+        "Sensor3": 293.4,
+        "Sensor4": 293
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "01:00",
+        "Sensor1": 292.9,
+        "Sensor2": 293,
+        "Sensor3": 293.4,
+        "Sensor4": 293
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "02:00",
+        "Sensor1": 292.6,
+        "Sensor2": 292.6,
+        "Sensor3": 293.7,
+        "Sensor4": 292.7
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "03:00",
+        "Sensor1": 293.3,
+        "Sensor2": 292.3,
+        "Sensor3": 293.7,
+        "Sensor4": 293.4
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "04:00",
+        "Sensor1": 292,
+        "Sensor2": 293,
+        "Sensor3": 293.3,
+        "Sensor4": 293.9
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "05:00",
+        "Sensor1": 294.1,
+        "Sensor2": 293.1,
+        "Sensor3": 293.1,
+        "Sensor4": 294.1
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "06:00",
+        "Sensor1": 293.2,
+        "Sensor2": 292.8,
+        "Sensor3": 294.1,
+        "Sensor4": 293.6
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "07:00",
+        "Sensor1": 294.6,
+        "Sensor2": 294.6,
+        "Sensor3": 294.8,
+        "Sensor4": 294.7
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "08:00",
+        "Sensor1": 294.6,
+        "Sensor2": 294.4,
+        "Sensor3": 295.4,
+        "Sensor4": 294.3
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "09:00",
+        "Sensor1": 295.2,
+        "Sensor2": 295.1,
+        "Sensor3": 296.2,
+        "Sensor4": 295.3
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "10:00",
+        "Sensor1": 294.2,
+        "Sensor2": 294.6,
+        "Sensor3": 296.1,
+        "Sensor4": 295.8
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "11:00",
+        "Sensor1": 294.7,
+        "Sensor2": 295.7,
+        "Sensor3": 296.6,
+        "Sensor4": 296.3
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "12:00",
+        "Sensor1": 293.4,
+        "Sensor2": 294,
+        "Sensor3": 296.3,
+        "Sensor4": 297.2
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "13:00",
+        "Sensor1": 291.8,
+        "Sensor2": 291.9,
+        "Sensor3": 296.2,
+        "Sensor4": 296.8
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "14:00",
+        "Sensor1": 291.8,
+        "Sensor2": 292.7,
+        "Sensor3": 297.3,
+        "Sensor4": 296.5
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "15:00",
+        "Sensor1": 292.3,
+        "Sensor2": 293.3,
+        "Sensor3": 296.8,
+        "Sensor4": 297.5
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "16:00",
+        "Sensor1": 293.1,
+        "Sensor2": 292.6,
+        "Sensor3": 297.6,
+        "Sensor4": 297.5
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "17:00",
+        "Sensor1": 293.3,
+        "Sensor2": 291.7,
+        "Sensor3": 295.8,
+        "Sensor4": 296.6
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "18:00",
+        "Sensor1": 295.8,
+        "Sensor2": 296.3,
+        "Sensor3": 296.8,
+        "Sensor4": 296.4
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "19:00",
+        "Sensor1": 295,
+        "Sensor2": 295.4,
+        "Sensor3": 296.3,
+        "Sensor4": 295
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "20:00",
+        "Sensor1": 295.1,
+        "Sensor2": 295.6,
+        "Sensor3": 295.1,
+        "Sensor4": 294.8
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "21:00",
+        "Sensor1": 294.1,
+        "Sensor2": 293.6,
+        "Sensor3": 295.4,
+        "Sensor4": 295
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "22:00",
+        "Sensor1": 295,
+        "Sensor2": 294.6,
+        "Sensor3": 292.5,
+        "Sensor4": 293.9
+      },
+      {
+        "Date": "12/04/18",
+        "Time": "23:00",
+        "Sensor1": 294,
+        "Sensor2": 293.3,
+        "Sensor3": 293.3,
+        "Sensor4": 293.8
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "00:00",
+        "Sensor1": 292.3,
+        "Sensor2": 293.2,
+        "Sensor3": 294,
+        "Sensor4": 292.8
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "01:00",
+        "Sensor1": 294.6,
+        "Sensor2": 293.5,
+        "Sensor3": 292.7,
+        "Sensor4": 292.8
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "02:00",
+        "Sensor1": 293,
+        "Sensor2": 292.2,
+        "Sensor3": 293.2,
+        "Sensor4": 292.8
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "03:00",
+        "Sensor1": 292.3,
+        "Sensor2": 293.8,
+        "Sensor3": 291.9,
+        "Sensor4": 292.9
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "04:00",
+        "Sensor1": 292.6,
+        "Sensor2": 293.4,
+        "Sensor3": 293.2,
+        "Sensor4": 292.6
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "05:00",
+        "Sensor1": 293.3,
+        "Sensor2": 294.1,
+        "Sensor3": 293.5,
+        "Sensor4": 293.3
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "06:00",
+        "Sensor1": 294.1,
+        "Sensor2": 291.6,
+        "Sensor3": 294.1,
+        "Sensor4": 292.9
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "07:00",
+        "Sensor1": 294,
+        "Sensor2": 295.1,
+        "Sensor3": 294.2,
+        "Sensor4": 294.1
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "08:00",
+        "Sensor1": 293.1,
+        "Sensor2": 293.9,
+        "Sensor3": 294.8,
+        "Sensor4": 294.8
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "09:00",
+        "Sensor1": 294.9,
+        "Sensor2": 295.2,
+        "Sensor3": 294.5,
+        "Sensor4": 295.7
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "10:00",
+        "Sensor1": 297.1,
+        "Sensor2": 295.3,
+        "Sensor3": 295.7,
+        "Sensor4": 295.1
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "11:00",
+        "Sensor1": 296.4,
+        "Sensor2": 296.6,
+        "Sensor3": 296.4,
+        "Sensor4": 296.6
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "12:00",
+        "Sensor1": 297.5,
+        "Sensor2": 296.5,
+        "Sensor3": 296.9,
+        "Sensor4": 296.6
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "13:00",
+        "Sensor1": 296.7,
+        "Sensor2": 297.4,
+        "Sensor3": 297.2,
+        "Sensor4": 296.2
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "14:00",
+        "Sensor1": 297.1,
+        "Sensor2": 296,
+        "Sensor3": 297.2,
+        "Sensor4": 297.8
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "15:00",
+        "Sensor1": 296.6,
+        "Sensor2": 298.4,
+        "Sensor3": 296.8,
+        "Sensor4": 297.6
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "16:00",
+        "Sensor1": 297.2,
+        "Sensor2": 297.9,
+        "Sensor3": 296.8,
+        "Sensor4": 296.7
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "17:00",
+        "Sensor1": 296.6,
+        "Sensor2": 296.7,
+        "Sensor3": 297.1,
+        "Sensor4": 297
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "18:00",
+        "Sensor1": 296.1,
+        "Sensor2": 296.7,
+        "Sensor3": 296.2,
+        "Sensor4": 297
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "19:00",
+        "Sensor1": 295.8,
+        "Sensor2": 295.6,
+        "Sensor3": 296.1,
+        "Sensor4": 295.5
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "20:00",
+        "Sensor1": 295.9,
+        "Sensor2": 294.2,
+        "Sensor3": 295.3,
+        "Sensor4": 295.4
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "21:00",
+        "Sensor1": 294.6,
+        "Sensor2": 294.2,
+        "Sensor3": 295.4,
+        "Sensor4": 294.2
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "22:00",
+        "Sensor1": 293.7,
+        "Sensor2": 294.2,
+        "Sensor3": 294.2,
+        "Sensor4": 294
+      },
+      {
+        "Date": "13/04/18",
+        "Time": "23:00",
+        "Sensor1": 292.7,
+        "Sensor2": 292.2,
+        "Sensor3": 293.6,
+        "Sensor4": 293.3
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "00:00",
+        "Sensor1": 294.1,
+        "Sensor2": 292.8,
+        "Sensor3": 293.5,
+        "Sensor4": 292.1
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "01:00",
+        "Sensor1": 294,
+        "Sensor2": 293.3,
+        "Sensor3": 293,
+        "Sensor4": 293
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "02:00",
+        "Sensor1": 292.7,
+        "Sensor2": 292.4,
+        "Sensor3": 293.1,
+        "Sensor4": 293.5
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "03:00",
+        "Sensor1": 292.8,
+        "Sensor2": 292.6,
+        "Sensor3": 293.3,
+        "Sensor4": 292.8
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "04:00",
+        "Sensor1": 293.3,
+        "Sensor2": 292.6,
+        "Sensor3": 294.5,
+        "Sensor4": 292.9
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "05:00",
+        "Sensor1": 292.1,
+        "Sensor2": 293,
+        "Sensor3": 292.4,
+        "Sensor4": 293
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "06:00",
+        "Sensor1": 294.4,
+        "Sensor2": 293.8,
+        "Sensor3": 294,
+        "Sensor4": 294.1
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "07:00",
+        "Sensor1": 294.5,
+        "Sensor2": 294.1,
+        "Sensor3": 294.9,
+        "Sensor4": 293.9
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "08:00",
+        "Sensor1": 294.4,
+        "Sensor2": 295.4,
+        "Sensor3": 294.2,
+        "Sensor4": 294.4
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "09:00",
+        "Sensor1": 295.8,
+        "Sensor2": 294.6,
+        "Sensor3": 294.8,
+        "Sensor4": 295.7
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "10:00",
+        "Sensor1": 295.9,
+        "Sensor2": 295.8,
+        "Sensor3": 295.5,
+        "Sensor4": 295.2
+      },
+      {
+        "Date": "14/04/18",
+        "Time": "11:00",
+        "Sensor1": 296.2,
+        "Sensor2": 297.2,
+        "Sensor3": 296.6,
+        "Sensor4": 296
+      }
+  ]
+}

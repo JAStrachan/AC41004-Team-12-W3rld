@@ -10,6 +10,7 @@
         <!-- Wrld3D API -->
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/indoor_control/latest/indoor_control.js"></script>
+        <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/marker_controller/latest/marker_controller.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
         <link href="https://cdn-webgl.wrld3d.com/wrldjs/addons/resources/latest/css/wrld.css" rel="stylesheet"/>
 
@@ -20,9 +21,12 @@
         <!-- Stylesheets -->
         <link href="CSS/stylesheet.css" rel="stylesheet"/>
         <link href="CSS/cardstyle.css" rel="stylesheet" />
+        <link href="CSS/marker.css" rel="stylesheet"/>
         <!-- Scripts -->
         <script src="JS/card.js"></script>
         <script src="JS/graph.js"></script>
+        <script src="JS/marker.js"></script>
+        <script src="JS/loadingData.js"></script>
     </head>
     <body>
         <div style="position: relative">
@@ -40,27 +44,14 @@
                 // indoor controller widget
                 let indoorControl = new WrldIndoorControl("widget-container", map);
 
-                // create card for popup
-                let card = new Card("20°C");
-                let div = card.getDiv();
+                // add marker controller
+                let markerController = new WrldMarkerController(map);
 
-                // create popup
-                let popupOptions = {
-                    indoorMapId: "westport_house",
-                    indoorMapFloorIndex: 2,
-                    autoClose: false
-                };
-                let popup = L.popup(popupOptions)
-                    .setLatLng([56.460102, -2.978278])
-                    .setContent(div);
-
-                //create marker
-                let marker = L.marker([56.460102, -2.978278], {title: "Test", indoorMapId: "westport_house", indoorMapFloorId: 2}).addTo(map);
-
-                //attach popup to marker
-                marker.on("click", function() {
-                    popup.addTo(map);
-                })
+                addSensor(markerController, "westport_house", 0, [56.460102, -2.978278], "°C", "SVG/thermometer.svg");
+                // waits until the o'clock of the next hour then runs the update method every hour
+                // setTimeout(setInterval(updateMarkers, 1000 * 60 * 60), (60 - Date.getMinutes()) * 60 * 1000);
+                // setTimeout(setInterval, (60 - new Date().getSeconds()) * 1000, updateSensor, 1000 * 60, markerController);
+                //setInterval(updateSensor, 20*1000, markerController);
             </script>
         </div>
     </body>
