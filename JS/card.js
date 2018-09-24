@@ -26,7 +26,7 @@ function expandCard()
         }
 
         // loading graph for sensor
-        let graph = new Graph();
+        let graph = new Graph(this.sensorData);
         graph.createGraph();
     }
     else {
@@ -42,10 +42,10 @@ function expandCard()
 
 class Card {
 
-    constructor(value, units, date, time, svgPath) {
-        this.value = value;
-        this.time = time;
-        this.date = date;
+    constructor(units,svgPath, sensorData) {
+        this.lastReading = sensorData[0].reading;
+        this.lastTime = sensorData[0].time;
+        this.lastDate = sensorData[0].date;
         this.units = units;
         this.expanded = false;
         this.cardDiv = document.createElement("div");
@@ -53,20 +53,22 @@ class Card {
         this.svgIcon = null;
         this.arrow = null;
         this.svgPath=svgPath;
+        this.sensorData = sensorData;
     }
 
     getDiv() {
-
+        
+        console.log(this.sensorData[0].reading);
 		let tempAndTimeContainer = document.createElement("div");
 
 		tempAndTimeContainer.className = "flexcontainer value";
 
         // create div to store the value
-        let valDiv = document.createElement("div");
-        valDiv.className = "value valueText";
-        valDiv.textContent = this.value + this.units;
+        let sensorReadingDiv = document.createElement("div");
+        sensorReadingDiv.className = "value valueText";
+        sensorReadingDiv.textContent = this.lastReading + this.units;
 
-        tempAndTimeContainer.appendChild(valDiv);
+        tempAndTimeContainer.appendChild(sensorReadingDiv);
 
         let TimeDiv = this.getTimeDiv();
         tempAndTimeContainer.appendChild(TimeDiv);
@@ -97,7 +99,7 @@ class Card {
     {
         let TimeDiv = document.createElement("div");
         TimeDiv.className = "time timeDateText";
-        TimeDiv.textContent = this.date + " " + this.time;
+        TimeDiv.textContent = this.lastDate + " " + this.lastTime;
         return TimeDiv;
     }
 

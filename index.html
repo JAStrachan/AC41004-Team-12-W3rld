@@ -47,33 +47,11 @@
                 // add marker controller
                 let markerController = new WrldMarkerController(map);
 
-                // create card for popup
-                let card2 = new Card("273", "°C", "19/09/18", "13:38", "SVG/thermometer.svg");
-                let div2 = card2.getDiv();
-
-                // create popup
-                let popupOptions = {
-                    indoorMapId: "westport_house",
-                    indoorMapFloorIndex: 0,
-                    autoClose: false,
-                };
-
-                let popup2 = L.popup(popupOptions)
-                    .setLatLng([56.46, -2.97])
-                    .setContent(div2);
-
-                let marker2 = markerController.addMarker(1, [56.460050, -2.978305], {title: "Test2", indoorMapId: "westport_house", indoorMapFloorId: 0});
-                marker2.setIcon(getDataMarkerIcon("273", "°C", "SVG/thermometer.svg"));
-
-                //attach popup to marker
-                marker2.bindPopup(popup2);
-
                 addSensor(markerController, "westport_house", 0, [56.460102, -2.978278], "°C", "SVG/thermometer.svg");
                 // waits until the o'clock of the next hour then runs the update method every hour
                 // setTimeout(setInterval(updateMarkers, 1000 * 60 * 60), (60 - Date.getMinutes()) * 60 * 1000);
                 // setTimeout(setInterval, (60 - new Date().getSeconds()) * 1000, updateSensor, 1000 * 60, markerController);
-                setInterval(updateSensor, 20*1000, markerController);
-                console.log(60 - new Date().getSeconds());
+                //setInterval(updateSensor, 20*1000, markerController);
             </script>
         </div>
     </body>

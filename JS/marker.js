@@ -36,9 +36,9 @@ async function addSensor(markerController, indoorMapId, indoorMapFloorIndex, lat
     let marker = markerController.addMarker(0, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
     marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[0].reading)), units, svgPath));
 
-    let card = new Card(Math.round(convert("C", sensorData[0].reading) * 100) / 100, units, sensorData[0].date, sensorData[0].time, svgPath);
+    let card = new Card(units, svgPath, sensorData);
     let div = card.getDiv();
-
+    
     let popupOptions = {
         indoorMapId: indoorMapId,
         indoorMapFloorIndex: indoorMapFloorIndex,
