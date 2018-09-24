@@ -10,7 +10,7 @@
 
     --button-height: 15px;
 
-    --graph-height: 200px;
+    --graph-height: 159px;
 }
 
 .body{
@@ -81,7 +81,7 @@
 .graph {
     background-color: #DDDDDD;
     width: 100%;
-    height: var(--graph-height);
+    height: 100%;
     display: block;
     float: left;
 }
