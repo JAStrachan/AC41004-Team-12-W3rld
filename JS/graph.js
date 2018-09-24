@@ -15,6 +15,8 @@ class Graph {
         labels: timeLabels,
         datasets: [{
           data: readings,
+          borderColor: 'red',
+          backgroundColor:'rgba(0,0,0,0)'
         }]
       },
       options: {
@@ -24,7 +26,7 @@ class Graph {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: false
             }
           }]
         }
