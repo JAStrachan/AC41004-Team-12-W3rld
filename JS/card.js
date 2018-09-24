@@ -40,9 +40,13 @@ function expandCard()
     }
 }
 
+function sliderChange(value) {
+    alert("Slider: " + value);
+}
+
 class Card {
 
-    constructor(units,svgPath, sensorData) {
+    constructor(units, svgPath, sensorData) {
         this.lastReading = convert("C", sensorData[0].reading);
         this.lastTime = sensorData[0].time;
         this.lastDate = sensorData[0].date;
@@ -128,12 +132,15 @@ class Card {
         // add slider to div
         let slider = document.createElement("input");
         slider.type = "range";
-        slider.id = "range";
+        slider.id = "cardSlider";
         slider.className = "slider";
         slider.min = "1";
         slider.max = "12";
         slider.value = "12";
         slider.step = "1";
+        slider.oninput = function() {
+            sliderChange(slider.value);
+        }
         sliderDiv.appendChild(slider);
         return sliderDiv;
     }

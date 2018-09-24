@@ -38,7 +38,7 @@ async function addSensor(markerController, indoorMapId, indoorMapFloorIndex, lat
 
     let card = new Card(units, svgPath, sensorData);
     let div = card.getDiv();
-    
+
     let popupOptions = {
         indoorMapId: indoorMapId,
         indoorMapFloorIndex: indoorMapFloorIndex,
@@ -62,14 +62,17 @@ async function updateSensor(markerController) {
 
         // update content of the popup
         let popup = marker.getPopup();
+        updatePopup(popup);
+    }
+}
 
-        let value = popup.getContent().getElementsByClassName("valueText");
-        value[0].textContent = Math.round(convert("C", sensorData[7].reading) * 100) / 100 + "°C";
-        let time = popup.getContent().getElementsByClassName("timeDateText");
-        time[0].textContent = sensorData[7].date + " " + sensorData[7].time;
+function updatePopup(popup) {
+    let value = popup.getContent().getElementsByClassName("valueText");
+    value[0].textContent = Math.round(convert("C", sensorData[7].reading) * 100) / 100 + "°C";
+    let time = popup.getContent().getElementsByClassName("timeDateText");
+    time[0].textContent = sensorData[7].date + " " + sensorData[7].time;
 
-        if(popup.isOpen()) {
-            popup.update();
-        }
+    if(popup.isOpen()) {
+        popup.update();
     }
 }
