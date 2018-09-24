@@ -57,10 +57,9 @@ class Card {
     }
 
     getDiv() {
-
 		let tempAndTimeContainer = document.createElement("div");
 
-		tempAndTimeContainer.className = "flexcontainer value";
+		tempAndTimeContainer.className = "flexcontainer tempAndTimeContainer";
 
         // create div to store the value
         let sensorReadingDiv = document.createElement("div");
@@ -112,8 +111,7 @@ class Card {
         this.svgIcon = document.createElement("object");
         this.svgIcon.type = "image/svg+xml";
         this.svgIcon.data = this.svgPath;
-        this.svgIcon.style.height = "100%";
-        this.svgIcon.style.width = "100%";
+        this.svgIcon.className = "svgIcon";
 
         iconDiv.appendChild(this.svgIcon);
         return iconDiv;
