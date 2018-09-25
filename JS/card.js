@@ -30,17 +30,18 @@ function expandCard()
 
 class Card {
 
-    constructor(units, svgPath, sensorData) {
+    constructor(measurement, sensorData) {
         this.lastReading = convert("C", sensorData[sensorData.length - 1].reading);
         this.lastTime = sensorData[sensorData.length - 1].time;
         this.lastDate = sensorData[sensorData.length - 1].date;
-        this.units = units;
+        this.units = measurement.units;
+        this.measurement = measurement;
         this.expanded = false;
         this.cardDiv = document.createElement("div");
         this.cardDiv.className = "card";
         this.svgIcon = null;
         this.arrow = null;
-        this.svgPath=svgPath;
+        this.svgPath = measurement.svgPath;
         this.sensorData = sensorData;
     }
 
@@ -52,8 +53,15 @@ class Card {
 
         // create div to store the value
         let sensorReadingDiv = document.createElement("div");
-        sensorReadingDiv.className = "value valueText";
-        sensorReadingDiv.textContent = this.lastReading + this.units;
+        sensorReadingDiv.className = "value";
+        let sensorValue = document.createElement("span");
+        sensorValue.className = "valueText value";
+        sensorValue.textContent = this.lastReading;
+        let unitText = document.createElement("span");
+        unitText.className = "unitText value";
+        unitText.textContent = this.units;
+        sensorReadingDiv.appendChild(sensorValue);
+        sensorReadingDiv.appendChild(unitText);
 
         tempAndTimeContainer.appendChild(sensorReadingDiv);
 

@@ -1,4 +1,4 @@
-function getDataMarkerIcon(value, units, svgPath) {
+function getDataMarkerIcon(value, measurement) {
     let svgDiv = document.createElement("div");
     svgDiv.className = "svgDiv";
     let readingDiv = document.createElement("div");
@@ -6,11 +6,11 @@ function getDataMarkerIcon(value, units, svgPath) {
 
     let svgObject = document.createElement("object");
     svgObject.type = "image/svg+xml";
-    svgObject.data = svgPath;
+    svgObject.data = measurement.svgPath;
     svgObject.className = "markerSVG";
 
     let readingText = document.createElement("h1");
-    readingText.innerHTML = value + units;
+    readingText.innerHTML = value + measurement.units;
     readingText.className = "markerText";
 
     let tail = document.createElement("div");
@@ -29,12 +29,13 @@ function getDataMarkerIcon(value, units, svgPath) {
     return L.divIcon({className: "divIcon has-anchor", html: container.innerHTML, iconSize: [50, 50], iconAnchor: [25, 75]});
 }
 
-function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, units, svgPath, sensorData) {
+function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, measurement, sensorData) {
 
     let marker = markerController.addMarker(markerID, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
-    marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[0].reading)), units, svgPath));
+    marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[sensorData.length - 1].reading)), measurement));
+    marker.measurement = measurement;
 
-    let card = new Card(units, svgPath, sensorData);
+    let card = new Card(measurement, sensorData);
     let div = card.getDiv();
 
     let popupOptions = {
@@ -54,11 +55,11 @@ function updateSensor(markerController, sensorData) {
     for(i=0; i<markerIds.length; i++) {
         // change marker icon
         let marker = markerController.getMarker(markerIds[i]);
-        marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[sensorData.length - 1].reading)), "°C", "SVG/thermometer.svg"));
+        marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[sensorData.length - 1].reading)), marker.measurement));
 
         // update content of the popup
         let popup = marker.getPopup();
-        updateCard(popup.getContent(), sensorData);
+        updateCard(popup.getContent(), sensorData, marker.measurement);
 
         if(popup.isOpen()) {
             popup.update();
@@ -74,9 +75,9 @@ function updateCard(card, sensorReading) {
     }
     let value = card.getElementsByClassName("valueText");
     let readingValue = Math.round(convert("C", sensorReading[sensorReading.length - 1 - (12-position)].reading) * 100) / 100;
-    value[0].textContent = readingValue + "°C";
+    value[0].textContent = readingValue;
     let time = card.getElementsByClassName("timeDateText");
-    time[0].textContent = sensorReading[sensorReading.length - 1 - (12-position)].date + " " + sensorReading[sensorReading.length - 1 - (12-slider.value)].time;
+    time[0].textContent = sensorReading[sensorReading.length - 1 - (12-position)].date + " " + sensorReading[sensorReading.length - 1 - (12-position)].time;
     fillSvg(document.getElementById("svgIcon"), readingValue);
 }
 
