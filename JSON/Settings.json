@@ -2,9 +2,8 @@
     "Settings":
     [
         {
-        "TemperatureFormat":"C",
-        //Units in seconds
-        "TimeInterval":"20"
+        "TemperatureFormat": "C",
+        "TimeInterval": 20
         }
     ]
 }
