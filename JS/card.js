@@ -13,7 +13,7 @@ function expandCard()
         this.cardDiv.style.width = "var(--card-width-expanded)";
 
         // loading graph for sensor
-        let graph = new Graph(dayOfSensorData);
+        let graph = new Graph(getDayOfSensorData(this.sensorData));
         graph.createGraph();
     }
     else {
