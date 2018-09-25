@@ -1,17 +1,26 @@
 class Graph {
+
+  constructor(sensorData){
+    this.sensorData = [];
+    this.sensorData = sensorData;
+  }
   createGraph () {
     let ctx = document.getElementById('graphCanvas');
-    console.log(ctx.innerHTML);
+
+    let timeLabels = this.getTimes();
+    let readings = this.getReadings();
     let graphCanvas = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['10/09/2018', '11/09/2018', '12/09/2018', '13/09/2018', '14/09/2018', '15/09/2018'],
+        labels: timeLabels,
         datasets: [{
-          label: 'Temperature',
-          data: [12, 19, 3, 5, 2, 3]
+          data: readings,
         }]
       },
       options: {
+        legend: {
+          display: false
+        },
         scales: {
           yAxes: [{
             ticks: {
@@ -21,5 +30,23 @@ class Graph {
         }
       }
     });
+  }
+
+  getTimes() {
+    let timeLabels = [];
+    for(i=0; i< this.sensorData.length; i++)
+    {
+      timeLabels.push(this.sensorData[i].time);
+    }
+    return timeLabels;
+  }
+
+  getReadings() {
+    let readings = [];
+    for(i=0; i< this.sensorData.length; i++)
+    {
+      readings.push(convert("C", this.sensorData[i].reading));
+    }
+    return readings;
   }
 }

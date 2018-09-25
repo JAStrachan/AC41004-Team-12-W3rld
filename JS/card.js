@@ -6,46 +6,34 @@ function expandCard()
 
         this.flipArrow("225deg", this.arrow);
 
+        this.arrow.style.marginTop = "5px";
+
         // expand card
         this.cardDiv.style.height = "calc(var(--card-height-expanded) + var(--graph-height))";
         this.cardDiv.style.width = "var(--card-width-expanded)";
 
-        // get svgobject
-        let contentDoc = this.svgIcon.contentDocument;
-        let percentages = contentDoc.getElementsByClassName("level");;
-        let decimals = contentDoc.getElementsByClassName("levelAnim");
-
-        // set new percentages
-        for(let i=0; i<percentages.length; i++) {
-            percentages[i].setAttribute("offset", "60%");
-        }
-
-        // set new animation points
-        for(let i=0; i<decimals.length; i++) {
-            decimals[i].setAttribute("to", "0.6");
-        }
-
         // loading graph for sensor
-        let graph = new Graph();
+        let graph = new Graph(this.sensorData);
         graph.createGraph();
     }
     else {
         this.expanded = false;
 
         this.flipArrow("45deg", this.arrow);
+        this.arrow.style.marginTop = "0px";
 
         // shrink card
         this.cardDiv.style.height = "";
-        this.cardDiv.style.width = "";
+        this.cardDiv.style.width = "var(--card-width)";
     }
 }
 
 class Card {
 
-    constructor(value, units, date, time, svgPath) {
-        this.value = value;
-        this.time = time;
-        this.date = date;
+    constructor(units, svgPath, sensorData) {
+        this.lastReading = convert("C", sensorData[sensorData.length - 1].reading);
+        this.lastTime = sensorData[sensorData.length - 1].time;
+        this.lastDate = sensorData[sensorData.length - 1].date;
         this.units = units;
         this.expanded = false;
         this.cardDiv = document.createElement("div");
@@ -53,20 +41,21 @@ class Card {
         this.svgIcon = null;
         this.arrow = null;
         this.svgPath=svgPath;
+        this.sensorData = sensorData;
     }
 
     getDiv() {
-
 		let tempAndTimeContainer = document.createElement("div");
 
-		tempAndTimeContainer.className = "flexcontainer value";
+		tempAndTimeContainer.className = "flexcontainer tempAndTimeContainer";
+        tempAndTimeContainer.id = "popupCard";
 
         // create div to store the value
-        let valDiv = document.createElement("div");
-        valDiv.className = "value valueText";
-        valDiv.textContent = this.value + this.units;
+        let sensorReadingDiv = document.createElement("div");
+        sensorReadingDiv.className = "value valueText";
+        sensorReadingDiv.textContent = this.lastReading + this.units;
 
-        tempAndTimeContainer.appendChild(valDiv);
+        tempAndTimeContainer.appendChild(sensorReadingDiv);
 
         let TimeDiv = this.getTimeDiv();
         tempAndTimeContainer.appendChild(TimeDiv);
@@ -97,7 +86,7 @@ class Card {
     {
         let TimeDiv = document.createElement("div");
         TimeDiv.className = "time timeDateText";
-        TimeDiv.textContent = this.date + " " + this.time;
+        TimeDiv.textContent = this.lastDate + " " + this.lastTime;
         return TimeDiv;
     }
 
@@ -110,12 +99,16 @@ class Card {
         // add svg into iconDiv
         this.svgIcon = document.createElement("object");
         this.svgIcon.type = "image/svg+xml";
+        this.svgIcon.id = "svgIcon";
         this.svgIcon.data = this.svgPath;
-        this.svgIcon.style.height = "100%";
-        this.svgIcon.style.width = "100%";
+        this.svgIcon.className = "svgIcon";
 
         iconDiv.appendChild(this.svgIcon);
         return iconDiv;
+    }
+
+    updateCardFromSlider(param) {
+        updateCard(document.getElementById("popupCard"), param.target.sensorReadings);
     }
 
     getSliderDiv()
@@ -127,12 +120,14 @@ class Card {
         // add slider to div
         let slider = document.createElement("input");
         slider.type = "range";
-        slider.id = "range";
+        slider.id = "cardSlider";
         slider.className = "slider";
         slider.min = "1";
         slider.max = "12";
         slider.value = "12";
         slider.step = "1";
+        slider.addEventListener("input", this.updateCardFromSlider);
+        slider.sensorReadings = this.sensorData;
         sliderDiv.appendChild(slider);
         return sliderDiv;
     }

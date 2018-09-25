@@ -10,7 +10,7 @@
 
     --button-height: 15px;
 
-    --graph-height: 200px;
+    --graph-height: 159px;
 }
 
 .body{
@@ -18,25 +18,37 @@
 }
 
 .flexcontainer{
-	display: flex;
+    display: flex;
+    flex-grow: 1;
 	flex-direction: column;
 	margin: 0;
     width: 50%;
-    float:left;
     text-align: center;
     transition: 0.5s;
+    height: 100%;
 }
 
 .svgAndTempContainer{
     display: flex;
     flex-direction: row;
-    height: 100px;
+    flex-grow: 1;
+    height: 100%;
     min-height: calc(var(--card-height) - var(--button-height));
+    width: 100%;
+}
+
+.tempAndTimeContainer {
+    float:left;
+}
+
+.value {
+    font-size: 28px;
 }
 
 .card {
     display: flex;
     flex: 1;
+    flex-grow:1;
     flex-direction: column;
     background-color: #EEEEEE;
     width: 100%;
@@ -45,16 +57,16 @@
     overflow-y: hidden;
 }
 
-.value {
-    font-size: 28px;
-}
-
 .icon {
-    display: block;
+    display: flex;
     float: right;
     margin: 5px;
     margin: 0;
-    transition: 0.5s;
+}
+
+.svgIcon {
+    height: 100%;
+    width: 100%;
 }
 
 .time {
@@ -68,7 +80,7 @@
 .graph {
     background-color: #DDDDDD;
     width: 100%;
-    height: var(--graph-height);
+    height: 100%;
     display: block;
     float: left;
 }
