@@ -35,6 +35,7 @@ class Graph {
   }
 
   getTimes() {
+
     let timeLabels = [];
     for(i=0; i< this.sensorData.length; i++)
     {

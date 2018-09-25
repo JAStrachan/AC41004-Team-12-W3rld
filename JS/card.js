@@ -25,8 +25,9 @@ function expandCard()
             decimals[i].setAttribute("to", "0.6");
         }
 
+        let dayOfSensorData = getDayOfSensorData(this.sensorData);
         // loading graph for sensor
-        let graph = new Graph(this.sensorData);
+        let graph = new Graph(dayOfSensorData);
         graph.createGraph();
     }
     else {
@@ -38,6 +39,32 @@ function expandCard()
         this.cardDiv.style.height = "";
         this.cardDiv.style.width = "";
     }
+}
+
+function getDayOfSensorData(sensorData)
+{
+    let temp = [];
+    let timeLabels= [];
+
+    let checkDate = sensorData[sensorData.length - 1].date;
+
+    let i=sensorData.length-1;
+
+    //push sensor data to an array
+    do{
+        temp.push(sensorData[i]);
+        i--;
+    }
+    while(sensorData[i].date == checkDate)
+
+    // reverse timelabels
+    for(i=temp.length - 1; i>=0; i--)
+    {
+        timeLabels.push(temp[i]);
+    }
+    
+    return timeLabels;
+
 }
 
 class Card {
