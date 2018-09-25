@@ -29,9 +29,7 @@ function getDataMarkerIcon(value, units, svgPath) {
     return L.divIcon({className: "divIcon has-anchor", html: container.innerHTML, iconSize: [50, 50], iconAnchor: [25, 75]});
 }
 
-async function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, units, svgPath) {
-    let sensorData = [];
-    sensorData = await getData();
+function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, units, svgPath, sensorData) {
 
     let marker = markerController.addMarker(markerID, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
     marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[0].reading)), units, svgPath));
@@ -51,14 +49,12 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     marker.bindPopup(popup);
 }
 
-async function updateSensor(markerController) {
-    let sensorData = [];
-    sensorData = await getData();
+function updateSensor(markerController, sensorData) {
     let markerIds = markerController.getAllMarkerIds();
     for(i=0; i<markerIds.length; i++) {
         // change marker icon
         let marker = markerController.getMarker(markerIds[i]);
-        marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[7].reading)), "°C", "SVG/thermometer.svg"));
+        marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[sensorData.length - 1].reading)), "°C", "SVG/thermometer.svg"));
 
         // update content of the popup
         let popup = marker.getPopup();
@@ -72,11 +68,15 @@ async function updateSensor(markerController) {
 
 function updateCard(card, sensorReading) {
     let slider = document.getElementById("cardSlider");
+    let position = 12;
+    if(slider != null) {
+        position = slider.value;
+    }
     let value = card.getElementsByClassName("valueText");
-    let readingValue = Math.round(convert("C", sensorReading[sensorReading.length - 1 - (12-slider.value)].reading) * 100) / 100;
+    let readingValue = Math.round(convert("C", sensorReading[sensorReading.length - 1 - (12-position)].reading) * 100) / 100;
     value[0].textContent = readingValue + "°C";
     let time = card.getElementsByClassName("timeDateText");
-    time[0].textContent = sensorReading[sensorReading.length - 1 - (12-slider.value)].date + " " + sensorReading[sensorReading.length - 1 - (12-slider.value)].time;
+    time[0].textContent = sensorReading[sensorReading.length - 1 - (12-position)].date + " " + sensorReading[sensorReading.length - 1 - (12-slider.value)].time;
     fillSvg(document.getElementById("svgIcon"), readingValue);
 }
 

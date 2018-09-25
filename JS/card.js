@@ -107,9 +107,8 @@ class Card {
         return iconDiv;
     }
 
-    async updateCardFromSlider() {
-        let sensorData = await getData();
-        updateCard(document.getElementById("popupCard"), sensorData);
+    updateCardFromSlider(param) {
+        updateCard(document.getElementById("popupCard"), param.target.sensorReadings);
     }
 
     getSliderDiv()
@@ -128,6 +127,7 @@ class Card {
         slider.value = "12";
         slider.step = "1";
         slider.addEventListener("input", this.updateCardFromSlider);
+        slider.sensorReadings = this.sensorData;
         sliderDiv.appendChild(slider);
         return sliderDiv;
     }
