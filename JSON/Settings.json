@@ -1,0 +1,10 @@
+{
+    "Settings":
+    [
+        {
+        "TemperatureFormat":"C",
+        //Units in seconds
+        "TimeInterval":"20"
+        }
+    ]
+}
