@@ -11,6 +11,7 @@ class Graph {
     let readings = this.getReadings();
     let graphCanvas = new Chart(ctx, {
       type: 'line',
+
       data: {
         labels: timeLabels,
         datasets: [{
@@ -20,6 +21,13 @@ class Graph {
         }]
       },
       options: {
+        title:{
+
+          display:true,
+          text:this.sensorData[this.sensorData.length-1].date,
+          position:'top',
+          
+        },
         legend: {
           display: false
         },
