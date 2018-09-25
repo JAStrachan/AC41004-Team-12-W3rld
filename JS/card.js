@@ -12,12 +12,12 @@ function expandCard()
 
         // get svgobject
         let contentDoc = this.svgIcon.contentDocument;
-        let percentages = contentDoc.getElementsByClassName("level");;
-        let decimals = contentDoc.getElementsByClassName("levelAnim");
+        let fillLevel = contentDoc.getElementsByClassName("fillLevel");;
+        let decimals = contentDoc.getElementsByClassName("animationFillLevel");
 
-        // set new percentages
-        for(let i=0; i<percentages.length; i++) {
-            percentages[i].setAttribute("offset", "60%");
+        // set new fillLevel
+        for(let i=0; i<fillLevel.length; i++) {
+            fillLevel[i].setAttribute("offset", "60%");
         }
 
         // set new animation points
