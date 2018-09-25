@@ -45,10 +45,9 @@ class Card {
     }
 
     getDiv() {
-
 		let tempAndTimeContainer = document.createElement("div");
 
-		tempAndTimeContainer.className = "flexcontainer value";
+		tempAndTimeContainer.className = "flexcontainer tempAndTimeContainer";
         tempAndTimeContainer.id = "popupCard";
 
         // create div to store the value
@@ -102,8 +101,7 @@ class Card {
         this.svgIcon.type = "image/svg+xml";
         this.svgIcon.id = "svgIcon";
         this.svgIcon.data = this.svgPath;
-        this.svgIcon.style.height = "100%";
-        this.svgIcon.style.width = "100%";
+        this.svgIcon.className = "svgIcon";
 
         iconDiv.appendChild(this.svgIcon);
         return iconDiv;

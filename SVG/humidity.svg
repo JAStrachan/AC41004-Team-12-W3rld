@@ -91,32 +91,52 @@
          id="stop4147" />
       <stop
          offset="40%"
+<<<<<<< HEAD
          class="level"
+=======
+>>>>>>> origin/master
          stop-opacity="1"
          stop-color="#4286f4"
          id="stop4149">
         <animate
            attributeName="offset"
+<<<<<<< HEAD
            class="levelAnim"
            from="0"
            to="0.4"
            repeatCount="1"
            dur="1s"
+=======
+           from="0"
+           to="0.4"
+           repeatCount="1"
+           dur="3s"
+>>>>>>> origin/master
            begin="0s" />
       </stop>
       <stop
          offset="40%"
+<<<<<<< HEAD
          class="level"
+=======
+>>>>>>> origin/master
          stop-opacity="1"
          stop-color="white"
          id="stop4151">
         <animate
            attributeName="offset"
+<<<<<<< HEAD
            class="levelAnim"
            from="0"
            to="0.4"
            repeatCount="1"
            dur="1s"
+=======
+           from="0"
+           to="0.4"
+           repeatCount="1"
+           dur="3s"
+>>>>>>> origin/master
            begin="0s" />
       </stop>
     </linearGradient>

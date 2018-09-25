@@ -64,9 +64,8 @@ async function updateSensor(markerController) {
         let popup = marker.getPopup();
         updateCard(popup.getContent(), sensorData);
 
-        if(popup.isOpen()) {
-            popup.update();
-        }
+    if(popup.isOpen()) {
+        popup.update();
     }
 }
 
