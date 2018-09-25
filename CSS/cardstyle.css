@@ -28,8 +28,6 @@
     height: 100%;
 }
 
-
-
 .svgAndTempContainer{
     display: flex;
     flex-direction: row;
@@ -57,7 +55,6 @@
     height: var(--card-height);
     transition-duration: 0.5s;
     overflow-y: hidden;
-    
 }
 
 .icon {
@@ -81,7 +78,7 @@
 }
 
 .graph {
-    background-color: #EEEEEE;
+    background-color: #DDDDDD;
     width: 100%;
     height: 85%;
     display: block;
@@ -101,7 +98,6 @@
     width: 100%;
     margin: 0;
     display: inline-block;
-    
 }
 
 .button:hover {
