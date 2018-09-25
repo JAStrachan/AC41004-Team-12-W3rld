@@ -6,24 +6,11 @@ function expandCard()
 
         this.flipArrow("225deg", this.arrow);
 
+        this.arrow.style.marginTop = "5px";
+
         // expand card
         this.cardDiv.style.height = "calc(var(--card-height-expanded) + var(--graph-height))";
         this.cardDiv.style.width = "var(--card-width-expanded)";
-
-        // get svgobject
-        let contentDoc = this.svgIcon.contentDocument;
-        let percentages = contentDoc.getElementsByClassName("level");;
-        let decimals = contentDoc.getElementsByClassName("levelAnim");
-
-        // set new percentages
-        for(let i=0; i<percentages.length; i++) {
-            percentages[i].setAttribute("offset", "60%");
-        }
-
-        // set new animation points
-        for(let i=0; i<decimals.length; i++) {
-            decimals[i].setAttribute("to", "0.6");
-        }
 
         // loading graph for sensor
         let graph = new Graph(this.sensorData);
@@ -33,19 +20,20 @@ function expandCard()
         this.expanded = false;
 
         this.flipArrow("45deg", this.arrow);
+        this.arrow.style.marginTop = "0px";
 
         // shrink card
         this.cardDiv.style.height = "";
-        this.cardDiv.style.width = "";
+        this.cardDiv.style.width = "var(--card-width)";
     }
 }
 
 class Card {
 
-    constructor(units,svgPath, sensorData) {
-        this.lastReading = convert("C", sensorData[0].reading);
-        this.lastTime = sensorData[0].time;
-        this.lastDate = sensorData[0].date;
+    constructor(units, svgPath, sensorData) {
+        this.lastReading = convert("C", sensorData[sensorData.length - 1].reading);
+        this.lastTime = sensorData[sensorData.length - 1].time;
+        this.lastDate = sensorData[sensorData.length - 1].date;
         this.units = units;
         this.expanded = false;
         this.cardDiv = document.createElement("div");
@@ -60,6 +48,7 @@ class Card {
 		let tempAndTimeContainer = document.createElement("div");
 
 		tempAndTimeContainer.className = "flexcontainer tempAndTimeContainer";
+        tempAndTimeContainer.id = "popupCard";
 
         // create div to store the value
         let sensorReadingDiv = document.createElement("div");
@@ -110,11 +99,16 @@ class Card {
         // add svg into iconDiv
         this.svgIcon = document.createElement("object");
         this.svgIcon.type = "image/svg+xml";
+        this.svgIcon.id = "svgIcon";
         this.svgIcon.data = this.svgPath;
         this.svgIcon.className = "svgIcon";
 
         iconDiv.appendChild(this.svgIcon);
         return iconDiv;
+    }
+
+    updateCardFromSlider(param) {
+        updateCard(document.getElementById("popupCard"), param.target.sensorReadings);
     }
 
     getSliderDiv()
@@ -126,12 +120,14 @@ class Card {
         // add slider to div
         let slider = document.createElement("input");
         slider.type = "range";
-        slider.id = "range";
+        slider.id = "cardSlider";
         slider.className = "slider";
         slider.min = "1";
         slider.max = "12";
         slider.value = "12";
         slider.step = "1";
+        slider.addEventListener("input", this.updateCardFromSlider);
+        slider.sensorReadings = this.sensorData;
         sliderDiv.appendChild(slider);
         return sliderDiv;
     }
