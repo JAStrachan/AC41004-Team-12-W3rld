@@ -117,6 +117,10 @@ class Card {
         let graphDiv = this.getGraphDiv();
         this.cardDiv.appendChild(graphDiv);
 
+        let graphControlDiv = this.getGraphControlDiv();
+        this.cardDiv.appendChild(graphControlDiv);
+
+
         return this.cardDiv;
     }
 
@@ -194,8 +198,37 @@ class Card {
         return arrowL;
     }
 
+    getArrowGraph1Div()
+    {
+        let arrowL = document.createElement("i");
+        arrowL.className = "arrow";
+        return arrowL;
+    }
+    getArrowGraph2Div()
+    {
+        let arrowL = document.createElement("i");
+        arrowL.className = "arrow";
+        return arrowL;
+    }
+
+
     flipArrow(rotation, arrow)
     {
         arrow.style.transform = "rotate("+ rotation + ")";
+    }
+
+    getGraphControlDiv(){
+        let graphButtonDiv = document.createElement("div");
+        graphButtonDiv.className = "graphButtons";
+        let arrow1 = this.getArrowGraph1Div();
+        arrow1.id = "arrowLeft";
+        graphButtonDiv.appendChild(arrow1);
+        let arrow2 = this.getArrowGraph2Div();
+        arrow2.id = "arrowRight";
+        graphButtonDiv.appendChild(arrow2);
+        return graphButtonDiv;
+
+
+
     }
 }

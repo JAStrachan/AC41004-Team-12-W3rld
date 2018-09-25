@@ -27,6 +27,8 @@
     transition: 0.5s;
 }
 
+
+
 .svgAndTempContainer{
     display: flex;
     flex-direction: row;
@@ -43,6 +45,7 @@
     height: var(--card-height);
     transition-duration: 0.5s;
     overflow-y: hidden;
+    
 }
 
 .value {
@@ -86,6 +89,7 @@
     width: 100%;
     margin: 0;
     display: inline-block;
+    
 }
 
 .button:hover {
@@ -100,4 +104,33 @@
     margin-bottom: 5px;
     transform: rotate(45deg);
     transition: 0.3s;
+}
+
+#arrowLeft {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: 5px;
+    transform: rotate(135deg);
+    transition: 0.3s;
+}
+
+#arrowRight {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: 5px;
+    transform: rotate(315deg);
+    transition: 0.3s;
+}
+
+.graphButtons{
+    display: flex;
+	flex-direction: row;
+	margin: 0;
+    width: 100%;
+    height:20px;
+    justify-content: space-around;
 }
