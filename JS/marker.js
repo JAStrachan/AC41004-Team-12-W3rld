@@ -29,10 +29,14 @@ function getDataMarkerIcon(value, units, svgPath) {
     return L.divIcon({className: "divIcon has-anchor", html: container.innerHTML, iconSize: [50, 50], iconAnchor: [25, 75]});
 }
 
-function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, units, svgPath, sensorData) {
+async function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, units, svgPath, sensorData) {
+    let settingsData = [];
+    settingsData = await getSettings();
 
+    console.log(settingsData[0]);
+    let tempFormat = settingsData[0]
     let marker = markerController.addMarker(markerID, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
-    marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[0].reading)), units, svgPath));
+    marker.setIcon(getDataMarkerIcon(Math.round(convert(tempFormat, sensorData[0].reading)), units, svgPath));
 
     let card = new Card(units, svgPath, sensorData);
     let div = card.getDiv();
@@ -49,12 +53,15 @@ function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex,
     marker.bindPopup(popup);
 }
 
-function updateSensor(markerController, sensorData) {
+async function updateSensor(markerController, sensorData) {
+    let settingsData =[];
+    settingsData = await getSettings();
     let markerIds = markerController.getAllMarkerIds();
+    let tempFormat = settingsData[0];
     for(i=0; i<markerIds.length; i++) {
         // change marker icon
         let marker = markerController.getMarker(markerIds[i]);
-        marker.setIcon(getDataMarkerIcon(Math.round(convert("C", sensorData[sensorData.length - 1].reading)), "°C", "SVG/thermometer.svg"));
+        marker.setIcon(getDataMarkerIcon(Math.round(convert(tempFormat, sensorData[sensorData.length - 1].reading)), "°" +tempFormat, "SVG/thermometer.svg"));
 
         // update content of the popup
         let popup = marker.getPopup();
