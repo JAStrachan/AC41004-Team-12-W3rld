@@ -10,7 +10,7 @@ function expandCard()
 
         // expand card
         this.cardDiv.style.height = "calc(var(--card-height-expanded) + var(--graph-height))";
-        this.cardDiv.style.width = "var(--card-width)";
+        this.cardDiv.style.width = "var(--card-width-expanded)";
 
         // loading graph for sensor
         let graph = new Graph(this.sensorData);
