@@ -13,8 +13,9 @@ function expandCard()
         this.cardDiv.style.width = "var(--card-width-expanded)";
 
         // loading graph for sensor
-        let graph = new Graph(getDayOfSensorData(this.sensorData));
-        graph.createGraph();
+        
+        this.graph.createGraph();
+
     }
     else {
         this.expanded = false;
@@ -28,14 +29,29 @@ function expandCard()
     }
 }
 
-function getDayOfSensorData(sensorData)
+function getDayOfSensorData(sensorData,placement)
 {
+    if (placement > sensorData.length){
+        placement = sensorData.length-1;
+        console.log('back');
+        console.log(placement);
+        
+    }
+    else if(placement < 1){
+        placement = 1;
+        console.log('forward');
+    }
+    else{
+        console.log('ok');
+        console.log(placement);
+    }
+
     let temp = [];
     let timeLabels= [];
 
-    let checkDate = sensorData[sensorData.length - 1].date;
+    let checkDate = sensorData[sensorData.length - placement].date;
 
-    let i=sensorData.length-1;
+    let i=sensorData.length-placement;
 
     //push sensor data to an array
     do{
@@ -54,6 +70,30 @@ function getDayOfSensorData(sensorData)
 
 }
 
+function getPrevDayGraph(){
+   this.placement = this.placement +24;
+
+   this.graph = null;
+   console.log(this.graph);
+   this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
+   this.graph.createGraph();
+   console.log(this.graph);
+
+}
+
+
+function getNextDayGraph(){
+
+    this.placement = this.placement -24;
+
+    this.graph = null;
+    console.log(this.graph);
+    this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
+    this.graph.createGraph();
+    console.log(this.graph);
+}
+
+
 class Card {
 
     constructor(units, svgPath, sensorData) {
@@ -68,7 +108,12 @@ class Card {
         this.arrow = null;
         this.svgPath=svgPath;
         this.sensorData = sensorData;
+        this.placement = 25;
+        this.prevPlacement = this.placement;
+        this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
+
     }
+
 
     getDiv() {
 		let tempAndTimeContainer = document.createElement("div");
@@ -193,15 +238,17 @@ class Card {
 
     getArrowGraph1Div()
     {
-        let arrowL = document.createElement("i");
-        arrowL.className = "arrow";
-        return arrowL;
+        let arrowLeft = document.createElement("i");
+        arrowLeft.className = "arrowPrevious";
+        arrowLeft.addEventListener("click",getPrevDayGraph.bind(this));
+        return arrowLeft;
     }
     getArrowGraph2Div()
     {
-        let arrowL = document.createElement("i");
-        arrowL.className = "arrow";
-        return arrowL;
+        let arrowRight = document.createElement("i");
+        arrowRight.className = "arrowNext";
+        arrowRight.addEventListener("click",getNextDayGraph.bind(this));
+        return arrowRight;
     }
 
 
