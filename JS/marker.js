@@ -37,6 +37,7 @@ function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex,
 
     let card = new Card(measurement, sensorData);
     let div = card.getDiv();
+    marker.card = card;
 
     let popupOptions = {
         indoorMapId: indoorMapId,
@@ -59,7 +60,7 @@ function updateSensor(markerController, sensorData) {
 
         // update content of the popup
         let popup = marker.getPopup();
-        updateCard(popup.getContent(), sensorData, marker.measurement);
+        updateCard(marker.card, sensorData, marker.measurement);
 
         if(popup.isOpen()) {
             popup.update();
@@ -67,7 +68,7 @@ function updateSensor(markerController, sensorData) {
     }
 }
 
-function updateCard(card, sensorReading) {
+function updateCard(card, sensorReading, measurement) {
     let slider = document.getElementById("cardSlider");
     let position = 12;
     if(slider != null) {
@@ -78,11 +79,11 @@ function updateCard(card, sensorReading) {
     value[0].textContent = readingValue;
     let time = card.getElementsByClassName("timeDateText");
     time[0].textContent = sensorReading[sensorReading.length - 1 - (12-position)].date + " " + sensorReading[sensorReading.length - 1 - (12-position)].time;
-    fillSvg(document.getElementById("svgIcon"), readingValue);
+    fillSvg(document.getElementById("svgIcon"), readingValue, measurement);
 }
 
-function fillSvg(svgIcon, currValue) {
-    let fillPercent = calculatePercentageFill(10, 30, currValue);
+function fillSvg(svgIcon, currValue, measurement) {
+    let fillPercent = calculatePercentageFill(measurement.rangeMin, measurement.rangeMax, currValue);
 
     if(fillPercent < 0) {
         fillPercent = 0;

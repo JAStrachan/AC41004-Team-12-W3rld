@@ -28,6 +28,10 @@ function expandCard()
     }
 }
 
+function updateCardFromSlider() {
+    updateCard(this.cardDiv, this.sensorData, this.measurement);
+}
+
 class Card {
 
     constructor(measurement, sensorData) {
@@ -115,10 +119,6 @@ class Card {
         return iconDiv;
     }
 
-    updateCardFromSlider(param) {
-        updateCard(document.getElementById("popupCard"), param.target.sensorReadings);
-    }
-
     getSliderDiv()
     {
         // create div to store slider
@@ -134,7 +134,8 @@ class Card {
         slider.max = "12";
         slider.value = "12";
         slider.step = "1";
-        slider.addEventListener("input", this.updateCardFromSlider);
+        // slider.addEventListener("input", this.updateCardFromSlider);
+        slider.addEventListener("input", updateCardFromSlider.bind(this));
         slider.sensorReadings = this.sensorData;
         sliderDiv.appendChild(slider);
         return sliderDiv;
