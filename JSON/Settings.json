@@ -1,0 +1,9 @@
+{
+    "Settings":
+    [
+        {
+            "TemperatureFormat": "F",
+            "TimeInterval": 20
+        }
+    ]
+}

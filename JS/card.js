@@ -13,7 +13,7 @@ function expandCard()
         this.cardDiv.style.width = "var(--card-width-expanded)";
 
         // loading graph for sensor
-        let graph = new Graph(this.sensorData);
+        let graph = new Graph(getDayOfSensorData(this.sensorData));
         graph.createGraph();
     }
     else {
@@ -30,6 +30,31 @@ function expandCard()
 
 function updateCardFromSlider() {
     updateCard(this.cardDiv, this.sensorData, this.measurement);
+}
+
+function getDayOfSensorData(sensorData)
+{
+    let temp = [];
+    let timeLabels= [];
+
+    let checkDate = sensorData[sensorData.length - 1].date;
+
+    let i=sensorData.length-1;
+
+    //push sensor data to an array
+    do{
+        temp.push(sensorData[i]);
+        i--;
+    }
+    while(sensorData[i].date == checkDate)
+
+    // reverse timelabels
+    for(i=temp.length - 1; i>=0; i--)
+    {
+        timeLabels.push(temp[i]);
+    }
+
+    return timeLabels;
 }
 
 class Card {
@@ -89,6 +114,10 @@ class Card {
 
         let graphDiv = this.getGraphDiv();
         this.cardDiv.appendChild(graphDiv);
+
+        let graphControlDiv = this.getGraphControlDiv();
+        this.cardDiv.appendChild(graphControlDiv);
+
 
         return this.cardDiv;
     }
@@ -170,8 +199,37 @@ class Card {
         return arrowL;
     }
 
+    getArrowGraph1Div()
+    {
+        let arrowL = document.createElement("i");
+        arrowL.className = "arrow";
+        return arrowL;
+    }
+    getArrowGraph2Div()
+    {
+        let arrowL = document.createElement("i");
+        arrowL.className = "arrow";
+        return arrowL;
+    }
+
+
     flipArrow(rotation, arrow)
     {
         arrow.style.transform = "rotate("+ rotation + ")";
+    }
+
+    getGraphControlDiv(){
+        let graphButtonDiv = document.createElement("div");
+        graphButtonDiv.className = "graphButtons";
+        let arrow1 = this.getArrowGraph1Div();
+        arrow1.id = "arrowLeft";
+        graphButtonDiv.appendChild(arrow1);
+        let arrow2 = this.getArrowGraph2Div();
+        arrow2.id = "arrowRight";
+        graphButtonDiv.appendChild(arrow2);
+        return graphButtonDiv;
+
+
+
     }
 }
