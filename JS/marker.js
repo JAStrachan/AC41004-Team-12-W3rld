@@ -33,7 +33,6 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     let settingsData = [];
     settingsData = await getSettings();
 
-    console.log(settingsData[0]);
     let tempFormat = settingsData[0]
     let marker = markerController.addMarker(markerID, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
     marker.setIcon(getDataMarkerIcon(Math.round(convert(tempFormat, sensorData[0].reading)), units, svgPath));
@@ -50,7 +49,15 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
         .setLatLng(latLng)
         .setContent(div);
 
-    marker.bindPopup(popup);
+    marker.bindPopup(popup).on('click',focusOnPopup);
+}
+
+function focusOnPopup(marker)
+{   
+    let markerLatLng = marker.target.getLatLng()
+    let lat = markerLatLng.lat + 0.00015;
+    let latLng = L.latLng(lat,markerLatLng.lng);
+    map.setView(latLng, map.getZoom(), {animate: true});
 }
 
 async function updateSensor(markerController, sensorData) {
