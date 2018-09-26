@@ -52,9 +52,10 @@ function getDayOfSensorData(sensorData,placement)
     let checkDate = sensorData[sensorData.length - placement].date;
 
     let i=sensorData.length-placement;
-
+    console.log('Printing out index of sensorData ' + i + '  + ' + sensorData[i]);
     //push sensor data to an array
     do{
+        console.log('hit loop');
         temp.push(sensorData[i]);
         i--;
     }
@@ -71,29 +72,24 @@ function getDayOfSensorData(sensorData,placement)
 }
 
 function getPrevDayGraph(){
-   this.placement = this.placement +24;
-
-   this.graph = null;
-   console.log(this.graph);
-   this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
-   this.graph.createGraph();
-   console.log(this.graph);
-
+    this.placement = this.placement +24;
+    console.log(this.sensorData);
+    updateGraph(this.graph,this.sensorData,this.placement);
 }
 
 
 function getNextDayGraph(){
-
     this.placement = this.placement -24;
-
-    this.graph = null;
-    console.log(this.graph);
-    this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
-    this.graph.createGraph();
-    console.log(this.graph);
+    updateGraph(this.graph,this.sensorData,this.placement);
 }
 
+function updateGraph(graph,sensorData,placement){
+    graph = null;
+    console.log('Hit update graph');
+    graph = new Graph(getDayOfSensorData(sensorData,placement));
+    graph.createGraph();
 
+}
 class Card {
 
     constructor(units, svgPath, sensorData) {
@@ -111,7 +107,6 @@ class Card {
         this.placement = 25;
         this.prevPlacement = this.placement;
         this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
-
     }
 
 
@@ -231,22 +226,23 @@ class Card {
 
     getArrowDiv()
     {
-        let arrowL = document.createElement("i");
-        arrowL.className = "arrow";
-        return arrowL;
+        let arrow = document.createElement("i");
+        arrow.className = "arrow";
+        return arrow;
     }
 
-    getArrowGraph1Div()
+    getArrowGraphPrevDiv()
     {
-        let arrowLeft = document.createElement("i");
-        arrowLeft.className = "arrowPrevious";
+        let arrowLeft = this.getArrowDiv();
+        arrowLeft.id = "arrowLeft"
         arrowLeft.addEventListener("click",getPrevDayGraph.bind(this));
         return arrowLeft;
     }
-    getArrowGraph2Div()
+
+    getArrowGraphNextDiv()
     {
-        let arrowRight = document.createElement("i");
-        arrowRight.className = "arrowNext";
+        let arrowRight = this.getArrowDiv();
+        arrowRight.id = "arrowRight";
         arrowRight.addEventListener("click",getNextDayGraph.bind(this));
         return arrowRight;
     }
@@ -260,15 +256,10 @@ class Card {
     getGraphControlDiv(){
         let graphButtonDiv = document.createElement("div");
         graphButtonDiv.className = "graphButtons";
-        let arrow1 = this.getArrowGraph1Div();
-        arrow1.id = "arrowLeft";
-        graphButtonDiv.appendChild(arrow1);
-        let arrow2 = this.getArrowGraph2Div();
-        arrow2.id = "arrowRight";
-        graphButtonDiv.appendChild(arrow2);
+        let arrowPrev = this.getArrowGraphPrevDiv();
+        graphButtonDiv.appendChild(arrowPrev);
+        let arrowNext = this.getArrowGraphNextDiv();
+        graphButtonDiv.appendChild(arrowNext);
         return graphButtonDiv;
-
-
-
     }
 }

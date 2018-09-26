@@ -33,7 +33,6 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     let settingsData = [];
     settingsData = await getSettings();
 
-    console.log(settingsData[0]);
     let tempFormat = settingsData[0]
     let marker = markerController.addMarker(markerID, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
     marker.setIcon(getDataMarkerIcon(Math.round(convert(tempFormat, sensorData[0].reading)), units, svgPath));
