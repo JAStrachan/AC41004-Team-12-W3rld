@@ -34,37 +34,41 @@ function expandCard()
 function getDayOfSensorData(sensorData,placement)
 {
     let dataToDisplay = [];
-    let startingIndex= placement - NUMBER_OF_READINGS;
+    let startingIndex = placement - NUMBER_OF_READINGS;
     let endIndex = placement;
     
     //push data onto array, get oldest first
     do{
         dataToDisplay.push(sensorData[startingIndex]);
         startingIndex++;
-        console.log(startingIndex);
     }
-    while(startingIndex <= endIndex)
+    while(startingIndex < endIndex)
     console.log(dataToDisplay);
     return dataToDisplay;
-
 }
 
 function getPrevDayGraph(){
-    let newIndex = this.placement + NUMBER_OF_READINGS;
-    if(newIndex < this.sensorData.length && newIndex >= 0)
+    let newIndex = this.placement - NUMBER_OF_READINGS;
+    if(newIndex <= 0 || newIndex < NUMBER_OF_READINGS)
     {
-        this.placement += NUMBER_OF_READINGS;
-        updateGraph(this.graph,this.sensorData, this.placement);
-    } 
+        this.placement = NUMBER_OF_READINGS;
+    }
+    else{
+        this.placement = newIndex;
+    }
+    updateGraph(this.graph,this.sensorData, this.placement);
 }
 
 function getNextDayGraph(){
-    let newIndex = this.placement - NUMBER_OF_READINGS;
-    if(newIndex < this.sensorData.length && newIndex >= 0)
+    let newIndex = this.placement + NUMBER_OF_READINGS;
+    if(newIndex > this.sensorData.length)
     {
-        this.placement -= NUMBER_OF_READINGS;
-        updateGraph(this.graph,this.sensorData,this.placement);
-    } 
+        this.placement = this.sensorData.length;
+    }
+    else{
+        this.placement = newIndex;
+    }
+    updateGraph(this.graph,this.sensorData, this.placement);
 }
 
 function updateGraph(graph,sensorData,placement){
@@ -87,8 +91,7 @@ class Card {
         this.arrow = null;
         this.svgPath=svgPath;
         this.sensorData = sensorData;
-        this.placement = sensorData.length -1;
-        this.prevPlacement = this.placement;
+        this.placement = sensorData.length;
         this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
     }
 

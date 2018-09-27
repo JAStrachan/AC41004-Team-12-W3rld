@@ -63,27 +63,10 @@ class Graph {
   }
 
   updateGraph(sensorData){
-    this.removeData();
     this.sensorData = sensorData;
     console.log("In graph, updating it");
-    console.log(this.sensorData);
-    let label = this.getTimes();
+    this.graph.destroy();
+    this.createGraph();
 
-    let data = this.getReadings();
-
-    this.graph.data.labels.push(label);
-    this.graph.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    this.graph.update();
   }
-
-  
-  removeData() {
-  this.graph.data.labels.pop();
-  this.graph.data.datasets.forEach((dataset) => {
-      dataset.data.pop();
-  });
-  this.graph.update();
-}
 }
