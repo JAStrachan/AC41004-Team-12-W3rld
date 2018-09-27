@@ -227,16 +227,18 @@ class Card {
         if(this.placement == 0 || this.placement == NUMBER_OF_READINGS){
            bool = false;
         }
+        //console.log(bool);
         return bool;
     }
 
     nextReadingsAvailable()
     {
         let bool = true;
-        console.log("Next readings " + this.placement);
+        //console.log("Next readings " + this.placement);
         if(this.placement == this.sensorData.length){
            bool = false;
         }
+       // console.log(bool);
         return bool; 
     }
 
@@ -251,7 +253,7 @@ class Card {
         let arrowRightDiv = document.getElementById('arrowRightDiv');
         let arrowRight = document.getElementById('arrowRight');
 
-        this.toggleLeftGraphButton(arrowRightDiv,arrowRight); 
+        this.toggleRightGraphButton(arrowRightDiv,arrowRight); 
     }
 
     toggleLeftGraphButton(arrowLeftDiv, arrowLeft){
