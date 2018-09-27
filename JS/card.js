@@ -31,6 +31,10 @@ function expandCard()
     }
 }
 
+function updateCardFromSlider() {
+    updateCard(this.sensorData, this.measurement);
+}
+
 function getDayOfSensorData(sensorData,placement)
 {
     let dataToDisplay = [];
@@ -81,17 +85,18 @@ function updateGraph(graph,sensorData,placement){
 }
 class Card {
 
-    constructor(units, svgPath, sensorData) {
-        this.lastReading = convert("C", sensorData[sensorData.length - 1].reading);
+    constructor(measurement, sensorData) {
+        this.lastReading = sensorData[sensorData.length - 1].reading;
         this.lastTime = sensorData[sensorData.length - 1].time;
         this.lastDate = sensorData[sensorData.length - 1].date;
-        this.units = units;
+        this.units = measurement.units;
+        this.measurement = measurement;
         this.expanded = false;
         this.cardDiv = document.createElement("div");
         this.cardDiv.className = "card";
         this.svgIcon = null;
         this.arrow = null;
-        this.svgPath=svgPath;
+        this.svgPath = measurement.svgPath;
         this.sensorData = sensorData;
         this.placement = sensorData.length;
         this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
@@ -106,8 +111,17 @@ class Card {
 
         // create div to store the value
         let sensorReadingDiv = document.createElement("div");
-        sensorReadingDiv.className = "value valueText";
-        sensorReadingDiv.textContent = this.lastReading + this.units;
+        sensorReadingDiv.className = "value";
+        let value = document.createElement("span");
+        value.id = "valueText";
+        value.className = "value";
+        value.textContent = this.lastReading;
+        let unitText = document.createElement("span");
+        unitText.id = "unitText";
+        unitText.className = "value";
+        unitText.textContent = this.units;
+        sensorReadingDiv.appendChild(value);
+        sensorReadingDiv.appendChild(unitText);
 
         tempAndTimeContainer.appendChild(sensorReadingDiv);
 
@@ -143,7 +157,8 @@ class Card {
     getTimeDiv()
     {
         let TimeDiv = document.createElement("div");
-        TimeDiv.className = "time timeDateText";
+        TimeDiv.id = "timeDateText";
+        TimeDiv.className = "time";
         TimeDiv.textContent = this.lastDate + " " + this.lastTime;
         return TimeDiv;
     }
@@ -165,10 +180,6 @@ class Card {
         return iconDiv;
     }
 
-    updateCardFromSlider(param) {
-        updateCard(document.getElementById("popupCard"), param.target.sensorReadings);
-    }
-
     getSliderDiv()
     {
         // create div to store slider
@@ -184,9 +195,12 @@ class Card {
         slider.max = "12";
         slider.value = "12";
         slider.step = "1";
-        slider.addEventListener("input", this.updateCardFromSlider);
+        slider.addEventListener("input", updateCardFromSlider.bind(this));
         slider.sensorReadings = this.sensorData;
         sliderDiv.appendChild(slider);
+
+        this.slider = slider;
+
         return sliderDiv;
     }
 

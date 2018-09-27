@@ -57,7 +57,7 @@ class Graph {
     let readings = [];
     for(i=0; i< this.sensorData.length; i++)
     {
-      readings.push(convert("C", this.sensorData[i].reading));
+      readings.push(this.sensorData[i].reading);
     }
     return readings;
   }

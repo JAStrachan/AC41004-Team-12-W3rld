@@ -5,20 +5,6 @@ class Reading{
         this.reading = reading;
     }
 }
-//Takes in input of mode desired to be displayed and converts values to appropriate unit when being displayed
-function convert(mode,value){
-    switch(mode){
-        //Kelvin
-        case "K":
-            return Math.round(value*100)/100;
-        //Fahrenheit
-        case "F":
-            return Math.round((value*1.8-459.67)*100) / 100;
-        //Celsius
-        case "C":
-            return Math.round((value-273.15) * 100) / 100;
-    }
-}
 
 getData = function() {
     let promise = new Promise(function(resolve, reject) {
@@ -68,7 +54,7 @@ getSettings = function(){
 
             settingsReadings.push(settings[0].TemperatureFormat);
             settingsReadings.push(settings[0].TimeInterval)
-            
+
             resolve(settingsReadings);
         }
     });
