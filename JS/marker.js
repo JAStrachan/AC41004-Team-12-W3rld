@@ -58,7 +58,6 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
 
 function updateSensor(markerController, sensorData) {
     let markerIds = markerController.getAllMarkerIds();
-    let tempFormat = settingsData[0];
 
     for(i=0; i<markerIds.length; i++) {
         // change marker icon
@@ -66,6 +65,7 @@ function updateSensor(markerController, sensorData) {
         let popup = marker.getPopup();
 
         popup.sensorData = sensorData;
+        popup.card.sensorData = sensorData;
 
         marker.setIcon(getDataMarkerIcon(Math.round(sensorData[sensorData.length - 1].reading), popup.measurement));
 
