@@ -93,6 +93,8 @@ class Card {
         this.sensorData = sensorData;
         this.placement = sensorData.length;
         this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
+        this.prevAvailable = true;
+        this.nextAvailable = false;
     }
 
 
@@ -223,9 +225,17 @@ class Card {
         arrowLeft.id = "arrowLeft"
 
         let arrowLeftDiv = document.createElement('div');
+        if(this.prevAvailable == false){
+            arrowLeft.style.borderColor = '#adb0b5';
+            arrowLeftDiv.classname = 'disabledButton';
+            console.log(this.prevAvailable)
+        }
+        else{
         arrowLeftDiv.className = 'button';
-        arrowLeftDiv.id = 'graphButtons';
         arrowLeftDiv.addEventListener("click",getPrevDayGraph.bind(this));
+        }
+        arrowLeftDiv.id = 'graphButtons';
+
         arrowLeftDiv.appendChild(arrowLeft);
         return arrowLeftDiv;
     }
@@ -236,9 +246,16 @@ class Card {
         arrowRight.id = "arrowRight";
         
         let arrowRightDiv = document.createElement('div');
+        if(this.nextAvailable == false){
+            arrowRight.style.borderColor = '#adb0b5';
+            arrowRightDiv.classname = 'disabledButton';
+            console.log(this.nextAvailable)
+        }
+        else{
         arrowRightDiv.className = 'button';
-        arrowRightDiv.id = 'graphButtons';
         arrowRightDiv.addEventListener("click",getPrevDayGraph.bind(this));
+        }
+        arrowRightDiv.id = 'graphButtons';
         arrowRightDiv.appendChild(arrowRight);
         return arrowRightDiv;
     }
