@@ -64,7 +64,6 @@ class Graph {
 
   updateGraph(sensorData){
     this.sensorData = sensorData;
-    console.log("In graph, updating it");
     this.graph.destroy();
     this.createGraph();
   }

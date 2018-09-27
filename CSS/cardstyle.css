@@ -98,20 +98,25 @@
     width: 100%;
     margin: 0;
     display: inline-block;
+    pointer-events: auto;
+    border-color: black;
+    fill:black;
 }
 
 .button:hover {
     background-color: #DDDDDD;
 }
 
-.diasbledButton {
+.disabledButton {
     background-color: rgb(255, 255, 255);
     fill:rgb(133, 122, 122);
+    border-color : '#adb0b5';
     text-align: center;
     height: var(--button-height);
     width: 100%;
     margin: 0;
     display: inline-block;
+    pointer-events: none;
 }
 
 .arrow {
@@ -141,6 +146,7 @@
     width: 100%;
     height:15%;
     justify-content: space-around;
+    pointer-events: auto;
 }
 
 #arrowLeftDiv{

@@ -75,7 +75,6 @@ function getNextDayGraph(){
 }
 
 function updateGraph(graph,sensorData,placement){
-    console.log('Hit update graph');
     let newSensorData = getDayOfSensorData(sensorData, placement);
     graph.updateGraph(newSensorData);
     
@@ -223,22 +222,18 @@ class Card {
     prevReadingsAvailable()
     {
         let bool = true;
-        console.log("Prev readings " + this.placement);
         if(this.placement == 0 || this.placement == NUMBER_OF_READINGS){
            bool = false;
         }
-        //console.log(bool);
         return bool;
     }
 
     nextReadingsAvailable()
     {
         let bool = true;
-        //console.log("Next readings " + this.placement);
         if(this.placement == this.sensorData.length){
            bool = false;
         }
-       // console.log(bool);
         return bool; 
     }
 
@@ -260,25 +255,30 @@ class Card {
         if(this.prevReadingsAvailable()){
             arrowLeftDiv.className = 'button';
             arrowLeft.style.borderColor = 'black';
-            arrowLeftDiv.addEventListener("click",getPrevDayGraph.bind(this));
+            arrowLeftDiv.style.pointerEvents = 'auto';
+            console.log('toggled left graph button, still have places to go');
         }
         else{
-            arrowLeftDiv.removeEventListener('click',getPrevDayGraph.bind(this));
-            arrowLeft.style.borderColor = '#adb0b5';
+            console.log('toggled left graph button, disabled');
             arrowLeftDiv.classname = 'disabledButton';
+            arrowLeft.style.borderColor ='#adb0b5';
+            arrowLeftDiv.style.pointerEvents = 'none';
         }
+        console.log(arrowLeftDiv.className);
     }
 
     toggleRightGraphButton(arrowRightDiv, arrowRight){
         if(this.nextReadingsAvailable()){
             arrowRightDiv.className = 'button';
             arrowRight.style.borderColor = 'black';
-            arrowRightDiv.addEventListener("click",getNextDayGraph.bind(this));
+            arrowRightDiv.style.pointerEvents = 'auto';
+            console.log('toggled right graph button, still have places to go');
         }
         else{
-            arrowRightDiv.removeEventListener('click',getNextDayGraph.bind(this));
-            arrowRight.style.borderColor = '#adb0b5';
+            console.log('toggled right graph button, disabled');
             arrowRightDiv.classname = 'disabledButton';
+            arrowRight.style.borderColor ='#adb0b5';
+            arrowRightDiv.style.pointerEvents = 'none';
         }
     }
 
@@ -290,6 +290,7 @@ class Card {
         arrowLeftDiv.id = 'arrowLeftDiv';
 
         this.toggleLeftGraphButton(arrowLeftDiv,arrowLeft);
+        arrowLeftDiv.addEventListener("click",getPrevDayGraph.bind(this));
 
         arrowLeftDiv.appendChild(arrowLeft);
         return arrowLeftDiv;
@@ -301,14 +302,10 @@ class Card {
         arrowRight.id = "arrowRight";
         let arrowRightDiv = document.createElement('div');
         arrowRightDiv.id = 'arrowRightDiv';
-        if(this.nextReadingsAvailable()){
-            arrowRightDiv.className = 'button';
-            arrowRightDiv.addEventListener("click",getNextDayGraph.bind(this));
-        }
-        else{
-            arrowRight.style.borderColor = '#adb0b5';
-            arrowRightDiv.classname = 'disabledButton';  
-        }
+       
+        this.toggleRightGraphButton(arrowRightDiv,arrowRight);
+        arrowRightDiv.addEventListener("click",getNextDayGraph.bind(this));
+
         arrowRightDiv.appendChild(arrowRight);
         return arrowRightDiv;
     }
