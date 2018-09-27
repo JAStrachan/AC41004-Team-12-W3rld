@@ -16,7 +16,7 @@ function getDataMarkerIcon(value, measurement) {
     let tail = document.createElement("div");
     tail.className = "anchorTail";
     let dot = document.createElement("div");
-    dot.className = "anchorDot"
+    dot.className = "anchorDot";
     tail.appendChild(dot);
 
     svgDiv.appendChild(svgObject);
@@ -32,14 +32,13 @@ function getDataMarkerIcon(value, measurement) {
 async function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, measurement, sensorData) {
     let settingsData = [];
     settingsData = await getSettings();
-
-    console.log(settingsData[0]);
-    let tempFormat = settingsData[0]
+    let tempFormat = settingsData[0];
+    
     let marker = markerController.addMarker(markerID, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
     marker.setIcon(getDataMarkerIcon(Math.round(convert(tempFormat, sensorData[sensorData.length - 1].reading)), measurement));
     marker.measurement = measurement;
 
-    let card = new Card(measurement, sensorData);
+    let card = new Card(measurement, sensorData, tempFormat);
     let div = card.getDiv();
     marker.card = card;
 
@@ -55,37 +54,33 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     marker.bindPopup(popup);
 }
 
-async function updateSensor(markerController, sensorData) {
-    let settingsData =[];
-    settingsData = await getSettings();
+function updateSensor(markerController, sensorData, settingsData) {
     let markerIds = markerController.getAllMarkerIds();
     let tempFormat = settingsData[0];
+
     for(i=0; i<markerIds.length; i++) {
         // change marker icon
         let marker = markerController.getMarker(markerIds[i]);
+        marker.card.sensorData = sensorData;
         marker.setIcon(getDataMarkerIcon(Math.round(convert(tempFormat, sensorData[sensorData.length - 1].reading)), marker.measurement));
 
         // update content of the popup
         let popup = marker.getPopup();
-        updateCard(marker.card, sensorData, marker.measurement);
-
         if(popup.isOpen()) {
-            popup.update();
+            updateCard(sensorData, marker.measurement);
         }
     }
 }
 
-function updateCard(card, sensorReading, measurement) {
+function updateCard(sensorReading, measurement) {
     let slider = document.getElementById("cardSlider");
     let position = 12;
     if(slider != null) {
         position = slider.value;
     }
-    let value = card.getElementsByClassName("valueText");
     let readingValue = Math.round(convert("C", sensorReading[sensorReading.length - 1 - (12-position)].reading) * 100) / 100;
-    value[0].textContent = readingValue;
-    let time = card.getElementsByClassName("timeDateText");
-    time[0].textContent = sensorReading[sensorReading.length - 1 - (12-position)].date + " " + sensorReading[sensorReading.length - 1 - (12-position)].time;
+    document.getElementById("valueText").textContent = readingValue;
+    document.getElementById("timeDateText").textContent = sensorReading[sensorReading.length - 1 - (12-position)].date + " " + sensorReading[sensorReading.length - 1 - (12-position)].time;
     fillSvg(document.getElementById("svgIcon"), readingValue, measurement);
 }
 

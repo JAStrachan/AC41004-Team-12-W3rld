@@ -41,7 +41,9 @@
             <script>
                 // create map
                 let map = L.Wrld.map("map", "7253bcb8510b3ccb628b5e59b301df98", {center: [56.460102, -2.978278], zoom: 16, indoorsEnabled: true, indoorMapId: "westport_house", floorIndex: 2});
-
+                map.on("initialstreamingcomplete", function(e) {
+                    map.indoors.enter("westport_house");
+                });
                 // indoor controller widget
                 let indoorControl = new WrldIndoorControl("widget-container", map);
 
@@ -51,6 +53,29 @@
                 // define measurement types
                 let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100);
                 let temperature = new Measurement("°C", "SVG/thermometer.svg", 10, 30);
+
+                async function setFormat(measurement) {
+                    let settings = await getSettings();
+                    measurement.setUnits(settings);
+                }
+
+                temperature.setUnits = function(settings) {
+                    switch(settings[0]) {
+                        case "C":
+                            this.units = "°C";
+                            break;
+                        case "F":
+                            this.units = "°F";
+                            break;
+                        case "K":
+                            this.units = "K";
+                        default:
+                            this.units = "°C";
+                            break;
+                    }
+                };
+
+                setFormat(temperature);
 
                 addSensorsToMap();
                 async function addSensorsToMap()
@@ -66,9 +91,9 @@
 
                 async function updateSensorsOnMap(markerController)
                 {
-                    let sensorData = [];
-                    sensorData = await getData();
-                    updateSensor(markerController, sensorData);
+                    let sensorData = await getData();
+                    let settings = await getSettings();
+                    updateSensor(markerController, sensorData, settings);
                 }
 
             </script>
