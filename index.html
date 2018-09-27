@@ -99,7 +99,7 @@
                     let tempFormat = settings[0];
                     for(i=0; i<sensorData.length; i++)
                     {
-                        sensorData[i].temperature = this.convert(tempFormat, sensorData[i].temperature);
+                        sensorData[i].reading = this.convert(tempFormat, sensorData[i].reading);
                     }
                     return sensorData;
                 };
@@ -114,10 +114,11 @@
                 addSensorsToMap();
                 async function addSensorsToMap()
                 {
-                    let unconvertedData = [];
-                    unconvertedData = await getData();
+                    let unconvertedTemperatureData = [];
+                    unconvertedTemperatureData = await getData('temperature');
+                    console.log(unconvertedTemperatureData)
                     let settings = await getSettings();
-                    let sensorData = temperature.convertData(unconvertedData, settings);
+                    let sensorData = temperature.convertData(unconvertedTemperatureData, settings);
                     addSensor(0, markerController, "westport_house", 0, [56.460102, -2.978278], temperature, sensorData);
                     addSensor(1, markerController, "westport_house", 0, [56.46, -2.9783], humidity, sensorData);
                 }
@@ -127,7 +128,7 @@
 
                 async function updateSensorsOnMap(markerController)
                 {
-                    let sensorData = await getData();
+                    let sensorData = await getData('temperature');
                     updateSensor(markerController, sensorData);
                 }
 

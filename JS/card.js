@@ -233,8 +233,5 @@ class Card {
         arrow2.id = "arrowRight";
         graphButtonDiv.appendChild(arrow2);
         return graphButtonDiv;
-
-
-
     }
 }

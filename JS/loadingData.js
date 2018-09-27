@@ -1,17 +1,15 @@
 class Reading{
-   constructor(date, time, temperature, humidity, people){
+   constructor(date, time, reading){
         this.date = date;
         this.time = time;
-        this.temperature = temperature;
-        this.humidity = humidity;
-        this.people = people;
+        this.reading = reading;
     }
 }
 
-getData = function() {
+getData = function(kindOfSensor){
     let promise = new Promise(function(resolve, reject) {
         //Initialise sensor arrays
-        let sensorReadings = [];
+        // let sensorReadings = [];
 
         let requestURL = "JSON/SensorData.json";
         let request = new XMLHttpRequest();
@@ -22,18 +20,52 @@ getData = function() {
 
         request.onload = function(){
             //If ready to receive data, parse the input
-
             let response = JSON.parse(request.responseText);
             let temperatureTime = response.temperatureTime;
-
-            for(let i = 0; i < temperatureTime.length; i++){
-                sensorReadings.push(new Reading(temperatureTime[i].Date,temperatureTime[i].Time, temperatureTime[i].Sensor1, temperatureTime[i].Humidity, temperatureTime[i].NumberOfPeople));
-            }
+            let sensorReadings = [];
+            switch(kindOfSensor){
+                case 'temperature':
+                    sensorReadings = getTemperatureData(temperatureTime);
+                    break;
+                case 'humidity':
+                    sensorReadings = getHumidityData(temperatureTime);
+                    break;
+                case 'people':
+                    sensorReadings = getPersonData(temperatureTime);
+                    break;
+                default:
+                    sensorReadings = null;
+            }  
 
             resolve(sensorReadings);
         }
     });
     return promise;
+    
+}
+
+getTemperatureData = function(temperatureTime) {
+    let sensorReadings = [];
+    for(let i = 0; i < temperatureTime.length; i++){
+        sensorReadings.push(new Reading(temperatureTime[i].Date,temperatureTime[i].Time, temperatureTime[i].Sensor1));
+    }
+    return sensorReadings;
+}
+
+getHumidityData = function(temperatureTime) {
+    let sensorReadings = [];
+    for(let i = 0; i < temperatureTime.length; i++){
+        sensorReadings.push(new Reading(temperatureTime[i].Date,temperatureTime[i].Time, temperatureTime[i].Humidity));
+    }
+    return sensorReadings;
+}
+
+getPersonData = function(temperatureTime) {
+    let sensorReadings = [];
+    for(let i = 0; i < temperatureTime.length; i++){
+        sensorReadings.push(new Reading(temperatureTime[i].Date,temperatureTime[i].Time, temperatureTime[i].NumberOfPeople));
+    }
+    return sensorReadings;
 }
 
 getSettings = function(){
