@@ -17,7 +17,7 @@ getData = function() {
         //Initialise sensor arrays
         let sensorReadings = [];
 
-        let requestURL = "JSON/TemperatureDataKelvin.json";
+        let requestURL = "JSON/SensorData.json";
         let request = new XMLHttpRequest();
         //Read from data file
 
