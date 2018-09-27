@@ -71,20 +71,22 @@
 
                 temperature.setUnits = function(settings) {
                     switch(settings[0]) {
-                        case "C":
-                            this.units = "°C";
-                            this.rangeMin = this.convert("C", this.rangeMin);
-                            this.rangeMax = this.convert("C", this.rangeMax);
+                        case "K":
+                            this.units = "K";
+                            this.rangeMin = this.convert("K", this.rangeMin);
+                            this.rangeMax = this.convert("K", this.rangeMax);
                             break;
                         case "F":
                             this.units = "°F";
                             this.rangeMin = this.convert("F", this.rangeMin);
                             this.rangeMax = this.convert("F", this.rangeMax);
                             break;
-                        case "K":
-                            this.units = "K";
-                            this.rangeMin = this.convert("K", this.rangeMin);
-                            this.rangeMax = this.convert("K", this.rangeMax);
+                        case "C":
+                            this.units = "°C";
+                            this.rangeMin = this.convert("C", this.rangeMin);
+                            this.rangeMax = this.convert("C", this.rangeMax);
+                            break;
+
                         default:
                             this.units = "McD";
                             this.rangeMin = 0;
@@ -97,7 +99,7 @@
                     let tempFormat = settings[0];
                     for(i=0; i<sensorData.length; i++)
                     {
-                        sensorData[i].reading = this.convert(tempFormat, sensorData[i].reading);
+                        sensorData[i].temperature = this.convert(tempFormat, sensorData[i].temperature);
                     }
                     return sensorData;
                 };
@@ -126,8 +128,7 @@
                 async function updateSensorsOnMap(markerController)
                 {
                     let sensorData = await getData();
-                    let settings = await getSettings();
-                    updateSensor(markerController, sensorData, settings);
+                    updateSensor(markerController, sensorData);
                 }
 
             </script>

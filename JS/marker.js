@@ -35,7 +35,7 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     let tempFormat = settingsData[0];
 
     let marker = markerController.addMarker(markerID, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
-    marker.setIcon(getDataMarkerIcon(Math.round(sensorData[sensorData.length - 1].reading), measurement));
+    marker.setIcon(getDataMarkerIcon(Math.round(sensorData[sensorData.length - 1].temperature), measurement));
 
     let card = new Card(measurement, sensorData);
     let div = card.getDiv();
@@ -56,7 +56,7 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     marker.bindPopup(popup).on("popupopen", function() { updateCard(sensorData, measurement) });
 }
 
-function updateSensor(markerController, sensorData, settingsData) {
+function updateSensor(markerController, sensorData) {
     let markerIds = markerController.getAllMarkerIds();
     let tempFormat = settingsData[0];
 
@@ -67,7 +67,7 @@ function updateSensor(markerController, sensorData, settingsData) {
 
         popup.sensorData = sensorData;
 
-        marker.setIcon(getDataMarkerIcon(Math.round(sensorData[sensorData.length - 1].reading), popup.measurement));
+        marker.setIcon(getDataMarkerIcon(Math.round(sensorData[sensorData.length - 1].temperature), popup.measurement));
 
         // update content of the popup
         if(popup.isOpen()) {
@@ -82,7 +82,7 @@ function updateCard(sensorReading, measurement) {
     if(slider != null) {
         position = slider.value;
     }
-    let readingValue = Math.round(sensorReading[sensorReading.length - 1 - (12-position)].reading * 100) / 100;
+    let readingValue = Math.round(sensorReading[sensorReading.length - 1 - (12-position)].temperature * 100) / 100;
     document.getElementById("valueText").textContent = readingValue;
     document.getElementById("timeDateText").textContent = sensorReading[sensorReading.length - 1 - (12-position)].date + " " + sensorReading[sensorReading.length - 1 - (12-position)].time;
     fillSvg(document.getElementById("svgIcon"), readingValue, measurement);

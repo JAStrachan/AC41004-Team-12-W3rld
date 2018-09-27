@@ -1,15 +1,11 @@
 class Reading{
-   constructor(date, time, reading){
+   constructor(date, time, temperature, humidity, people){
         this.date = date;
         this.time = time;
-        this.reading = reading;
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.people = people;
     }
-}
-
-function sensorAverage(mode) {
-    //Displays the average temperature of the 4 sensors
-    let noOfSensors = 4;
-    console.log((convert(mode,temperatureTime[i].Sensor1)+convert(mode,temperatureTime[i].Sensor2)+convert(mode,temperatureTime[i].Sensor3)+convert(mode,temperatureTime[i].Sensor4))/noOfSensors)
 }
 
 getData = function() {
@@ -31,7 +27,7 @@ getData = function() {
             let temperatureTime = response.temperatureTime;
 
             for(let i = 0; i < temperatureTime.length; i++){
-                sensorReadings.push(new Reading(temperatureTime[i].Date,temperatureTime[i].Time, temperatureTime[i].Sensor1));
+                sensorReadings.push(new Reading(temperatureTime[i].Date,temperatureTime[i].Time, temperatureTime[i].Sensor1, temperatureTime[i].Humidity, temperatureTime[i].NumberOfPeople));
             }
 
             resolve(sensorReadings);
