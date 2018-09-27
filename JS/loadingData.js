@@ -20,12 +20,6 @@ function convert(mode,value){
     }
 }
 
-function sensorAverage(mode) {
-    //Displays the average temperature of the 4 sensors
-    let noOfSensors = 4;
-    console.log((convert(mode,temperatureTime[i].Sensor1)+convert(mode,temperatureTime[i].Sensor2)+convert(mode,temperatureTime[i].Sensor3)+convert(mode,temperatureTime[i].Sensor4))/noOfSensors)
-}
-
 getData = function() {
     let promise = new Promise(function(resolve, reject) {
         //Initialise sensor arrays

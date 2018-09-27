@@ -1,3 +1,5 @@
+const NUMBER_OF_READINGS = 12;
+
 function expandCard()
 {
     // Since binded to class when called, this refers to card class
@@ -31,66 +33,45 @@ function expandCard()
 
 function getDayOfSensorData(sensorData,placement)
 {
-    if (placement > sensorData.length){
-        placement = sensorData.length-1;
-        console.log('back');
-        console.log(placement);
-        
-    }
-    else if(placement < 1){
-        placement = 1;
-        console.log('forward');
-    }
-    else{
-        console.log('ok');
-        console.log(placement);
-    }
-
-    let temp = [];
-    let timeLabels= [];
-
-    let checkDate = sensorData[sensorData.length - placement].date;
-
-    let i=sensorData.length-placement;
-    console.log('Printing out index of sensorData ' + i + '  + ' + sensorData[i]);
-
-    //push sensor data to an array
-    do{
-        console.log('hit loop');
-        temp.push(sensorData[i]);
-        i--;
-    }
-    while(sensorData[i].date == checkDate)
-
-    // reverse timelabels
-    for(i=temp.length - 1; i>=0; i--)
-    {
-        timeLabels.push(temp[i]);
-    }
+    let dataToDisplay = [];
+    let startingIndex= placement - NUMBER_OF_READINGS;
+    let endIndex = placement;
     
-    return temp;
+    //push data onto array, get oldest first
+    do{
+        dataToDisplay.push(sensorData[startingIndex]);
+        startingIndex++;
+        console.log(startingIndex);
+    }
+    while(startingIndex <= endIndex)
+    console.log(dataToDisplay);
+    return dataToDisplay;
 
 }
 
 function getPrevDayGraph(){
-    this.placement = this.placement +24;
-    console.log(this.sensorData);
-    updateGraph(this.graph,this.sensorData,this.placement);
+    let newIndex = this.placement + NUMBER_OF_READINGS;
+    if(newIndex < this.sensorData.length && newIndex >= 0)
+    {
+        this.placement += NUMBER_OF_READINGS;
+        updateGraph(this.graph,this.sensorData, this.placement);
+    } 
 }
 
-
 function getNextDayGraph(){
-    this.placement = this.placement -24;
-    updateGraph(this.graph,this.sensorData,this.placement);
+    let newIndex = this.placement - NUMBER_OF_READINGS;
+    if(newIndex < this.sensorData.length && newIndex >= 0)
+    {
+        this.placement -= NUMBER_OF_READINGS;
+        updateGraph(this.graph,this.sensorData,this.placement);
+    } 
 }
 
 function updateGraph(graph,sensorData,placement){
-    graph = null;
     console.log('Hit update graph');
+    console.log(sensorData);
     let newSensorData = getDayOfSensorData(sensorData, placement);
     graph.updateGraph(newSensorData);
-    // graph = new Graph(getDayOfSensorData(sensorData,placement));
-    // graph.createGraph();
 }
 class Card {
 
@@ -106,7 +87,7 @@ class Card {
         this.arrow = null;
         this.svgPath=svgPath;
         this.sensorData = sensorData;
-        this.placement = 25;
+        this.placement = sensorData.length -1;
         this.prevPlacement = this.placement;
         this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
     }
