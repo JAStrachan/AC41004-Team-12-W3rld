@@ -48,7 +48,7 @@ function getDayOfSensorData(sensorData,placement)
 
 function getPrevDayGraph(){
     let newIndex = this.placement - NUMBER_OF_READINGS;
-    if(newIndex < 0 || newIndex < NUMBER_OF_READINGS)
+    if(newIndex <= 0 || newIndex < NUMBER_OF_READINGS)
     {
         this.placement = NUMBER_OF_READINGS;
     }
@@ -62,7 +62,6 @@ function getPrevDayGraph(){
 
 function getNextDayGraph(){
     let newIndex = this.placement + NUMBER_OF_READINGS;
-    //console.log('getting next day graph ' + this.sensorData.length);
     if(newIndex > this.sensorData.length)
     {
         this.placement = this.sensorData.length;
@@ -76,6 +75,7 @@ function getNextDayGraph(){
 }
 
 function updateGraph(graph,sensorData,placement){
+    console.log('Hit update graph');
     let newSensorData = getDayOfSensorData(sensorData, placement);
     graph.updateGraph(newSensorData);
     
@@ -223,22 +223,20 @@ class Card {
     prevReadingsAvailable()
     {
         let bool = true;
-       // console.log("Prev readings " + this.placement);
+        console.log("Prev readings " + this.placement);
         if(this.placement == 0 || this.placement == NUMBER_OF_READINGS){
            bool = false;
         }
-        //console.log(bool);
         return bool;
     }
 
     nextReadingsAvailable()
     {
         let bool = true;
-        //console.log("Next readings " + this.placement);
+        console.log("Next readings " + this.placement);
         if(this.placement == this.sensorData.length){
            bool = false;
         }
-       // console.log(bool);
         return bool; 
     }
 
@@ -253,7 +251,7 @@ class Card {
         let arrowRightDiv = document.getElementById('arrowRightDiv');
         let arrowRight = document.getElementById('arrowRight');
 
-        this.toggleRightGraphButton(arrowRightDiv,arrowRight); 
+        this.toggleLeftGraphButton(arrowRightDiv,arrowRight); 
     }
 
     toggleLeftGraphButton(arrowLeftDiv, arrowLeft){
