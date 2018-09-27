@@ -33,14 +33,12 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     let settingsData = [];
     settingsData = await getSettings();
     let tempFormat = settingsData[0];
-    
+
     let marker = markerController.addMarker(markerID, latLng, {indoorMapId: indoorMapId, indoorMapFloorId: indoorMapFloorIndex});
     marker.setIcon(getDataMarkerIcon(Math.round(convert(tempFormat, sensorData[sensorData.length - 1].reading)), measurement));
-    marker.measurement = measurement;
 
     let card = new Card(measurement, sensorData, tempFormat);
     let div = card.getDiv();
-    marker.card = card;
 
     let popupOptions = {
         indoorMapId: indoorMapId,
@@ -51,7 +49,11 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
         .setLatLng(latLng)
         .setContent(div);
 
-    marker.bindPopup(popup);
+    popup.card = card;
+    popup.measurement = measurement;
+    popup.sensorData = sensorData;
+
+    marker.bindPopup(popup).on("popupopen", function() { updateCard(sensorData, measurement) });
 }
 
 function updateSensor(markerController, sensorData, settingsData) {
@@ -61,13 +63,15 @@ function updateSensor(markerController, sensorData, settingsData) {
     for(i=0; i<markerIds.length; i++) {
         // change marker icon
         let marker = markerController.getMarker(markerIds[i]);
-        marker.card.sensorData = sensorData;
-        marker.setIcon(getDataMarkerIcon(Math.round(convert(tempFormat, sensorData[sensorData.length - 1].reading)), marker.measurement));
+        let popup = marker.getPopup();
+
+        popup.sensorData = sensorData;
+
+        marker.setIcon(getDataMarkerIcon(Math.round(convert(tempFormat, sensorData[sensorData.length - 1].reading)), popup.measurement));
 
         // update content of the popup
-        let popup = marker.getPopup();
         if(popup.isOpen()) {
-            updateCard(sensorData, marker.measurement);
+            updateCard(sensorData, popup.measurement);
         }
     }
 }
