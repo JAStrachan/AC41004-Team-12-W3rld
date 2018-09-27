@@ -116,17 +116,25 @@
 
 #arrowLeft {
     transform: rotate(135deg);
+    margin-top: 3px;
 }
 
 #arrowRight {
     transform: rotate(315deg);
+    margin-top: 3px;
 }
 
-.graphButtons{
+.graphButtonsDiv{
     display: flex;
 	flex-direction: row;
 	margin: 0;
     width: 100%;
     height:15%;
     justify-content: space-around;
+}
+
+#graphButtons{
+    height: 100%;
+    width: 50%;
+    text-align: center;
 }

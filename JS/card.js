@@ -218,16 +218,26 @@ class Card {
     {
         let arrowLeft = this.getArrowDiv();
         arrowLeft.id = "arrowLeft"
-        arrowLeft.addEventListener("click",getPrevDayGraph.bind(this));
-        return arrowLeft;
+
+        let arrowLeftDiv = document.createElement('div');
+        arrowLeftDiv.className = 'button';
+        arrowLeftDiv.id = 'graphButtons';
+        arrowLeftDiv.addEventListener("click",getPrevDayGraph.bind(this));
+        arrowLeftDiv.appendChild(arrowLeft);
+        return arrowLeftDiv;
     }
 
     getArrowGraphNextDiv()
     {
         let arrowRight = this.getArrowDiv();
         arrowRight.id = "arrowRight";
-        arrowRight.addEventListener("click",getNextDayGraph.bind(this));
-        return arrowRight;
+        
+        let arrowRightDiv = document.createElement('div');
+        arrowRightDiv.className = 'button';
+        arrowRightDiv.id = 'graphButtons';
+        arrowRightDiv.addEventListener("click",getPrevDayGraph.bind(this));
+        arrowRightDiv.appendChild(arrowRight);
+        return arrowRightDiv;
     }
 
 
@@ -238,7 +248,7 @@ class Card {
 
     getGraphControlDiv(){
         let graphButtonDiv = document.createElement("div");
-        graphButtonDiv.className = "graphButtons";
+        graphButtonDiv.className = "graphButtonsDiv";
         let arrowPrev = this.getArrowGraphPrevDiv();
         graphButtonDiv.appendChild(arrowPrev);
         let arrowNext = this.getArrowGraphNextDiv();
