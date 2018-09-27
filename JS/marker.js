@@ -72,6 +72,11 @@ function focusOnPopup(marker)
     let lat = markerLatLng.lat + 0.00015;
     let latLng = L.latLng(lat,markerLatLng.lng);
     map.setView(latLng, map.getZoom(), {animate: true});
+    popup.card = card;
+    popup.measurement = measurement;
+    popup.sensorData = sensorData;
+
+    marker.bindPopup(popup).on("popupopen", function() { updateCard(sensorData, measurement) });
 }
 
 function updateSensor(markerController, sensorData, settingsData) {
