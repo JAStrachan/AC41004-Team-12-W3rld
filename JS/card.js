@@ -53,6 +53,7 @@ function getDayOfSensorData(sensorData,placement)
 
     let i=sensorData.length-placement;
     console.log('Printing out index of sensorData ' + i + '  + ' + sensorData[i]);
+
     //push sensor data to an array
     do{
         console.log('hit loop');
@@ -67,7 +68,7 @@ function getDayOfSensorData(sensorData,placement)
         timeLabels.push(temp[i]);
     }
     
-    return timeLabels;
+    return temp;
 
 }
 
@@ -86,9 +87,10 @@ function getNextDayGraph(){
 function updateGraph(graph,sensorData,placement){
     graph = null;
     console.log('Hit update graph');
-    graph = new Graph(getDayOfSensorData(sensorData,placement));
-    graph.createGraph();
-
+    let newSensorData = getDayOfSensorData(sensorData, placement);
+    graph.updateGraph(newSensorData);
+    // graph = new Graph(getDayOfSensorData(sensorData,placement));
+    // graph.createGraph();
 }
 class Card {
 
