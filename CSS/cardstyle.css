@@ -143,7 +143,13 @@
     justify-content: space-around;
 }
 
-#graphButtons{
+#arrowLeftDiv{
+    height: 100%;
+    width: 50%;
+    text-align: center;
+}
+
+#arrowRightDiv{
     height: 100%;
     width: 50%;
     text-align: center;

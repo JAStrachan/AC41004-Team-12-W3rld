@@ -43,7 +43,6 @@ function getDayOfSensorData(sensorData,placement)
         startingIndex++;
     }
     while(startingIndex < endIndex)
-    console.log(dataToDisplay);
     return dataToDisplay;
 }
 
@@ -57,6 +56,8 @@ function getPrevDayGraph(){
         this.placement = newIndex;
     }
     updateGraph(this.graph,this.sensorData, this.placement);
+    this.updateLeftGraphArrow();
+    this.updateRightGraphArrow();
 }
 
 function getNextDayGraph(){
@@ -69,13 +70,15 @@ function getNextDayGraph(){
         this.placement = newIndex;
     }
     updateGraph(this.graph,this.sensorData, this.placement);
+    this.updateLeftGraphArrow();
+    this.updateRightGraphArrow();
 }
 
 function updateGraph(graph,sensorData,placement){
     console.log('Hit update graph');
-    console.log(sensorData);
     let newSensorData = getDayOfSensorData(sensorData, placement);
     graph.updateGraph(newSensorData);
+    
 }
 class Card {
 
@@ -93,8 +96,6 @@ class Card {
         this.sensorData = sensorData;
         this.placement = sensorData.length;
         this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
-        this.prevAvailable = true;
-        this.nextAvailable = false;
     }
 
 
@@ -219,22 +220,74 @@ class Card {
         return arrow;
     }
 
+    prevReadingsAvailable()
+    {
+        let bool = true;
+        console.log("Prev readings " + this.placement);
+        if(this.placement == 0 || this.placement == NUMBER_OF_READINGS){
+           bool = false;
+        }
+        return bool;
+    }
+
+    nextReadingsAvailable()
+    {
+        let bool = true;
+        console.log("Next readings " + this.placement);
+        if(this.placement == this.sensorData.length){
+           bool = false;
+        }
+        return bool; 
+    }
+
+    updateLeftGraphArrow(){
+        let arrowLeftDiv = document.getElementById('arrowLeftDiv');
+        let arrowLeft = document.getElementById('arrowLeft');
+
+        this.toggleLeftGraphButton(arrowLeftDiv,arrowLeft);      
+    }
+
+    updateRightGraphArrow(){
+        let arrowRightDiv = document.getElementById('arrowRightDiv');
+        let arrowRight = document.getElementById('arrowRight');
+
+        this.toggleLeftGraphButton(arrowRightDiv,arrowRight); 
+    }
+
+    toggleLeftGraphButton(arrowLeftDiv, arrowLeft){
+        if(this.prevReadingsAvailable()){
+            arrowLeftDiv.className = 'button';
+            arrowLeft.style.borderColor = 'black';
+            arrowLeftDiv.addEventListener("click",getPrevDayGraph.bind(this));
+        }
+        else{
+            arrowLeftDiv.removeEventListener('click',getPrevDayGraph.bind(this));
+            arrowLeft.style.borderColor = '#adb0b5';
+            arrowLeftDiv.classname = 'disabledButton';
+        }
+    }
+
+    toggleRightGraphButton(arrowRightDiv, arrowRight){
+        if(this.nextReadingsAvailable()){
+            arrowRightDiv.className = 'button';
+            arrowRight.style.borderColor = 'black';
+            arrowRightDiv.addEventListener("click",getNextDayGraph.bind(this));
+        }
+        else{
+            arrowRightDiv.removeEventListener('click',getNextDayGraph.bind(this));
+            arrowRight.style.borderColor = '#adb0b5';
+            arrowRightDiv.classname = 'disabledButton';
+        }
+    }
+
     getArrowGraphPrevDiv()
     {
         let arrowLeft = this.getArrowDiv();
         arrowLeft.id = "arrowLeft"
-
         let arrowLeftDiv = document.createElement('div');
-        if(this.prevAvailable == false){
-            arrowLeft.style.borderColor = '#adb0b5';
-            arrowLeftDiv.classname = 'disabledButton';
-            console.log(this.prevAvailable)
-        }
-        else{
-        arrowLeftDiv.className = 'button';
-        arrowLeftDiv.addEventListener("click",getPrevDayGraph.bind(this));
-        }
-        arrowLeftDiv.id = 'graphButtons';
+        arrowLeftDiv.id = 'arrowLeftDiv';
+
+        this.toggleLeftGraphButton(arrowLeftDiv,arrowLeft);
 
         arrowLeftDiv.appendChild(arrowLeft);
         return arrowLeftDiv;
@@ -244,18 +297,16 @@ class Card {
     {
         let arrowRight = this.getArrowDiv();
         arrowRight.id = "arrowRight";
-        
         let arrowRightDiv = document.createElement('div');
-        if(this.nextAvailable == false){
-            arrowRight.style.borderColor = '#adb0b5';
-            arrowRightDiv.classname = 'disabledButton';
-            console.log(this.nextAvailable)
+        arrowRightDiv.id = 'arrowRightDiv';
+        if(this.nextReadingsAvailable()){
+            arrowRightDiv.className = 'button';
+            arrowRightDiv.addEventListener("click",getNextDayGraph.bind(this));
         }
         else{
-        arrowRightDiv.className = 'button';
-        arrowRightDiv.addEventListener("click",getPrevDayGraph.bind(this));
+            arrowRight.style.borderColor = '#adb0b5';
+            arrowRightDiv.classname = 'disabledButton';  
         }
-        arrowRightDiv.id = 'graphButtons';
         arrowRightDiv.appendChild(arrowRight);
         return arrowRightDiv;
     }

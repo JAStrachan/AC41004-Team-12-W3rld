@@ -67,6 +67,5 @@ class Graph {
     console.log("In graph, updating it");
     this.graph.destroy();
     this.createGraph();
-
   }
 }
