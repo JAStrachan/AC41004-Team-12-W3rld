@@ -52,6 +52,25 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     popup.card = card;
     popup.measurement = measurement;
     popup.sensorData = sensorData;
+    
+    marker.bindPopup(popup).on("popupopen", function () { 
+        let markerLatLng = marker.getLatLng()
+        let lat = markerLatLng.lat + 0.00015;
+        let latLng = L.latLng(lat,markerLatLng.lng);
+        map.setView(latLng, map.getZoom(), {animate: true});
+        updateCard(sensorData,measurement);
+    });   
+}
+
+function focusOnPopup(marker)
+{   
+    let markerLatLng = marker.target.getLatLng()
+    let lat = markerLatLng.lat + 0.00015;
+    let latLng = L.latLng(lat,markerLatLng.lng);
+    map.setView(latLng, map.getZoom(), {animate: true});
+    popup.card = card;
+    popup.measurement = measurement;
+    popup.sensorData = sensorData;
 
     marker.bindPopup(popup).on("popupopen", function() { updateCard(sensorData, measurement) });
 }

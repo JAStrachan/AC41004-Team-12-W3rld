@@ -10,6 +10,10 @@ class Graph {
 
     let timeLabels = this.getTimes();
     let readings = this.getReadings();
+    if(this.graph != null)
+    {
+      this.graph.destroy();
+    }  
     this.graph = new Chart(ctx, {
       type: 'line',
 
