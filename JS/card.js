@@ -59,7 +59,7 @@ function getDayOfSensorData(sensorData)
 
 class Card {
 
-    constructor(measurement, sensorData, tempFormat) {
+    constructor(measurement, sensorData) {
         this.lastReading = sensorData[sensorData.length - 1].reading;
         this.lastTime = sensorData[sensorData.length - 1].time;
         this.lastDate = sensorData[sensorData.length - 1].date;
