@@ -27,6 +27,7 @@
         <script src="JS/graph.js"></script>
         <script src="JS/marker.js"></script>
         <script src="JS/loadingData.js"></script>
+        <script src="JS/measurement.js"></script>
     </head>
     <body>
         <div style="position: relative">
@@ -40,30 +41,93 @@
             <script>
                 // create map
                 let map = L.Wrld.map("map", "7253bcb8510b3ccb628b5e59b301df98", {center: [56.460102, -2.978278], zoom: 16, indoorsEnabled: true, indoorMapId: "westport_house", floorIndex: 2});
-
+                map.on("initialstreamingcomplete", function(e) {
+                    map.indoors.enter("westport_house");
+                });
                 // indoor controller widget
                 let indoorControl = new WrldIndoorControl("widget-container", map);
 
                 // add marker controller
                 let markerController = new WrldMarkerController(map);
-                
+
+                // define measurement types
+                let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100);
+                let temperature = new Measurement("K", "SVG/thermometer.svg", 283, 303);
+
+                //Takes in input of mode desired to be displayed and converts values to appropriate unit when being displayed
+                temperature.convert = function(mode,value) {
+                    switch(mode){
+                        //Kelvin
+                        case "K":
+                            return Math.round(value*100)/100;
+                        //Fahrenheit
+                        case "F":
+                            return Math.round((value*1.8-459.67)*100) / 100;
+                        //Celsius
+                        case "C":
+                            return Math.round((value-273.15) * 100) / 100;
+                    }
+                }
+
+                temperature.setUnits = function(settings) {
+                    switch(settings[0]) {
+                        case "C":
+                            this.units = "°C";
+                            this.rangeMin = this.convert("C", this.rangeMin);
+                            this.rangeMax = this.convert("C", this.rangeMax);
+                            break;
+                        case "F":
+                            this.units = "°F";
+                            this.rangeMin = this.convert("F", this.rangeMin);
+                            this.rangeMax = this.convert("F", this.rangeMax);
+                            break;
+                        case "K":
+                            this.units = "K";
+                            this.rangeMin = this.convert("K", this.rangeMin);
+                            this.rangeMax = this.convert("K", this.rangeMax);
+                        default:
+                            this.units = "McD";
+                            this.rangeMin = 0;
+                            this.rangeMax = 100;
+                            break;
+                    }
+                };
+
+                temperature.convertData = function(sensorData, settings) {
+                    let tempFormat = settings[0];
+                    for(i=0; i<sensorData.length; i++)
+                    {
+                        sensorData[i].reading = this.convert(tempFormat, sensorData[i].reading);
+                    }
+                    return sensorData;
+                };
+
+                async function setFormat(measurement) {
+                    let settings = await getSettings();
+                    measurement.setUnits(settings);
+                }
+
+                setFormat(temperature);
+
                 addSensorsToMap();
                 async function addSensorsToMap()
                 {
-                    let sensorData = [];
-                    sensorData = await getData();
-                    addSensor(0, markerController, "westport_house", 0, [56.460102, -2.978278], "°C", "SVG/thermometer.svg", sensorData);
-                    addSensor(1, markerController, "westport_house", 0, [56.46, -2.9783], "%", "SVG/humidity.svg", sensorData);
+                    let unconvertedData = [];
+                    unconvertedData = await getData();
+                    let settings = await getSettings();
+                    let sensorData = temperature.convertData(unconvertedData, settings);
+                    addSensor(0, markerController, "westport_house", 0, [56.460102, -2.978278], temperature, sensorData);
+                    addSensor(1, markerController, "westport_house", 0, [56.46, -2.9783], humidity, sensorData);
                 }
-                
+
                 // waits until the o'clock of the next hour then runs the update method every hour
                 setInterval(updateSensorsOnMap, 20*1000, markerController);
 
                 async function updateSensorsOnMap(markerController)
                 {
-                    let sensorData = [];
-                    sensorData = await getData();
-                    updateSensor(markerController, sensorData);
+                    let sensorData = await getData();
+                    let settings = await getSettings();
+                    updateSensor(markerController, sensorData, settings);
                 }
 
             </script>
