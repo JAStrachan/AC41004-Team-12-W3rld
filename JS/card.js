@@ -256,15 +256,12 @@ class Card {
             arrowLeftDiv.className = 'button';
             arrowLeft.style.borderColor = 'black';
             arrowLeftDiv.style.pointerEvents = 'auto';
-            console.log('toggled left graph button, still have places to go');
         }
         else{
-            console.log('toggled left graph button, disabled');
             arrowLeftDiv.classname = 'disabledButton';
             arrowLeft.style.borderColor ='#adb0b5';
             arrowLeftDiv.style.pointerEvents = 'none';
         }
-        console.log(arrowLeftDiv.className);
     }
 
     toggleRightGraphButton(arrowRightDiv, arrowRight){
@@ -272,10 +269,8 @@ class Card {
             arrowRightDiv.className = 'button';
             arrowRight.style.borderColor = 'black';
             arrowRightDiv.style.pointerEvents = 'auto';
-            console.log('toggled right graph button, still have places to go');
         }
         else{
-            console.log('toggled right graph button, disabled');
             arrowRightDiv.classname = 'disabledButton';
             arrowRight.style.borderColor ='#adb0b5';
             arrowRightDiv.style.pointerEvents = 'none';
