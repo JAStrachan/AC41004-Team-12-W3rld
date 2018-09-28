@@ -98,10 +98,25 @@
     width: 100%;
     margin: 0;
     display: inline-block;
+    pointer-events: auto;
+    border-color: black;
+    fill:black;
 }
 
 .button:hover {
     background-color: #DDDDDD;
+}
+
+.disabledButton {
+    background-color: rgb(255, 255, 255);
+    fill:rgb(133, 122, 122);
+    border-color : '#adb0b5';
+    text-align: center;
+    height: var(--button-height);
+    width: 100%;
+    margin: 0;
+    display: inline-block;
+    pointer-events: none;
 }
 
 .arrow {
@@ -115,30 +130,33 @@
 }
 
 #arrowLeft {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    margin-bottom: 5px;
     transform: rotate(135deg);
-    transition: 0.3s;
+    margin-top: 3px;
 }
 
 #arrowRight {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    margin-bottom: 5px;
     transform: rotate(315deg);
-    transition: 0.3s;
+    margin-top: 3px;
 }
 
-.graphButtons{
+.graphButtonsDiv{
     display: flex;
 	flex-direction: row;
 	margin: 0;
     width: 100%;
     height:15%;
     justify-content: space-around;
+    pointer-events: auto;
+}
+
+#arrowLeftDiv{
+    height: 100%;
+    width: 50%;
+    text-align: center;
+}
+
+#arrowRightDiv{
+    height: 100%;
+    width: 50%;
+    text-align: center;
 }

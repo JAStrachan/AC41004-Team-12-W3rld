@@ -91,11 +91,11 @@
      id="layer1">
     <linearGradient id="lg" x1="0.5" y1="1" x2="0.5" y2="0">
       <stop offset="0%" stop-opacity="1" stop-color="#D40000"/>
-      <stop class="level" offset="0%" stop-opacity="1" stop-color="#D40000">
-	  <animate class="levelAnim" attributeName="offset" from="0" to="0" repeatCount="1" dur="1s" begin="0s"/>
+      <stop class="level" offset="40%" stop-opacity="1" stop-color="#D40000">
+	  <animate class="levelAnim" attributeName="offset" from="0" to="0.4" repeatCount="1" dur="1s" begin="0s"/>
 	  </stop>
-      <stop class="level" offset="0%" stop-opacity="1" stop-color="white">
-	  <animate class="levelAnim" attributeName="offset" from="0" to="0" repeatCount="1" dur="1s" begin="0s"/>
+      <stop class="level" offset="40%" stop-opacity="1" stop-color="white">
+	  <animate class="levelAnim" attributeName="offset" from="0" to="0.4" repeatCount="1" dur="1s" begin="0s"/>
 	  </stop>
 	</linearGradient>
     <path
