@@ -125,31 +125,31 @@
                 updateMap();
                 async function updateMap() {
                     let tempReadings = await getData('temperature');
-                    let timedSensorData = [];
 
                     let settings = await getSettings();
                     let sensorData = temperature.convertData(tempReadings, settings);
 
-                    function addReading() {
+                    let timedSensorData = [];
+                    for(i=0; i<13; i++) {
+                        timedSensorData.push(sensorData[i]);
+                    }
+                    console.log(timedSensorData);
+
+                    function addReading(timedSensorData, sensorData, markerController) {
                         let index = timedSensorData.length;
+                        console.log(index);
                         if(index == sensorData.length) {
                             index = 0;
                         }
 
-                        timedSensorData = [];
-
-                        for(i=0; i< index + 1; i++)
-                        {
-                            timedSensorData.push(sensorData[i]);
-                        }
-                        return timedSensorData;
+                        timedSensorData.push(sensorData[index]);
+                        console.log(timedSensorData);
+                        updateSensorsOnMap(markerController, timedSensorData);
                     }
 
-                    timedSensorData = setInterval(addReading, 20*1000);
+                    setInterval(addReading, 5*1000, timedSensorData, sensorData, markerController);
                     // waits until the o'clock of the next hour then runs the update method every hour
-                    setInterval(updateSensorsOnMap, 20*1000, markerController);
-
-                    function updateSensorsOnMap(markerController)
+                    function updateSensorsOnMap(markerController, timedSensorData)
                     {
                         updateSensor(markerController, timedSensorData);
                     }

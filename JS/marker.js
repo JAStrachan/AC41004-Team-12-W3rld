@@ -53,7 +53,7 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     popup.measurement = measurement;
     popup.sensorData = sensorData;
 
-    marker.bindPopup(popup).on("popupopen", function() { updateCard(sensorData, measurement) });
+    marker.bindPopup(popup).on("popupopen", function() { updateCard(popup.sensorData, sensorData, measurement) });
 }
 
 function updateSensor(markerController, sensorData) {
@@ -85,7 +85,8 @@ function updateCard(sensorReading, measurement) {
     let readingValue = Math.round(sensorReading[sensorReading.length - 1 - (12-position)].reading * 100) / 100;
     document.getElementById("valueText").textContent = readingValue;
     document.getElementById("timeDateText").textContent = sensorReading[sensorReading.length - 1 - (12-position)].date + " " + sensorReading[sensorReading.length - 1 - (12-position)].time;
-    fillSvg(document.getElementById("svgIcon"), readingValue, measurement);
+    fillSvg(document.getElementById("svgIcon"), sensorData[sensorData.length - 1].reading, measurement);
+
 }
 
 function fillSvg(svgIcon, currValue, measurement) {
