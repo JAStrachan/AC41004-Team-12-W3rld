@@ -66,7 +66,7 @@
                     let sensorData = await getData('humidity');
 
                     let timedSensorData = [];
-                    for(i=0; i<13; i++) {
+                    for(i=0; i<26; i++) {
                         timedSensorData.push(sensorData[i]);
                     }
 
@@ -80,7 +80,7 @@
                         updateSensorsOnMap(markerController, timedSensorData);
                     }
 
-                    setInterval(addReading, 5*1000, timedSensorData, sensorData, markerController);
+                    setInterval(addReading, 20*1000, timedSensorData, sensorData, markerController);
                     // waits until the o'clock of the next hour then runs the update method every hour
                     function updateSensorsOnMap(markerController, timedSensorData)
                     {
