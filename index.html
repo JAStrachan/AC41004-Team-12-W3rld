@@ -48,7 +48,8 @@
                 let indoorControl = new WrldIndoorControl("widget-container", map);
 
                 // add marker controller
-                let markerController = new WrldMarkerController(map);
+                let temperatureMarkerController = new WrldMarkerController(map);
+                let humidityMarkerController = new WrldMarkerController(map);
 
                 // define measurement types
                 let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100);
@@ -115,23 +116,34 @@
                 async function addSensorsToMap()
                 {
                     let tempData = [];
-                    tempData = await getData('temperature');
+                    unconvertedTemperatureData = await getData('temperature');
                     let settings = await getSettings();
-                    sensorData = temperature.convertData(tempData, settings);
-                    addSensor(0, markerController, "westport_house", 0, [56.460102, -2.978278], temperature, sensorData);
-                    addSensor(1, markerController, "westport_house", 0, [56.46, -2.9783], humidity, sensorData);
+                    temperatureData = temperature.convertData(unconvertedTemperatureData, settings);
+
+                    let humidityData = [];
+                    humidityData = await getData('humidity');
+
+                    addSensor(0, temperatureMarkerController, "westport_house", 0, [56.460102, -2.978278], temperature, temperatureData);
+                    addSensor(1, humidityMarkerController, "westport_house", 0, [56.46, -2.9783], humidity, humidityData);
                 }
 
                 updateMap();
                 async function updateMap() {
-                    let tempReadings = await getData('temperature');
+                    let unconvertedTemperatureData = await getData('temperature');
 
                     let settings = await getSettings();
-                    let sensorData = temperature.convertData(tempReadings, settings);
+                    let temperatureData = temperature.convertData(unconvertedTemperatureData, settings);
 
-                    let timedSensorData = [];
+                    let humidityData = await getData('humidity');
+
+                    let timedTemperatureData = [];
                     for(i=0; i<26; i++) {
-                        timedSensorData.push(sensorData[i]);
+                        timedTemperatureData.push(temperatureData[i]);
+                    }
+
+                    let timedHumidityData = [];
+                    for(i=0; i<26; i++) {
+                        timedHumidityData.push(humidityData[i]);
                     }
 
                     function addReading(timedSensorData, sensorData, markerController) {
@@ -143,9 +155,10 @@
                         timedSensorData.push(sensorData[index]);
                         updateSensorsOnMap(markerController, timedSensorData);
                     }
+                    
+                    setInterval(addReading, 20*1000, timedTemperatureData, temperatureData, temperatureMarkerController);
+                    setInterval(addReading, 20*1000, timedHumidityData, humidityData, humidityMarkerController);
 
-                    setInterval(addReading, 20*1000, timedSensorData, sensorData, markerController);
-                    // waits until the o'clock of the next hour then runs the update method every hour
                     function updateSensorsOnMap(markerController, timedSensorData)
                     {
                         updateSensor(markerController, timedSensorData);
