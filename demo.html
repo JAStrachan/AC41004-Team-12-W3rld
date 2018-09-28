@@ -53,22 +53,24 @@
                 // define measurement types
                 let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100);
 
+
+                let timedSensorData = [];
+
                 addSensorsToMap();
                 async function addSensorsToMap()
                 {
-                    let sensorData = [];
-                    sensorData = await getData('humidity');
-                    addSensor(0, markerController, "westport_house", 0, [56.46, -2.9783], humidity, sensorData);
+                    let sensorData = await getData('humidity');
+
+                    for(i=0; i<26; i++) {
+                        timedSensorData.push(sensorData[i]);
+                    }
+
+                    addSensor(0, markerController, "westport_house", 0, [56.46, -2.9783], humidity, timedSensorData);
                 }
 
                 updateMap();
                 async function updateMap() {
                     let sensorData = await getData('humidity');
-
-                    let timedSensorData = [];
-                    for(i=0; i<26; i++) {
-                        timedSensorData.push(sensorData[i]);
-                    }
 
                     function addReading(timedSensorData, sensorData, markerController) {
                         let index = timedSensorData.length;

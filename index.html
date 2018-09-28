@@ -112,9 +112,14 @@
 
                 setFormat(temperature);
 
+                // Time-based data
+                let timedTemperatureData = [];
+                let timedHumidityData = [];
+
                 addSensorsToMap();
                 async function addSensorsToMap()
                 {
+                    // get the data from the different measurement types
                     let tempData = [];
                     unconvertedTemperatureData = await getData('temperature');
                     let settings = await getSettings();
@@ -123,8 +128,18 @@
                     let humidityData = [];
                     humidityData = await getData('humidity');
 
-                    addSensor(0, temperatureMarkerController, "westport_house", 0, [56.460102, -2.978278], temperature, temperatureData);
-                    addSensor(1, humidityMarkerController, "westport_house", 0, [56.46, -2.9783], humidity, humidityData);
+                    // Set initial time-based data
+                    for(i=0; i<26; i++) {
+                        timedTemperatureData.push(temperatureData[i]);
+                    }
+
+                    for(i=0; i<26; i++) {
+                        timedHumidityData.push(humidityData[i]);
+                    }
+
+                    // add the sensors to the appropriate marker controllers
+                    addSensor(0, temperatureMarkerController, "westport_house", 0, [56.460102, -2.978278], temperature, timedTemperatureData);
+                    addSensor(1, humidityMarkerController, "westport_house", 0, [56.46, -2.9783], humidity, timedHumidityData);
                 }
 
                 updateMap();
@@ -136,16 +151,6 @@
 
                     let humidityData = await getData('humidity');
 
-                    let timedTemperatureData = [];
-                    for(i=0; i<26; i++) {
-                        timedTemperatureData.push(temperatureData[i]);
-                    }
-
-                    let timedHumidityData = [];
-                    for(i=0; i<26; i++) {
-                        timedHumidityData.push(humidityData[i]);
-                    }
-
                     function addReading(timedSensorData, sensorData, markerController) {
                         let index = timedSensorData.length;
                         if(index == sensorData.length) {
@@ -155,7 +160,7 @@
                         timedSensorData.push(sensorData[index]);
                         updateSensorsOnMap(markerController, timedSensorData);
                     }
-                    
+
                     setInterval(addReading, 20*1000, timedTemperatureData, temperatureData, temperatureMarkerController);
                     setInterval(addReading, 20*1000, timedHumidityData, humidityData, humidityMarkerController);
 
