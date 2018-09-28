@@ -133,17 +133,14 @@
                     for(i=0; i<13; i++) {
                         timedSensorData.push(sensorData[i]);
                     }
-                    console.log(timedSensorData);
 
                     function addReading(timedSensorData, sensorData, markerController) {
                         let index = timedSensorData.length;
-                        console.log(index);
                         if(index == sensorData.length) {
                             index = 0;
                         }
 
                         timedSensorData.push(sensorData[index]);
-                        console.log(timedSensorData);
                         updateSensorsOnMap(markerController, timedSensorData);
                     }
 

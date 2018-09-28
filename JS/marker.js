@@ -85,8 +85,7 @@ function updateCard(sensorReading, measurement) {
     let readingValue = Math.round(sensorReading[sensorReading.length - 1 - (12-position)].reading * 100) / 100;
     document.getElementById("valueText").textContent = readingValue;
     document.getElementById("timeDateText").textContent = sensorReading[sensorReading.length - 1 - (12-position)].date + " " + sensorReading[sensorReading.length - 1 - (12-position)].time;
-    fillSvg(document.getElementById("svgIcon"), sensorData[sensorData.length - 1].reading, measurement);
-
+    fillSvg(document.getElementById("svgIcon"), readingValue, measurement);
 }
 
 function fillSvg(svgIcon, currValue, measurement) {
@@ -99,7 +98,7 @@ function fillSvg(svgIcon, currValue, measurement) {
     }
 
     let contentDoc = svgIcon.contentDocument;
-
+    console.log(contentDoc);
     let percentages = contentDoc.getElementsByClassName("level");;
     let decimals = contentDoc.getElementsByClassName("levelAnim");
 

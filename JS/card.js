@@ -151,6 +151,8 @@ class Card {
         return iconDiv;
     }
 
+    
+
     getSliderDiv()
     {
         // create div to store slider
