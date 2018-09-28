@@ -3,13 +3,18 @@ class Graph {
   constructor(sensorData){
     this.sensorData = [];
     this.sensorData = sensorData;
+    this.graph = null;
   }
   createGraph () {
     let ctx = document.getElementById('graphCanvas');
 
     let timeLabels = this.getTimes();
     let readings = this.getReadings();
-    let graphCanvas = new Chart(ctx, {
+    if(this.graph != null)
+    {
+      this.graph.destroy();
+    }  
+    this.graph = new Chart(ctx, {
       type: 'line',
 
       data: {
@@ -59,5 +64,11 @@ class Graph {
       readings.push(this.sensorData[i].reading);
     }
     return readings;
+  }
+
+  updateGraph(sensorData){
+    this.sensorData = sensorData;
+    this.graph.destroy();
+    this.createGraph();
   }
 }
