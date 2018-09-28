@@ -114,13 +114,10 @@
                 addSensorsToMap();
                 async function addSensorsToMap()
                 {
-                    console.log("add sensors");
                     let tempData = [];
                     tempData = await getData('temperature');
-                    console.log(tempData);
                     let settings = await getSettings();
                     sensorData = temperature.convertData(tempData, settings);
-                    console.log(sensorData);
                     addSensor(0, markerController, "westport_house", 0, [56.460102, -2.978278], temperature, sensorData);
                     addSensor(1, markerController, "westport_house", 0, [56.46, -2.9783], humidity, sensorData);
                 }
@@ -148,9 +145,9 @@
                         return timedSensorData;
                     }
 
-                    timedSensorData = setInterval(addReading, 5*1000);
+                    timedSensorData = setInterval(addReading, 20*1000);
                     // waits until the o'clock of the next hour then runs the update method every hour
-                    setInterval(updateSensorsOnMap, 5*1000, markerController);
+                    setInterval(updateSensorsOnMap, 20*1000, markerController);
 
                     function updateSensorsOnMap(markerController)
                     {
