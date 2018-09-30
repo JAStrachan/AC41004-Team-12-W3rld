@@ -111,7 +111,9 @@ class Card {
         tempAndTimeContainer.id = "popupCard";
 
         let titleDiv = document.createElement("div");
+        titleDiv.className = "titleDiv";
         let title = document.createElement("span");
+        title.className = "title";
         title.textContent = this.measurement.title;
         titleDiv.appendChild(title);
         tempAndTimeContainer.appendChild(titleDiv);

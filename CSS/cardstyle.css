@@ -1,6 +1,6 @@
 *{
-    --card-height: 110px;
-    --card-height-expanded: 110px;
+    --card-height: 125px;
+    --card-height-expanded: 125px;
 
     --card-width: 213px;
     --card-width-expanded: 300px;
@@ -11,10 +11,17 @@
     --button-height: 15px;
 
     --graph-height: 165px;
+
+    font-family: "Roboto";
 }
 
 .body{
     height: 100%;
+}
+
+.title{
+    font-size: 20px;
+    color: #404142;
 }
 
 .flexcontainer{
@@ -43,6 +50,7 @@
 
 .value {
     font-size: 28px;
+    font-weight: bold;
 }
 
 .card {
