@@ -2,8 +2,7 @@
     "Settings":
     [
         {
-            "TemperatureFormat": "C",
-            "TimeInterval": 20
+            "TemperatureFormat": "C"
         }
     ]
 }

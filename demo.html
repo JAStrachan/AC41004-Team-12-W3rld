@@ -51,8 +51,8 @@
                 let markerController = new WrldMarkerController(map);
 
                 // define measurement types
+                // Measurement(units, iconPath, lowerRange, upperRange)
                 let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100);
-
 
                 let timedSensorData = [];
 
@@ -65,6 +65,7 @@
                         timedSensorData.push(sensorData[i]);
                     }
 
+                    // addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, measurement, sensorData)
                     addSensor(0, markerController, "westport_house", 0, [56.46, -2.9783], humidity, timedSensorData);
                 }
 
@@ -79,15 +80,10 @@
                         }
 
                         timedSensorData.push(sensorData[index]);
-                        updateSensorsOnMap(markerController, timedSensorData);
+                        updateSensor(markerController, timedSensorData);
                     }
 
                     setInterval(addReading, 20*1000, timedSensorData, sensorData, markerController);
-                    // waits until the o'clock of the next hour then runs the update method every hour
-                    function updateSensorsOnMap(markerController, timedSensorData)
-                    {
-                        updateSensor(markerController, timedSensorData);
-                    }
                 }
 
             </script>
