@@ -52,8 +52,8 @@
                 let humidityMarkerController = new WrldMarkerController(map);
 
                 // define measurement types
-                let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100);
-                let temperature = new Temperature("K", "SVG/thermometer.svg", 283, 303);
+                let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100, "Humidity");
+                let temperature = new Temperature("K", "SVG/thermometer.svg", 283, 303, "Temperature");
 
                 async function setFormat(measurement) {
                     let settings = await getSettings();
