@@ -75,6 +75,27 @@
 
 .slider {
     width: 100%;
+    margin: 0;
+}
+
+.slider::-webkit-slider-thumb {
+    border-radius: 50%;
+    background: #AAAAAA;
+    height: 20px;
+    width: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    border-radius: 50%;
+    background: #AAAAAA;
+    height: 10px;
+    width: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
 }
 
 .graph {
