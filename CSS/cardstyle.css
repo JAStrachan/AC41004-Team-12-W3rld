@@ -119,6 +119,7 @@
     pointer-events: none;
 }
 
+/* arrow styling taken from https://www.w3schools.com/howto/howto_css_arrows.asp */
 .arrow {
     border: solid black;
     border-width: 0 3px 3px 0;

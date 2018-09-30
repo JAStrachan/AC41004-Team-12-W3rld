@@ -58,26 +58,12 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
         let lat = markerLatLng.lat + 0.00015;
         let latLng = L.latLng(lat,markerLatLng.lng);
         map.setView(latLng, map.getZoom(), {animate: true});
-        updateCard(sensorData,measurement);
+        updateCard(popup.sensorData,measurement);
     });   
 }
 
-function focusOnPopup(marker)
-{   
-    let markerLatLng = marker.target.getLatLng()
-    let lat = markerLatLng.lat + 0.00015;
-    let latLng = L.latLng(lat,markerLatLng.lng);
-    map.setView(latLng, map.getZoom(), {animate: true});
-    popup.card = card;
-    popup.measurement = measurement;
-    popup.sensorData = sensorData;
-
-    marker.bindPopup(popup).on("popupopen", function() { updateCard(sensorData, measurement) });
-}
-
-function updateSensor(markerController, sensorData, settingsData) {
+function updateSensor(markerController, sensorData) {
     let markerIds = markerController.getAllMarkerIds();
-    let tempFormat = settingsData[0];
 
     for(i=0; i<markerIds.length; i++) {
         // change marker icon
@@ -85,6 +71,7 @@ function updateSensor(markerController, sensorData, settingsData) {
         let popup = marker.getPopup();
 
         popup.sensorData = sensorData;
+        popup.card.sensorData = sensorData;
 
         marker.setIcon(getDataMarkerIcon(Math.round(sensorData[sensorData.length - 1].reading), popup.measurement));
 
@@ -110,6 +97,8 @@ function updateCard(sensorReading, measurement) {
 function fillSvg(svgIcon, currValue, measurement) {
     let fillPercent = calculatePercentageFill(measurement.rangeMin, measurement.rangeMax, currValue);
 
+    
+
     if(fillPercent < 0) {
         fillPercent = 0;
     } else if(fillPercent > 1) {
@@ -117,7 +106,6 @@ function fillSvg(svgIcon, currValue, measurement) {
     }
 
     let contentDoc = svgIcon.contentDocument;
-
     let percentages = contentDoc.getElementsByClassName("level");;
     let decimals = contentDoc.getElementsByClassName("levelAnim");
 

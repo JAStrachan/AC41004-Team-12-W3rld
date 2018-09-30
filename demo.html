@@ -48,58 +48,30 @@
                 let indoorControl = new WrldIndoorControl("widget-container", map);
 
                 // add marker controller
-                let temperatureMarkerController = new WrldMarkerController(map);
-                let humidityMarkerController = new WrldMarkerController(map);
+                let markerController = new WrldMarkerController(map);
 
                 // define measurement types
+                // Measurement(units, iconPath, lowerRange, upperRange)
                 let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100);
-                let temperature = new Temperature("K", "SVG/thermometer.svg", 283, 303);
 
-                async function setFormat(measurement) {
-                    let settings = await getSettings();
-                    measurement.setUnits(settings);
-                }
-
-                setFormat(temperature);
-
-                // Time-based data
-                let timedTemperatureData = [];
-                let timedHumidityData = [];
+                let timedSensorData = [];
 
                 addSensorsToMap();
                 async function addSensorsToMap()
                 {
-                    // get the data from the different measurement types
-                    let tempData = [];
-                    unconvertedTemperatureData = await getData('temperature');
-                    let settings = await getSettings();
-                    temperatureData = temperature.convertData(unconvertedTemperatureData, settings);
-
-                    let humidityData = [];
-                    humidityData = await getData('humidity');
-
-                    // Set initial time-based data
-                    for(i=0; i<26; i++) {
-                        timedTemperatureData.push(temperatureData[i]);
-                    }
+                    let sensorData = await getData('humidity');
 
                     for(i=0; i<26; i++) {
-                        timedHumidityData.push(humidityData[i]);
+                        timedSensorData.push(sensorData[i]);
                     }
 
-                    // add the sensors to the appropriate marker controllers
-                    addSensor(0, temperatureMarkerController, "westport_house", 0, [56.460102, -2.978278], temperature, timedTemperatureData);
-                    addSensor(1, humidityMarkerController, "westport_house", 0, [56.46, -2.9783], humidity, timedHumidityData);
+                    // addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, measurement, sensorData)
+                    addSensor(0, markerController, "westport_house", 0, [56.46, -2.9783], humidity, timedSensorData);
                 }
 
                 updateMap();
                 async function updateMap() {
-                    let unconvertedTemperatureData = await getData('temperature');
-
-                    let settings = await getSettings();
-                    let temperatureData = temperature.convertData(unconvertedTemperatureData, settings);
-
-                    let humidityData = await getData('humidity');
+                    let sensorData = await getData('humidity');
 
                     function addReading(timedSensorData, sensorData, markerController) {
                         let index = timedSensorData.length;
@@ -108,16 +80,10 @@
                         }
 
                         timedSensorData.push(sensorData[index]);
-                        updateSensorsOnMap(markerController, timedSensorData);
-                    }
-
-                    setInterval(addReading, 20*1000, timedTemperatureData, temperatureData, temperatureMarkerController);
-                    setInterval(addReading, 20*1000, timedHumidityData, humidityData, humidityMarkerController);
-
-                    function updateSensorsOnMap(markerController, timedSensorData)
-                    {
                         updateSensor(markerController, timedSensorData);
                     }
+
+                    setInterval(addReading, 20*1000, timedSensorData, sensorData, markerController);
                 }
 
             </script>

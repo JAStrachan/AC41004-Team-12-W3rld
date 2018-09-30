@@ -15,7 +15,7 @@ function expandCard()
         this.cardDiv.style.width = "var(--card-width-expanded)";
 
         // loading graph for sensor
-        
+
         this.graph.createGraph();
 
     }
@@ -40,7 +40,7 @@ function getDayOfSensorData(sensorData,placement)
     let dataToDisplay = [];
     let startingIndex = placement - NUMBER_OF_READINGS;
     let endIndex = placement;
-    
+
     //push data onto array, get oldest first
     do{
         dataToDisplay.push(sensorData[startingIndex]);
@@ -81,7 +81,7 @@ function getNextDayGraph(){
 function updateGraph(graph,sensorData,placement){
     let newSensorData = getDayOfSensorData(sensorData, placement);
     graph.updateGraph(newSensorData);
-    
+
 }
 class Card {
 
@@ -180,6 +180,8 @@ class Card {
         return iconDiv;
     }
 
+
+
     getSliderDiv()
     {
         // create div to store slider
@@ -248,21 +250,21 @@ class Card {
         if(this.placement == this.sensorData.length){
            bool = false;
         }
-        return bool; 
+        return bool;
     }
 
     updateLeftGraphArrow(){
         let arrowLeftDiv = document.getElementById('arrowLeftDiv');
         let arrowLeft = document.getElementById('arrowLeft');
 
-        this.toggleLeftGraphButton(arrowLeftDiv,arrowLeft);      
+        this.toggleLeftGraphButton(arrowLeftDiv,arrowLeft);
     }
 
     updateRightGraphArrow(){
         let arrowRightDiv = document.getElementById('arrowRightDiv');
         let arrowRight = document.getElementById('arrowRight');
 
-        this.toggleRightGraphButton(arrowRightDiv,arrowRight); 
+        this.toggleRightGraphButton(arrowRightDiv,arrowRight);
     }
 
     toggleLeftGraphButton(arrowLeftDiv, arrowLeft){
@@ -311,7 +313,7 @@ class Card {
         arrowRight.id = "arrowRight";
         let arrowRightDiv = document.createElement('div');
         arrowRightDiv.id = 'arrowRightDiv';
-       
+
         this.toggleRightGraphButton(arrowRightDiv,arrowRight);
         arrowRightDiv.addEventListener("click",getNextDayGraph.bind(this));
 
