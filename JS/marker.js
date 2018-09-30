@@ -1,3 +1,4 @@
+// returns a L.DivIcon showing the current reading for a sensor
 function getDataMarkerIcon(value, measurement) {
     let svgDiv = document.createElement("div");
     svgDiv.className = "svgDiv";
@@ -29,6 +30,7 @@ function getDataMarkerIcon(value, measurement) {
     return L.divIcon({className: "divIcon has-anchor", html: container.innerHTML, iconSize: [50, 50], iconAnchor: [25, 75]});
 }
 
+// uses a markerController to add a marker to the map and attach a popup
 async function addSensor(markerID, markerController, indoorMapId, indoorMapFloorIndex, latLng, measurement, sensorData) {
     let settingsData = [];
     settingsData = await getSettings();
@@ -62,6 +64,7 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
     });
 }
 
+// updates the reading on the marker's icon and the data on the popup
 function updateSensor(markerController, sensorData) {
     let markerIds = markerController.getAllMarkerIds();
 
@@ -82,6 +85,7 @@ function updateSensor(markerController, sensorData) {
     }
 }
 
+// updates the time, date, sensor reading and svg fill level displayed on the card
 function updateCard(sensorReading, measurement) {
     let slider = document.getElementById("cardSlider");
     let position = 12;
@@ -94,6 +98,7 @@ function updateCard(sensorReading, measurement) {
     fillSvg(document.getElementById("svgIcon"), readingValue, measurement);
 }
 
+// sets the percentage fill level of the svg icon
 function fillSvg(svgIcon, currValue, measurement) {
     let fillPercent = calculatePercentageFill(measurement.rangeMin, measurement.rangeMax, currValue);
 
@@ -118,6 +123,7 @@ function fillSvg(svgIcon, currValue, measurement) {
     }
 }
 
+// takes in the min and max range of a measurement and calculates what percentage of the svg should be filled for the current reading
 function calculatePercentageFill(rangeMin, rangeMax, currValue) {
     return (currValue - rangeMin) / (rangeMax - rangeMin);
 }
