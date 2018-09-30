@@ -1,15 +1,16 @@
 class Measurement {
-    constructor(units, svgPath, rangeMin, rangeMax) {
+    constructor(units, svgPath, rangeMin, rangeMax, title) {
         this.units = units;
         this.svgPath = svgPath;
         this.rangeMin = rangeMin;
         this.rangeMax = rangeMax;
-    }
+        this.title = title;
+    }  
 }
 
 class Temperature extends Measurement {
-    constructor(units, svgPath, rangeMin, rangeMax) {
-        super(units, svgPath, rangeMin, rangeMax);
+    constructor(units, svgPath, rangeMin, rangeMax, title) {
+        super(units, svgPath, rangeMin, rangeMax, title);
     }
 
     //Takes in input of mode desired to be displayed and converts values to appropriate unit when being displayed
