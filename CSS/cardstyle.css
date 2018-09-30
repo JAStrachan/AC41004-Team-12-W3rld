@@ -1,6 +1,6 @@
 *{
-    --card-height: 125px;
-    --card-height-expanded: 125px;
+    --card-height: 130px;
+    --card-height-expanded: 130px;
 
     --card-width: 213px;
     --card-width-expanded: 300px;
@@ -46,6 +46,7 @@
 
 .tempAndTimeContainer {
     float:left;
+    margin-bottom: 10px;
 }
 
 .value {

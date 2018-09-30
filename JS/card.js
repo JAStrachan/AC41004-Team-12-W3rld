@@ -110,23 +110,18 @@ class Card {
 		tempAndTimeContainer.className = "flexcontainer tempAndTimeContainer";
         tempAndTimeContainer.id = "popupCard";
 
-        let titleDiv = document.createElement("div");
-        titleDiv.className = "titleDiv";
-        let title = document.createElement("span");
-        title.className = "title";
-        title.textContent = this.measurement.title;
-        titleDiv.appendChild(title);
+        let titleDiv = this.getTitleDiv();
         tempAndTimeContainer.appendChild(titleDiv);
 
         let sensorReadingDiv = this.getSensorReadingDiv();
 
         tempAndTimeContainer.appendChild(sensorReadingDiv);
 
-        let TimeDiv = this.getTimeDiv();
-        tempAndTimeContainer.appendChild(TimeDiv);
-
         let sliderDiv = this.getSliderDiv();
         tempAndTimeContainer.appendChild(sliderDiv);
+
+        let TimeDiv = this.getTimeDiv();
+        tempAndTimeContainer.appendChild(TimeDiv);
 
         let iconDiv = this.getIconDiv();
 
@@ -148,6 +143,17 @@ class Card {
 
 
         return this.cardDiv;
+    }
+
+    getTitleDiv()
+    {
+        let titleDiv = document.createElement("div");
+        titleDiv.className = "titleDiv";
+        let title = document.createElement("span");
+        title.className = "title";
+        title.textContent = this.measurement.title;
+        titleDiv.appendChild(title);
+        return titleDiv;
     }
 
     getSensorReadingDiv()
