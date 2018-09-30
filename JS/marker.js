@@ -57,7 +57,7 @@ async function addSensor(markerID, markerController, indoorMapId, indoorMapFloor
         let markerLatLng = marker.getLatLng()
         let lat = markerLatLng.lat + 0.00015;
         let latLng = L.latLng(lat,markerLatLng.lng);
-        map.setView(latLng, map.getZoom(), {animate: true});
+        map.setView(latLng, 19.1, {animate: true});
         updateCard(popup.sensorData,measurement);
     });   
 }
@@ -96,8 +96,6 @@ function updateCard(sensorReading, measurement) {
 
 function fillSvg(svgIcon, currValue, measurement) {
     let fillPercent = calculatePercentageFill(measurement.rangeMin, measurement.rangeMax, currValue);
-
-    
 
     if(fillPercent < 0) {
         fillPercent = 0;

@@ -103,25 +103,20 @@ class Card {
     }
 
 
+    //Gets the whole card
     getDiv() {
 		let tempAndTimeContainer = document.createElement("div");
 
 		tempAndTimeContainer.className = "flexcontainer tempAndTimeContainer";
         tempAndTimeContainer.id = "popupCard";
 
-        // create div to store the value
-        let sensorReadingDiv = document.createElement("div");
-        sensorReadingDiv.className = "value";
-        let value = document.createElement("span");
-        value.id = "valueText";
-        value.className = "value";
-        value.textContent = this.lastReading;
-        let unitText = document.createElement("span");
-        unitText.id = "unitText";
-        unitText.className = "value";
-        unitText.textContent = this.units;
-        sensorReadingDiv.appendChild(value);
-        sensorReadingDiv.appendChild(unitText);
+        let titleDiv = document.createElement("div");
+        let title = document.createElement("span");
+        title.textContent = this.measurement.title;
+        titleDiv.appendChild(title);
+        tempAndTimeContainer.appendChild(titleDiv);
+
+        let sensorReadingDiv = this.getSensorReadingDiv();
 
         tempAndTimeContainer.appendChild(sensorReadingDiv);
 
@@ -151,6 +146,24 @@ class Card {
 
 
         return this.cardDiv;
+    }
+
+    getSensorReadingDiv()
+    {
+        // create div to store the value
+        let sensorReadingDiv = document.createElement("div");
+        sensorReadingDiv.className = "value";
+        let value = document.createElement("span");
+        value.id = "valueText";
+        value.className = "value";
+        value.textContent = this.lastReading;
+        let unitText = document.createElement("span");
+        unitText.id = "unitText";
+        unitText.className = "value";
+        unitText.textContent = this.units;
+        sensorReadingDiv.appendChild(value);
+        sensorReadingDiv.appendChild(unitText);
+        return sensorReadingDiv;
     }
 
     // create div to store the time
