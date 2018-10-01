@@ -56,6 +56,7 @@ class Temperature extends Measurement {
         }
     };
 
+    // converts all the readings to the units chosen in the settings
     convertData(sensorData, settings) {
         let tempFormat = settings[0];
         for(let i=0; i<sensorData.length; i++)
