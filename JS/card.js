@@ -111,7 +111,7 @@ class Card {
 
 
     // returns the whole card in the form of a div
-    getDiv() {
+    getCard() {
 		let tempAndTimeContainer = document.createElement("div");
 
 		tempAndTimeContainer.className = "flexcontainer tempAndTimeContainer";
