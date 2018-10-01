@@ -1,5 +1,6 @@
 const NUMBER_OF_READINGS = 12;
 
+// expands the popup to show the graph
 function expandCard()
 {
     // Since binded to class when called, this refers to card class
@@ -31,11 +32,13 @@ function expandCard()
     }
 }
 
+// calls the updateCard function when the slider is moved
 function updateCardFromSlider() {
     updateCard(this.sensorData, this.measurement);
 }
 
-function getDayOfSensorData(sensorData,placement)
+// gets a page worth of readings. The number of readings in a page can be changed by editing NUMBER_OF_READINGS
+function getSliceOfSensorReadings(sensorData,placement)
 {
     let dataToDisplay = [];
     let startingIndex = placement - NUMBER_OF_READINGS;
@@ -50,6 +53,7 @@ function getDayOfSensorData(sensorData,placement)
     return dataToDisplay;
 }
 
+// loads the graph of  the previous page worth of readings
 function getPrevDayGraph(){
     let newIndex = this.placement - NUMBER_OF_READINGS;
     if(newIndex <= 0 || newIndex < NUMBER_OF_READINGS)
@@ -64,6 +68,7 @@ function getPrevDayGraph(){
     this.updateRightGraphArrow();
 }
 
+// loads the graph of  the next page worth of readings
 function getNextDayGraph(){
     let newIndex = this.placement + NUMBER_OF_READINGS;
     if(newIndex > this.sensorData.length)
@@ -78,13 +83,15 @@ function getNextDayGraph(){
     this.updateRightGraphArrow();
 }
 
+// updates the graph on the page with the new slice of data
 function updateGraph(graph,sensorData,placement){
-    let newSensorData = getDayOfSensorData(sensorData, placement);
+    let newSensorData = getSliceOfSensorReadings(sensorData, placement);
     graph.updateGraph(newSensorData);
 
 }
-class Card {
 
+// class that creates a card that contains the data to be displayed in the popup
+class Card {
     constructor(measurement, sensorData) {
         this.lastReading = sensorData[sensorData.length - 1].reading;
         this.lastTime = sensorData[sensorData.length - 1].time;
@@ -99,12 +106,12 @@ class Card {
         this.svgPath = measurement.svgPath;
         this.sensorData = sensorData;
         this.placement = sensorData.length;
-        this.graph = new Graph(getDayOfSensorData(this.sensorData,this.placement));
+        this.graph = new Graph(getSliceOfSensorReadings(this.sensorData,this.placement));
     }
 
 
-    //Gets the whole card
-    getDiv() {
+    // returns the whole card in the form of a div
+    getCard() {
 		let tempAndTimeContainer = document.createElement("div");
 
 		tempAndTimeContainer.className = "flexcontainer tempAndTimeContainer";
@@ -145,6 +152,7 @@ class Card {
         return this.cardDiv;
     }
 
+    // returns the div containing the name of the measurement type
     getTitleDiv()
     {
         let titleDiv = document.createElement("div");
@@ -156,6 +164,7 @@ class Card {
         return titleDiv;
     }
 
+    // returns a div containing the current reading and its appropriate units
     getSensorReadingDiv()
     {
         // create div to store the value
@@ -174,7 +183,7 @@ class Card {
         return sensorReadingDiv;
     }
 
-    // create div to store the time
+    // returns a div displaying the current time and date
     getTimeDiv()
     {
         let TimeDiv = document.createElement("div");
@@ -184,6 +193,7 @@ class Card {
         return TimeDiv;
     }
 
+    // returns the div containing the svg icon
     getIconDiv()
     {
         // create div to store SVG icon
@@ -201,8 +211,7 @@ class Card {
         return iconDiv;
     }
 
-
-
+    // returns the div containing the slider to go back 12 readings
     getSliderDiv()
     {
         // create div to store slider
@@ -227,6 +236,7 @@ class Card {
         return sliderDiv;
     }
 
+    // returns the blank canvas that the graph will appear in
     getGraphDiv()
     {
         // create div to store graph
@@ -238,24 +248,27 @@ class Card {
         return graphDiv;
     }
 
+    // returns the button used to expand the popup
     getButtonDiv()
     {
         // create div to store expand/contract button
         let buttonDiv = document.createElement("div");
         buttonDiv.className = "button";
-        this.arrow = this.getArrowDiv();
+        this.arrow = this.getArrow();
         buttonDiv.appendChild(this.arrow);
         buttonDiv.addEventListener("click", expandCard.bind(this));
         return buttonDiv;
     }
 
-    getArrowDiv()
+    // returns the arrow icon used in the buttons
+    getArrow()
     {
         let arrow = document.createElement("i");
         arrow.className = "arrow";
         return arrow;
     }
 
+    // checks if there are any previous readings to make a graph page from
     prevReadingsAvailable()
     {
         let bool = true;
@@ -265,6 +278,7 @@ class Card {
         return bool;
     }
 
+    // checks if there are any future readings to make a graph page from
     nextReadingsAvailable()
     {
         let bool = true;
@@ -274,6 +288,7 @@ class Card {
         return bool;
     }
 
+    // sets the left arrow button as grey and unclickable if there arent any previous readings
     updateLeftGraphArrow(){
         let arrowLeftDiv = document.getElementById('arrowLeftDiv');
         let arrowLeft = document.getElementById('arrowLeft');
@@ -281,6 +296,7 @@ class Card {
         this.toggleLeftGraphButton(arrowLeftDiv,arrowLeft);
     }
 
+    // sets the right arrow button as grey and unclickable if there arent any previous readings
     updateRightGraphArrow(){
         let arrowRightDiv = document.getElementById('arrowRightDiv');
         let arrowRight = document.getElementById('arrowRight');
@@ -288,6 +304,7 @@ class Card {
         this.toggleRightGraphButton(arrowRightDiv,arrowRight);
     }
 
+    // sets the left arrow button as grey and unclickable if there arent any previous readings
     toggleLeftGraphButton(arrowLeftDiv, arrowLeft){
         if(this.prevReadingsAvailable()){
             arrowLeftDiv.className = 'button';
@@ -301,6 +318,7 @@ class Card {
         }
     }
 
+    // sets the right arrow button as grey and unclickable if there arent any previous readings
     toggleRightGraphButton(arrowRightDiv, arrowRight){
         if(this.nextReadingsAvailable()){
             arrowRightDiv.className = 'button';
@@ -314,9 +332,10 @@ class Card {
         }
     }
 
+    // returns the div containing the left arrow button for the graph
     getArrowGraphPrevDiv()
     {
-        let arrowLeft = this.getArrowDiv();
+        let arrowLeft = this.getArrow();
         arrowLeft.id = "arrowLeft"
         let arrowLeftDiv = document.createElement('div');
         arrowLeftDiv.id = 'arrowLeftDiv';
@@ -328,9 +347,10 @@ class Card {
         return arrowLeftDiv;
     }
 
+    // returns the div containing the left arrow button for the graph
     getArrowGraphNextDiv()
     {
-        let arrowRight = this.getArrowDiv();
+        let arrowRight = this.getArrow();
         arrowRight.id = "arrowRight";
         let arrowRightDiv = document.createElement('div');
         arrowRightDiv.id = 'arrowRightDiv';
@@ -342,12 +362,13 @@ class Card {
         return arrowRightDiv;
     }
 
-
+    // rotates the arrow on the expand card button when it is pressed
     flipArrow(rotation, arrow)
     {
         arrow.style.transform = "rotate("+ rotation + ")";
     }
 
+    // returns the div that contains both of the arrows that control the graph navigation
     getGraphControlDiv(){
         let graphButtonDiv = document.createElement("div");
         graphButtonDiv.className = "graphButtonsDiv";

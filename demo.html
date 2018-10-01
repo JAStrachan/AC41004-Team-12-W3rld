@@ -52,7 +52,7 @@
 
                 // define measurement types
                 // Measurement(units, iconPath, lowerRange, upperRange)
-                let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100);
+                let humidity = new Measurement("%", "SVG/humidity.svg", 0, 100, "Humidity");
 
                 let timedSensorData = [];
 
@@ -85,7 +85,6 @@
 
                     setInterval(addReading, 20*1000, timedSensorData, sensorData, markerController);
                 }
-
             </script>
         </div>
     </body>

@@ -1,3 +1,4 @@
+// Base class to store multiple types of sensor readings and their respective units and icons
 class Measurement {
     constructor(units, svgPath, rangeMin, rangeMax, title) {
         this.units = units;
@@ -5,9 +6,10 @@ class Measurement {
         this.rangeMin = rangeMin;
         this.rangeMax = rangeMax;
         this.title = title;
-    }  
+    }
 }
 
+// temperature class that extends the base class and adds functions for converting between units
 class Temperature extends Measurement {
     constructor(units, svgPath, rangeMin, rangeMax, title) {
         super(units, svgPath, rangeMin, rangeMax, title);
@@ -54,6 +56,7 @@ class Temperature extends Measurement {
         }
     };
 
+    // converts all the readings to the units chosen in the settings
     convertData(sensorData, settings) {
         let tempFormat = settings[0];
         for(let i=0; i<sensorData.length; i++)
@@ -62,6 +65,4 @@ class Temperature extends Measurement {
         }
         return sensorData;
     };
-
-
 }

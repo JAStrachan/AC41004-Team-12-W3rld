@@ -1,3 +1,4 @@
+// class to store one reading from the JSON for use in other functions
 class Reading{
    constructor(date, time, reading){
         this.date = date;
@@ -6,6 +7,7 @@ class Reading{
     }
 }
 
+// function used to retrieve all data of a specific measurement type from the JSON
 getData = function(kindOfSensor){
     let promise = new Promise(function(resolve, reject) {
         //Initialise sensor arrays
@@ -35,15 +37,16 @@ getData = function(kindOfSensor){
                     break;
                 default:
                     sensorReadings = null;
-            }  
+            }
 
             resolve(sensorReadings);
         }
     });
     return promise;
-    
+
 }
 
+// gets the temperature data from the JSON
 getTemperatureData = function(temperatureTime) {
     let sensorReadings = [];
     for(let i = 0; i < temperatureTime.length; i++){
@@ -52,6 +55,7 @@ getTemperatureData = function(temperatureTime) {
     return sensorReadings;
 }
 
+// gets the humidity data from the JSON
 getHumidityData = function(temperatureTime) {
     let sensorReadings = [];
     for(let i = 0; i < temperatureTime.length; i++){
@@ -60,6 +64,7 @@ getHumidityData = function(temperatureTime) {
     return sensorReadings;
 }
 
+// gets the number of people from the JSON
 getPersonData = function(temperatureTime) {
     let sensorReadings = [];
     for(let i = 0; i < temperatureTime.length; i++){
@@ -68,6 +73,7 @@ getPersonData = function(temperatureTime) {
     return sensorReadings;
 }
 
+// loads the user's from the settings JSON
 getSettings = function(){
     let promiseSettings = new Promise(function(resolve, reject) {
         //Initialise sensor arrays
